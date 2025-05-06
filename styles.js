@@ -40,7 +40,9 @@ export default createGlobalStyle`
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
-
+.activityCard[data-bg] {
+    background-image: attr(data-bg url);
+  }
   .cardContent {
     position: absolute;
     bottom: 0;
@@ -90,5 +92,16 @@ export default createGlobalStyle`
     .activityGrid {
       grid-template-columns: 1fr; /* Single column for smaller screens */
     }
+  }
+
+  .mainWrapper {
+    padding: 2rem;
+  }
+
+  .activityGrid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    overflow-x: auto;
   }
 `;

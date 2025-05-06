@@ -2,21 +2,21 @@
 
 export default function ActivityCard({ activity }) {
   return (
-    <div
+    <article
       className="activityCard"
-      style={{ backgroundImage: `url(${activity.imageUrl})` }}
+      data-bg={activity.imageUrl || "/placeholder.jpg"}
     >
-      <div className="cardContent">
+      <section className="cardContent">
         <h2 className="cardTitle">{activity.title}</h2>
         <p className="cardCountry">{activity.country}</p>
-        <div className="cardTags">
+        <ul className="cardTags">
           {activity.categories.map((category) => (
-            <span key={category._id} className="tag">
+            <li key={category._id} className="tag">
               {category.name}
-            </span>
+            </li>
           ))}
-        </div>
-      </div>
-    </div>
+        </ul>
+      </section>
+    </article>
   );
 }

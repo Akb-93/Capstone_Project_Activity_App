@@ -1,17 +1,19 @@
 //FRONTEND aca se crea la nueva actividad
 import ActivityForm from "@/components/ActivityForm";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+
+//obtener los datos de las actividades
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function CreateActivity() {
   const router = useRouter();
-  const { mutate } = useSWR(); //API()
+  const { data: activities, error } = useSWR("/api/activities", fetcher); // Obtener actividades actuales
 
   async function addActivity({ activityData }) {
-    const response = await fetch("/", {
-      //API dentro()
+    const response = await fetch("/api/activities", {
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(activityData),
@@ -22,10 +24,14 @@ export default function CreateActivity() {
       return;
     }
 
-    mutate();
-    event.target.reset();
-    router.push("/");
+    // Actualizar la lista de actividades + la nueva actividad
+    const newActivity = await response.json();
+    mutate("/api/activities", [newActivity, ...activities], false); // Actualizamos las actividades en cache
+    router.push("/"); // Redirigir a la página principal
   }
+
+  if (error) return <p>Error loading activities...</p>;
+  if (!activities) return <p>Loading activities...</p>;
 
   return (
     //aca header que esta haciendo alissa, temporal h1

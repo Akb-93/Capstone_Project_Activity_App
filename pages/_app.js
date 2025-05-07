@@ -1,9 +1,10 @@
 import GlobalStyle from "../styles";
-import HeaderComponent from"@/components/Header";
+import Layout from "@/components/LayoutComponent";
+
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <HeaderComponent/>
+      <Layout/>
       <GlobalStyle />
       <Component {...pageProps} />
     </>

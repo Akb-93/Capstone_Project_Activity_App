@@ -2,6 +2,7 @@
 
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
+import Category from "@/db/models/Categories";
 
 export default async function handler(request, response) {
   try {

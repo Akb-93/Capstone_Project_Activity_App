@@ -26,7 +26,4 @@ export default createGlobalStyle`
     font-weight: 600;
     color: #4a3f35;
     margin: 0;
-  }
-
-  
-`;
+  }`;

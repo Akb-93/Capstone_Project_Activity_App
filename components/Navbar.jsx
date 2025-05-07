@@ -6,11 +6,7 @@ const Header = styled.header`
      background-color: #ccc;
      padding-left: 2rem;
      padding-right: 2rem;
-
-`;
-
-const HeaderContainer = styled.div`
-    display: flex;
+     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 5rem;
@@ -99,7 +95,7 @@ const NavbarComponent = () => {
 
     return (
         <Header>
-            <HeaderContainer>
+            
                 <LogoContainer>
                     Logo
                 </LogoContainer>
@@ -138,7 +134,7 @@ const NavbarComponent = () => {
                         </DropdownList>
                     )}
                 </Nav>
-            </HeaderContainer>
+            
         </Header>
     );
 };

@@ -1,14 +1,82 @@
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+
+const Header = styled.header`
+     background-color: #ccc;
+     padding-left: 2rem;
+     padding-right: 2rem;
+
+`;
+
+const HeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+   
+`;
+
+const LogoContainer = styled.div`
+ //will be revisited
+`;
+
+const Nav = styled.nav`
+  //will be revisited  
+`;
+
+const MenuButton = styled.button`
+   
+    background: none;
+    border: none;
+    padding: 0;
+`;
+
+const MenuIconImg = styled.img`
+    width: 24px;  
+    height: 24px;
+`;
+
+const DropdownList = styled.ul`
+   
+    list-style: none;
+    padding: 0;
+    margin: 0;
+   position:fixed;
+   right: 0;
+   top:5rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+`;
+
+const DropdownListItem = styled.li`
+   font-size: 2rem;
+`;
+
+const DropdownLink = styled(Link)`
+  //will be revisited
+`;
+
+const DropdownButton = styled.button`
+ 
+    background: none;
+    border: none;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    text-align: left;
+`;
+
 
 const HeaderComponent = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
-    
     useEffect(() => {
-        const handleClickOutside = (event) => { 
-            if (menuRef.current && !menuRef.current.contains(event.target)) { 
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setIsMenuOpen(false);
             }
         };
@@ -30,48 +98,48 @@ const HeaderComponent = () => {
     };
 
     return (
-        <header>
-            <div>
-                <div>
+        <Header>
+            <HeaderContainer>
+                <LogoContainer>
                     Logo
-                </div>
-                <nav ref={menuRef}>
-                    <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                </LogoContainer>
+                <Nav ref={menuRef}>
+                    <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         {isMenuOpen ? (
-                            <img
-                                src="/img/x.svg" 
+                            <MenuIconImg
+                                src="/img/x.svg"
                                 alt="Close Menu"
-                                size="24px"
+
                             />
                         ) : (
-                            <img
-                                src="/img/menu.svg" 
+                            <MenuIconImg
+                                src="/img/menu.svg"
                                 alt="Open Menu"
-                                size="24px"
+
                             />
                         )}
-                    </button>
+                    </MenuButton>
                     {isMenuOpen && (
-                        <ul>
-                            <li>
+                        <DropdownList>
+                            <DropdownListItem>
                                 <Link href="/activities">
-                                    <button onClick={handleActivitiesClick}>
+                                    <DropdownButton onClick={handleActivitiesClick}>
                                         Activities
-                                    </button>
+                                    </DropdownButton>
                                 </Link>
-                            </li>
-                            <li>
+                            </DropdownListItem>
+                            <DropdownListItem>
                                 <Link href="/favorites">
-                                    <button onClick={handleFavoritesClick}>
+                                    <DropdownButton onClick={handleFavoritesClick}>
                                         Favorites
-                                    </button>
+                                    </DropdownButton>
                                 </Link>
-                            </li>
-                        </ul>
+                            </DropdownListItem>
+                        </DropdownList>
                     )}
-                </nav>
-            </div>
-        </header>
+                </Nav>
+            </HeaderContainer>
+        </Header>
     );
 };
 

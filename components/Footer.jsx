@@ -1,23 +1,46 @@
 import React from 'react';
 import Link from 'next/link';
+import styled from 'styled-components';
 
+const FooterWrapper = styled.footer`
+    position: fixed;
+    bottom:0;
+    background-color: #ccc;
+    width: 100%;
+`;
+
+const FooterList = styled.ul`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const FooterItem = styled.li`
+ list-style-type: none;
+`;
+
+const FooterLink = styled(Link)`
+  
+  text-decoration: none;
+ 
+`;
 
 const FooterComponent = () => {
     return (
-        <footer>
-            <ul>
-                <li>
-                    <Link href="/activities">
+        <FooterWrapper>
+            <FooterList>
+                <FooterItem>
+                    <FooterLink href="/activities">
                         Activities
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/favorites">
+                    </FooterLink>
+                </FooterItem>
+                <FooterItem>
+                    <FooterLink href="/favorites">
                         Favorites
-                    </Link>
-                </li>
-            </ul>
-        </footer>
+                    </FooterLink>
+                </FooterItem>
+            </FooterList>
+        </FooterWrapper>
     );
 };
 

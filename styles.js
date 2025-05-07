@@ -27,4 +27,6 @@ export default createGlobalStyle`
     color: #4a3f35;
     margin: 0;
   }
+
+  
 `;

@@ -35,9 +35,11 @@ export default function CreateActivity() {
 
   return (
     //aca header que esta haciendo alissa, temporal h1
-    <>
-      <h1></h1>
-      <ActivityForm onSubmit={addActivity} />
-    </>
+    <div>
+      <>
+        <h1></h1>
+        <ActivityForm onSubmit={addActivity} />
+      </>
+    </div>
   );
 }

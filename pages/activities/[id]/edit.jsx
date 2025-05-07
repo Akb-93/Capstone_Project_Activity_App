@@ -3,10 +3,16 @@ import HeroCard from "@/components/HeroCard";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
+
 export default function EditActivityPage() {
   const router = useRouter();
   const { id } = router.query;
+  console.log(id);
+//   const { data: activities, error, mutate } = useSWR(
+//     id ? `/api/activities/${id}` : null
+//   );
   const { data: activities, error, mutate } = useSWR(`/api/activities/${id}`);
+  console.log(activities);
 
   async function editActivity({ activityData }) {
     const response = await fetch(`/api/activities/${id}`, {
@@ -26,13 +32,13 @@ export default function EditActivityPage() {
     router.push(`/places/${id}`)
   }
 
-  if (error) return <p>Error loading activities...</p>;
-  if (!activities) return <p>Loading activities...</p>;
+  if (error) return <p>Error loading activity...</p>;
+  if (!activities) return <p>Loading activity...</p>;
 
   return (
     <>
       <HeroCard title={"Edit Activity"}/>
-      <ActivityForm onSubmit={editActivity} />
+      <ActivityForm onSubmit={editActivity} inputData={activities} />
     </>
   );
 }

@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import fetcher from "@/Lib/fetcher";
 
-export default function ActivityForm({ onSubmit }) {
+export default function ActivityForm({ onSubmit, inputData }) {
   //el fetcher esta en otra carpeta
 
   const { data: categories, error: categoriesError } = useSWR(
@@ -17,8 +17,10 @@ export default function ActivityForm({ onSubmit }) {
     fetcher
   ); // Obtener actividades desde GET el backend
 
+console.log("form:", inputData);
+
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(inputData || { // this to have inputData if there are any
     title: "",
     category: "",
     description: "",
@@ -70,7 +72,7 @@ export default function ActivityForm({ onSubmit }) {
 
   return (
     <div>
-      <h1> New Activity</h1>
+      {/* <h1> New Activity</h1> */}
       <FormContainer onSubmit={handleSubmit}>
         {" "}
         {/* Escucha el envío del formulario. Cuando el usuario hace clic en "Add Activity"*/}
@@ -140,8 +142,8 @@ export default function ActivityForm({ onSubmit }) {
         </Label>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
-        <button type="submit" disabled={!formData.title || !formData.category}>
-          Add Activity
+        <button type="submit" disabled={!formData.title || !formData.category} >
+          {inputData ? "Edit Activity" : "Add Activity"}
         </button>
         <button type="button" onClick={handleCancel}>
           Cancel

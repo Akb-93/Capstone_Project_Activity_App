@@ -1,6 +1,7 @@
 import ActivityForm from "@/components/ActivityForm";
+import HeroCard from "@/components/HeroCard";
 import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 export default function EditActivityPage() {
   const router = useRouter();
@@ -29,9 +30,8 @@ export default function EditActivityPage() {
   if (!activities) return <p>Loading activities...</p>;
 
   return (
-    //aca header que esta haciendo alissa, temporal h1
     <>
-      <h1></h1>
+      <HeroCard title={"Edit Activity"}/>
       <ActivityForm onSubmit={editActivity} />
     </>
   );

@@ -18,11 +18,11 @@ const HeaderContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
- //will be revisited
+ background: none;
 `;
 
 const Nav = styled.nav`
-  //will be revisited  
+  background: none ;
 `;
 
 const MenuButton = styled.button`
@@ -56,7 +56,7 @@ const DropdownListItem = styled.li`
 `;
 
 const DropdownLink = styled(Link)`
-  //will be revisited
+  text-decoration: none;
 `;
 
 const DropdownButton = styled.button`
@@ -70,7 +70,7 @@ const DropdownButton = styled.button`
 `;
 
 
-const HeaderComponent = () => {
+const NavbarComponent = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -143,4 +143,4 @@ const HeaderComponent = () => {
     );
 };
 
-export default HeaderComponent;
+export default NavbarComponent;

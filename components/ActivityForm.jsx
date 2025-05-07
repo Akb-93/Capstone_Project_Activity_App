@@ -2,20 +2,19 @@
 import { FormContainer, Input, Textarea, Label, Select } from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
-import fetcher from "@/Lib/fetcher";
 
 export default function ActivityForm({ onSubmit }) {
-  //el fetcher esta en otra carpeta
+  const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM
 
   const { data: categories, error: categoriesError } = useSWR(
     "/api/categories",
     fetcher
   ); //useswr para cargar datos automáticamente cuando el componente se monta.
 
-  const { data: activities, error: activitiesError } = useSWR(
-    "/api/activities",
-    fetcher
-  ); // Obtener actividades desde GET el backend
+  //const { data: activities, error: activitiesError } = useSWR(
+  // "/api/activities",
+  // fetcher
+  //); // Obtener actividades desde GET el backend
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState({
@@ -29,8 +28,8 @@ export default function ActivityForm({ onSubmit }) {
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
-  if (categoriesError || activitiesError) return <p>Error loading data...</p>;
-  if (!categories || !activities) return <p>Loading...</p>;
+  if (categoriesError) return <p>Error loading data...</p>;
+  if (!categories) return <p>Loading...</p>;
   console.log(categories);
 
   function handleChange(event) {
@@ -121,7 +120,7 @@ export default function ActivityForm({ onSubmit }) {
             {/*loop MAP para unir categoria se necesita 1 opcion */}
             <option value="">Please select a category</option>
             {categories?.map((cat) => (
-              <option key={cat._id} value={cat.name}>
+              <option key={cat._id} value={cat._id}>
                 {cat.name}
               </option>
             ))}

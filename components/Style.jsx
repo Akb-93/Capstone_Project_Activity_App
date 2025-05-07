@@ -3,7 +3,14 @@ import styled from "styled-components";
 
 export const FormContainer = styled.form`
   display: grid;
-  gap: 0.5rem;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
 `;
 
 export const Input = styled.input`

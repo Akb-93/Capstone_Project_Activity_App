@@ -10,7 +10,8 @@ export default function CreateActivity() {
   const router = useRouter();
   const { data: activities, error } = useSWR("/api/activities", fetcher); // Obtener actividades actuales
 
-  async function addActivity({ activityData }) {
+  async function addActivity(activityData) {
+    console.log("Datos que se están enviando:", activityData);
     const response = await fetch("/api/activities", {
       method: "POST",
       headers: {
@@ -27,7 +28,7 @@ export default function CreateActivity() {
     // Actualizar la lista de actividades + la nueva actividad
     const newActivity = await response.json();
     mutate("/api/activities", [newActivity, ...activities], false); // Actualizamos las actividades en cache
-    router.push("/"); // Redirigir a la página principal
+    //router.push("/"); // Redirigir a la página principal
   }
 
   if (error) return <p>Error loading activities...</p>;

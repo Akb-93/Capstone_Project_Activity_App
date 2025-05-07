@@ -2,10 +2,17 @@
 import { FormContainer, Input, Textarea, Label, Select } from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
-
 export default function ActivityForm({ onSubmit }) {
   const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM
-  const { data: categories, error } = useSWR("api/categories", fetcher); //useswr para cargar datos automáticamente cuando el componente se monta.
+  const { data: categories, error: categoriesError } = useSWR(
+    "/api/categories",
+    fetcher
+  ); //useswr para cargar datos automáticamente cuando el componente se monta.
+
+  const { data: activities, error: activitiesError } = useSWR(
+    "/api/activities",
+    fetcher
+  ); // Obtener actividades desde GET el backend
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState({
@@ -19,8 +26,8 @@ export default function ActivityForm({ onSubmit }) {
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
-  if (error) return <p>Error loading categories...</p>;
-  if (!categories) return <p>Loading categories...</p>;
+  if (categoriesError || activitiesError) return <p>Error loading data...</p>;
+  if (!categories || !activities) return <p>Loading...</p>;
   console.log(categories);
 
   function handleChange(event) {
@@ -54,9 +61,8 @@ export default function ActivityForm({ onSubmit }) {
   function handleSubmit(event) {
     // función que se ejecuta cuando el usuario envía el formulario.
     event.preventDefault(); //evitar que se recargue la pagina
-    const formData = new FormData(event.target); //crear objeto con los datos del form
-    const activityData = Object.fromEntries(formData);
-    onSubmit(activityData); //llamo a la funcion para mandarle los datos que el usuario ingreso
+
+    onSubmit(formData); //llamo a la funcion para mandarle los datos que el usuario ingreso
   }
 
   return (

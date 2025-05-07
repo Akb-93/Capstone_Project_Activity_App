@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import styled from "styled-components";
 
 export default function ActivityDetailPage() {
   const router = useRouter();
-  const { id } = router.query; //to access [id] from the route
+  const { id } = router.query; // to access [id] from the route
 
-  //swr fetch activity data from API route
+  // SWR fetch activity data from API route
   const {
     data: activity,
     error,
@@ -17,40 +18,78 @@ export default function ActivityDetailPage() {
   if (!activity) return <p>No activity found.</p>;
 
   return (
-    <main className="detailsPage">
-      <header
-        className="heroBanner"
-        style={{
-          backgroundImage: `url(${activity.imageUrl || "placeholder.jpg"})`, //use fallback if image missing
-        }}
-      >
-        <button className="backButton" onClick={() => router.back()}>
-          ←
-        </button>
-        <h1 className="heroTitle">{activity.title}</h1>
-      </header>
-
-      <section className="categoriesList">
-        <strong>Categories:</strong>{" "}
+    <main>
+      <Header>
+        <BackButton onClick={() => router.back()}>←</BackButton>
+        <Title>{activity.title}</Title>
+      </Header>
+      <ImageWrapper>
+        <img
+          src={activity.imageUrl || "/placeholder.jpg"}
+          alt={activity.title}
+        />
+      </ImageWrapper>
+      <Description>{activity.description}</Description>
+      <Categories>
+        <strong>Categories:</strong>
         {activity.categories?.length ? (
           activity.categories.map((cat) => (
-            <span key={cat._id} className="categoryTag">
-              {cat.name}
-            </span>
+            <CategoryTag key={cat._id}>{cat.name}</CategoryTag>
           ))
         ) : (
           <span>No categories</span>
         )}
-      </section>
-
-      <p className="descriptionText">
-        {activity.description || "No description available."}
-      </p>
-
-      <p className="locationInfo">
-        {activity.area && <span> Area: {activity.area}</span>}
-        {activity.country && <span> Country: {activity.country}</span>}
-      </p>
+      </Categories>
+      <LocationInfo>
+        <p>Area: {activity.area || "N/A"}</p>
+        <p>Country: {activity.country || "N/A"}</p>
+      </LocationInfo>
     </main>
   );
 }
+
+// Styled components
+
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;
+
+const BackButton = styled.button`
+  font-size: 1.5rem;
+  cursor: pointer;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+`;
+
+const ImageWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const Description = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;
+
+const Categories = styled.div`
+  font-size: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const CategoryTag = styled.span`
+  background-color: #4a90e2;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+`;
+
+const LocationInfo = styled.div`
+  font-size: 1rem;
+  margin-top: 1rem;
+`;

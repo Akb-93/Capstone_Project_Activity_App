@@ -17,29 +17,47 @@ export default function ActivityForm({ onSubmit, inputData }) {
     fetcher
   ); // Obtener actividades desde GET el backend
 
-console.log("form:", inputData);
+  //console.log("form:", inputData);
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
-  const [formData, setFormData] = useState(inputData || { // this to have inputData if there are any
-    title: "",
-    category: "",
-    description: "",
-    area: "",
-    country: "",
-  });
+  const [formData, setFormData] = useState(
+    inputData || {
+      // this to have inputData if there are any
+      title: "",
+      category: [], // this one was originally treated as a string, but actually is an array :/
+      description: "",
+      area: "",
+      country: "",
+    }
+  );
 
+  console.log("formData", formData);
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
   if (categoriesError || activitiesError) return <p>Error loading data...</p>;
   if (!categories || !activities) return <p>Loading...</p>;
-  console.log(categories);
+  //console.log(categories);
 
   function handleChange(event) {
     //ASI MANEJO LOS CAMBIOS DEL INPUT
-    const { name, value } = event.target;
+    const { name, value, selectedOptions } = event.target;
     setFormData((prev) => {
-      const newData = { ...prev, [name]: value }; //crear nuevo objeto con contenido previo + el nuevo valor del(title o category)
+
+      if (name === "categories") { // when the key is categories...
+        const newValue = Array.from(selectedOptions).map((opt) => opt.value); // ...create a value that is an array made of selected options
+        setFormData((prev) => ({
+          ...prev,
+          [name]: newValue,
+        }));
+      } else {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+
+      const newData = { ...prev, [name]: newValue }; //crear nuevo objeto con contenido previo + el nuevo valor del(title o category)
 
       // asi verifico si los campos obligatorios están vacíos
       if (newData.title === "" || newData.category === "") {
@@ -55,7 +73,7 @@ console.log("form:", inputData);
   function handleCancel() {
     setFormData({
       title: "",
-      category: "",
+      category: [],
       description: "",
       area: "",
       country: "",
@@ -114,16 +132,17 @@ console.log("form:", inputData);
           {" "}
           Categories*
           <Select
-            name="category"
-            value={formData.category}
+            name="categories"
+            value={formData.categories.map(cat => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
             onChange={handleChange}
+            multiple //let's allow for multiple entries
             required
           >
             {" "}
-            {/*loop MAP para unir categoria se necesita 1 opcion */}
-            <option value="">Please select a category</option>
+            {/*loop MAP para unir categoria se necesita 1 opcion // actually also more than 1 option since it's an array, we need it for the edit ad well */}
+            <option value="">Select categories</option>
             {categories?.map((cat) => (
-              <option key={cat._id} value={cat.name}>
+              <option key={cat._id} value={cat._id} /* also updating here so it sends the id and not the name */>
                 {cat.name}
               </option>
             ))}
@@ -142,7 +161,7 @@ console.log("form:", inputData);
         </Label>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
-        <button type="submit" disabled={!formData.title || !formData.category} >
+        <button type="submit" disabled={!formData.title || formData.categories.length === 0} /* updating the logic to disable the button here */>
           {inputData ? "Edit Activity" : "Add Activity"}
         </button>
         <button type="button" onClick={handleCancel}>

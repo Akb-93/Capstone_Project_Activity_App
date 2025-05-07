@@ -7,12 +7,9 @@ import useSWR from "swr";
 export default function EditActivityPage() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
-//   const { data: activities, error, mutate } = useSWR(
-//     id ? `/api/activities/${id}` : null
-//   );
-  const { data: activities, error, mutate } = useSWR(`/api/activities/${id}`);
-  console.log(activities);
+  const { data: activities, error, mutate } = useSWR(
+    id ? `/api/activities/${id}` : null
+  );
 
   async function editActivity({ activityData }) {
     const response = await fetch(`/api/activities/${id}`, {

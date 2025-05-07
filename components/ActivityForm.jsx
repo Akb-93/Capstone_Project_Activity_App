@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 
 export default function ActivityForm({ onSubmit }) {
-  const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM
+  const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM // why here as well? fetchers... fetchers everywhere!
   const { data: categories, error } = useSWR("/api/categories", fetcher); //useswr para cargar datos automáticamente cuando el componente se monta.
 
   if (error) return <p>Error loading categories...</p>;

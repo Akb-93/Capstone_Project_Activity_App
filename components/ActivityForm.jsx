@@ -2,8 +2,11 @@
 import { FormContainer, Input, Textarea, Label, Select } from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
+import fetcher from "@/Lib/fetcher";
+
 export default function ActivityForm({ onSubmit }) {
-  const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM
+  //el fetcher esta en otra carpeta
+
   const { data: categories, error: categoriesError } = useSWR(
     "/api/categories",
     fetcher

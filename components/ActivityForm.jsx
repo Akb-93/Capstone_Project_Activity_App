@@ -5,11 +5,7 @@ import { useState } from "react";
 
 export default function ActivityForm({ onSubmit }) {
   const fetcher = (url) => fetch(url).then((res) => res.json()); //DEL GET PARA CATEGORIAS DEL FORM
-  const { data: categories, error } = useSWR("/api/categories", fetcher); //useswr para cargar datos automáticamente cuando el componente se monta.
-
-  if (error) return <p>Error loading categories...</p>;
-  if (!categories) return <p>Loading categories...</p>;
-  console.log(categories);
+  const { data: categories, error } = useSWR("api/categories", fetcher); //useswr para cargar datos automáticamente cuando el componente se monta.
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState({
@@ -22,6 +18,10 @@ export default function ActivityForm({ onSubmit }) {
 
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
+
+  if (error) return <p>Error loading categories...</p>;
+  if (!categories) return <p>Loading categories...</p>;
+  console.log(categories);
 
   function handleChange(event) {
     //ASI MANEJO LOS CAMBIOS DEL INPUT
@@ -37,6 +37,18 @@ export default function ActivityForm({ onSubmit }) {
       }
       return newData;
     });
+  }
+
+  //LIMPIAR EL FORM LUEGO DE CANCEL
+  function handleCancel() {
+    setFormData({
+      title: "",
+      category: "",
+      description: "",
+      area: "",
+      country: "",
+    });
+    setErrorMessage("");
   }
 
   function handleSubmit(event) {
@@ -58,6 +70,7 @@ export default function ActivityForm({ onSubmit }) {
           Title*
           <Input
             type="text"
+            name="title"
             placeholder="insert title"
             value={formData.title}
             onChange={handleChange}
@@ -109,6 +122,7 @@ export default function ActivityForm({ onSubmit }) {
           {" "}
           Description
           <Textarea
+            name="description"
             type="text"
             placeholder="insert description"
             value={formData.description}
@@ -120,7 +134,9 @@ export default function ActivityForm({ onSubmit }) {
         <button type="submit" disabled={!formData.title || !formData.category}>
           Add Activity
         </button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
       </FormContainer>
     </div>
   );

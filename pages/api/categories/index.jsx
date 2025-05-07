@@ -1,6 +1,6 @@
 //back end del GET para usar categorias en el formulario
 import dbConnect from "@/db/connect";
-import Category from "@/db/models/Activities";
+import Category from "@/db/models/Categories";
 
 export default async function handler(req, res) {
   await dbConnect();

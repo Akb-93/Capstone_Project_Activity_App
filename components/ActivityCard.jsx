@@ -30,7 +30,7 @@ const Card = styled.article`
   background-image: ${({ bg }) => `url(${bg})`};
 `;
 
-const CardContent = styled.div`
+const CardContent = styled.section`
   position: absolute;
   bottom: 0;
   left: 0;

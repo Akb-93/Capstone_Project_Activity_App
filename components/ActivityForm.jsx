@@ -24,14 +24,14 @@ export default function ActivityForm({ onSubmit, inputData }) {
     inputData || {
       // this to have inputData if there are any
       title: "",
-      category: [], // this one was originally treated as a string, but actually is an array :/
+      categories: [], // this one was originally treated as a string, but actually is an array :/
       description: "",
       area: "",
       country: "",
     }
   );
 
-  console.log("formData", formData);
+  //console.log("formData", formData);
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -39,41 +39,96 @@ export default function ActivityForm({ onSubmit, inputData }) {
   if (!categories || !activities) return <p>Loading...</p>;
   //console.log(categories);
 
+  // function handleChange(event) {
+  //   //ASI MANEJO LOS CAMBIOS DEL INPUT
+  //   const { name, value, selectedOptions } = event.target;
+    
+  //   setFormData((prev) => {
+
+  //     if (name === "categories") { // when the key is categories...
+  //       const newValue = Array.from(selectedOptions).map((opt) => opt.value); // ...create a value that is an array made of selected options
+  //       setFormData((prev) => ({
+  //         ...prev,
+  //         [name]: newValue,
+  //       }));
+  //     } else {
+  //       setFormData((prev) => ({
+  //         ...prev,
+  //         [name]: value,
+  //       }));
+  //     }
+
+  //     const newData = { ...prev, [name]: newValue }; //crear nuevo objeto con contenido previo + el nuevo valor del(title o category)
+
+  //     // asi verifico si los campos obligatorios están vacíos
+  //     if (newData.title === "" || newData.categories === "") {
+  //       setErrorMessage("Please fill in all required fields.");
+  //     } else {
+  //       setErrorMessage("");
+  //     }
+  //     return newData;
+  //   });
+  // }
+
+  // function handleChange(event) {
+  //   const { name, value, selectedOptions } = event.target;
+  
+  //   let newValue;
+  
+  //   if (name === "categories") {
+  //     newValue = Array.from(selectedOptions).map((opt) => opt.value);
+  //   } else {
+  //     newValue = value;
+  //   }
+  
+  //   setFormData((prev) => {
+  //     const newData = { ...prev, [name]: newValue };
+  
+  //     if (newData.title === "" || newData.categories.length === 0) {
+  //       setErrorMessage("Please fill in all required fields.");
+  //     } else {
+  //       setErrorMessage("");
+  //     }
+  
+  //     return newData;
+  //   });
+  // }
+
   function handleChange(event) {
-    //ASI MANEJO LOS CAMBIOS DEL INPUT
     const { name, value, selectedOptions } = event.target;
-    setFormData((prev) => {
-
-      if (name === "categories") { // when the key is categories...
-        const newValue = Array.from(selectedOptions).map((opt) => opt.value); // ...create a value that is an array made of selected options
-        setFormData((prev) => ({
-          ...prev,
-          [name]: newValue,
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-      }
-
-      const newData = { ...prev, [name]: newValue }; //crear nuevo objeto con contenido previo + el nuevo valor del(title o category)
-
-      // asi verifico si los campos obligatorios están vacíos
-      if (newData.title === "" || newData.category === "") {
-        setErrorMessage("Please fill in all required fields.");
-      } else {
-        setErrorMessage("");
-      }
-      return newData;
-    });
+  
+    let newValue;
+  
+    if (name === "categories") {
+      // Create an array of category objects based on the selected category IDs
+      newValue = Array.from(selectedOptions).map((opt) => {
+        return categories.find((cat) => cat._id === opt.value); // Match category object by its ID
+      });
+    } else {
+      newValue = value;
+    }
+  
+    const updatedFormData = {
+      ...formData,
+      [name]: newValue,
+    };
+  
+    setFormData(updatedFormData);
+  
+    // Error message validation
+    if (!updatedFormData.title || updatedFormData.categories.length === 0) {
+      setErrorMessage("Please fill in all required fields.");
+    } else {
+      setErrorMessage("");
+    }
   }
+  
 
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
     setFormData({
       title: "",
-      category: [],
+      categories: [],
       description: "",
       area: "",
       country: "",
@@ -133,14 +188,17 @@ export default function ActivityForm({ onSubmit, inputData }) {
           Categories*
           <Select
             name="categories"
+            //value={formData.category}
+            //defaultValue={formData.categories.map(cat => cat._id)}
             value={formData.categories.map(cat => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
+
             onChange={handleChange}
             multiple //let's allow for multiple entries
             required
           >
             {" "}
             {/*loop MAP para unir categoria se necesita 1 opcion // actually also more than 1 option since it's an array, we need it for the edit ad well */}
-            <option value="">Select categories</option>
+            {/*<option value="">Select categories</option>*/}
             {categories?.map((cat) => (
               <option key={cat._id} value={cat._id} /* also updating here so it sends the id and not the name */>
                 {cat.name}

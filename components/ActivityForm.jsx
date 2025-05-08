@@ -3,9 +3,11 @@ import { FormContainer, Input, Textarea, Label, Select } from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
 import fetcher from "@/Lib/fetcher";
+import { useRouter } from "next/router";
 
 export default function ActivityForm({ onSubmit, inputData }) {
   //el fetcher esta en otra carpeta
+  const router = useRouter();
 
   const { data: categories, error: categoriesError } = useSWR(
     "/api/categories",
@@ -37,62 +39,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   if (categoriesError || activitiesError) return <p>Error loading data...</p>;
   if (!categories || !activities) return <p>Loading...</p>;
-  //console.log(categories);
-
-  // function handleChange(event) {
-  //   //ASI MANEJO LOS CAMBIOS DEL INPUT
-  //   const { name, value, selectedOptions } = event.target;
-    
-  //   setFormData((prev) => {
-
-  //     if (name === "categories") { // when the key is categories...
-  //       const newValue = Array.from(selectedOptions).map((opt) => opt.value); // ...create a value that is an array made of selected options
-  //       setFormData((prev) => ({
-  //         ...prev,
-  //         [name]: newValue,
-  //       }));
-  //     } else {
-  //       setFormData((prev) => ({
-  //         ...prev,
-  //         [name]: value,
-  //       }));
-  //     }
-
-  //     const newData = { ...prev, [name]: newValue }; //crear nuevo objeto con contenido previo + el nuevo valor del(title o category)
-
-  //     // asi verifico si los campos obligatorios están vacíos
-  //     if (newData.title === "" || newData.categories === "") {
-  //       setErrorMessage("Please fill in all required fields.");
-  //     } else {
-  //       setErrorMessage("");
-  //     }
-  //     return newData;
-  //   });
-  // }
-
-  // function handleChange(event) {
-  //   const { name, value, selectedOptions } = event.target;
-  
-  //   let newValue;
-  
-  //   if (name === "categories") {
-  //     newValue = Array.from(selectedOptions).map((opt) => opt.value);
-  //   } else {
-  //     newValue = value;
-  //   }
-  
-  //   setFormData((prev) => {
-  //     const newData = { ...prev, [name]: newValue };
-  
-  //     if (newData.title === "" || newData.categories.length === 0) {
-  //       setErrorMessage("Please fill in all required fields.");
-  //     } else {
-  //       setErrorMessage("");
-  //     }
-  
-  //     return newData;
-  //   });
-  // }
 
   function handleChange(event) {
     const { name, value, selectedOptions } = event.target;
@@ -126,21 +72,39 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
-    setFormData({
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-    });
-    setErrorMessage("");
+
+    // setFormData({ <--------- do I need this here if I need to go back?
+    //   title: "",
+    //   categories: [],
+    //   description: "",
+    //   area: "",
+    //   country: "",
+    // });
+
+    // setErrorMessage("");
+
+    // brainstorming some logic to go back when cancel (for Jessi's ticket too)
+
+    //router.back(); <--------- would this be better or would it be better to have more control?
+
+    if (inputData?._id) {
+      router.push(`/activities/${inputData._id}`); // won't work until Alissa cooks the details page
+    } else {
+      router.push("/activities"); // won't work until activities page is operational
+    }
+
   }
 
   function handleSubmit(event) {
     // función que se ejecuta cuando el usuario envía el formulario.
     event.preventDefault(); //evitar que se recargue la pagina
 
-    onSubmit(formData); //llamo a la funcion para mandarle los datos que el usuario ingreso
+    const dataToSubmit = {
+      ...formData,
+      categories: formData.categories.map((cat) => cat._id),
+    };
+
+    onSubmit(dataToSubmit);
   }
 
   return (

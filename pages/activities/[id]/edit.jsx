@@ -11,7 +11,10 @@ export default function EditActivityPage() {
     id ? `/api/activities/${id}` : null
   );
 
-  async function editActivity({ activityData }) {
+  async function editActivity(activityData) {
+
+    console.log("PUT:", activityData);
+
     const response = await fetch(`/api/activities/${id}`, {
       method: "PUT",
       headers: {
@@ -26,11 +29,11 @@ export default function EditActivityPage() {
     }
 
     mutate();
-    router.push(`/places/${id}`)
+    router.push(`/activities/${id}`) // this won't work until Alissa cooks the details page
   }
 
-  if (error) return <p>Error loading activity...</p>;
-  if (!activities) return <p>Loading activity...</p>;
+  if (error) return <p>Error loading edit form...</p>; // adding better copy here :D
+  if (!activities) return <p>Loading edit form...</p>;
 
   return (
     <>

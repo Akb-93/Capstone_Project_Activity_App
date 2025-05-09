@@ -40,7 +40,7 @@ export default function CreateActivity() {
       false
     );
 
-    // router.push("/activities"); // COMPLETAR ACA !! CUANDO TENGA EL ACTIVITY LIST
+    router.push("/activities"); // COMPLETAR ACA !! CUANDO TENGA EL ACTIVITY LIST
   }
 
   return (

@@ -1,5 +1,3 @@
-// this is just a placeholder to make it work, Alissa will implement that
-
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 import Category from "@/db/models/Categories";

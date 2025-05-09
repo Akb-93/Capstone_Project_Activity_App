@@ -3,7 +3,6 @@ import HeroCard from "@/components/HeroCard";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-
 export default function EditActivityPage() {
   const router = useRouter();
   const { id } = router.query;

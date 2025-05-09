@@ -8,22 +8,11 @@ export default function ActivityForm({ onSubmit, inputData }) {
   //el fetcher esta en otra carpeta
   const router = useRouter();
 
-  // const { data: categories, error: categoriesError } = useSWR(
-  //   "/api/categories",
-  //   fetcher
-  // ); //useswr para cargar datos automáticamente cuando el componente se monta.
-
-  // const { data: activities, error: activitiesError } = useSWR(
-  //   "/api/activities",
-  //   fetcher
-  // ); // Obtener actividades desde GET el backend
 
   const { data: categories, error: categoriesError } =  // improved SWR, copied Alissa's config from her last PR
     useSWR("/api/categories");
   const { data: activities, error: activitiesError } =
     useSWR("/api/activities");
-
-  //console.log("form:", inputData);
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
@@ -37,7 +26,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
     }
   );
 
-  //console.log("formData", formData);
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -75,24 +63,21 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
-    // setFormData({ <--------- do I need this here if I need to go back?
-    //   title: "",
-    //   categories: [],
-    //   description: "",
-    //   area: "",
-    //   country: "",
-    // });
-
-    // setErrorMessage("");
 
     // brainstorming some logic to go back when cancel (for Jessi's ticket too)
 
-    //router.back(); <--------- would this be better or would it be better to have more control?
-
     if (inputData?._id) {
-      router.push(`/activities/${inputData._id}`); // won't work until Alissa cooks the details page
+      router.push(`/activities/${inputData._id}`);
     } else {
-      router.push("/activities"); // won't work until activities page is operational
+    setFormData({
+    title: "",
+    categories: [],
+    description: "",
+    area: "",
+    country: "",
+    });
+
+    setErrorMessage("");
     }
   }
 
@@ -110,10 +95,8 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   return (
     <div>
-      {/* <h1> New Activity</h1> <--- commenting this out, we don't need this in the form, we handle the title in the page where we use the form*/}
       <FormContainer onSubmit={handleSubmit}>
         {" "}
-        {/* Escucha el envío del formulario. Cuando el usuario hace clic en "Add Activity"*/}
         <Label>
           {" "}
           Title*
@@ -153,16 +136,12 @@ export default function ActivityForm({ onSubmit, inputData }) {
           Categories*
           <Select
             name="categories"
-            //value={formData.category}
-            //defaultValue={formData.categories.map(cat => cat._id)}
             value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
             onChange={handleChange}
             multiple //let's allow for multiple entries
             required
           >
             {" "}
-            {/*loop MAP para unir categoria se necesita 1 opcion // actually also more than 1 option since it's an array, we need it for the edit ad well */}
-            {/*<option value="">Select categories</option> <--- commenting out, since it's not a single select anymore*/}
             {categories?.map((cat) => (
               <option
                 key={cat._id}

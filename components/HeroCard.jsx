@@ -1,10 +1,26 @@
-//hhh
+import styled from "styled-components";
 
 export default function HeroCard({ title, children }) {
   return (
-    <div className="heroCard">
-      <h1 className="title">{title}</h1>
+    <Wrapper>
+      <Title>{title}</Title>
       {children}
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.header`
+  background-color: #f5f5dc;
+  border: 2px solid rgb(9, 9, 8);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
+  color: #4a3f35;
+  margin: 0;
+`;

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  *,
+*,
   *::before,
   *::after {
     box-sizing: border-box;
@@ -12,9 +12,7 @@ export default createGlobalStyle`
     font-family: system-ui;
   }
 
-  .heroCard {
-    background-color: #f5f5dc;
-    border: 2px solid rgb(9, 9, 8);
+  .mainWrapper {
     padding: 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;

@@ -12,8 +12,8 @@ export default function CreateActivity() {
     "/api/activities",
     fetcher
   ); // Obtener actividades desde GET el backend
-  if (activitiesError) return <p>Error loading data...</p>;
-  if (!activities) return <p>Loading...</p>;
+  if (activitiesError) return <p>Error loading data2...</p>;
+  if (!activities) return <p>Loading2...</p>;
 
   async function addActivity(activityData) {
     const response = await fetch("/api/activities", {

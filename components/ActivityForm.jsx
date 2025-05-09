@@ -28,8 +28,8 @@ export default function ActivityForm({ onSubmit }) {
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
-  if (categoriesError) return <p>Error loading data...</p>;
-  if (!categories) return <p>Loading...</p>;
+  if (categoriesError) return <p>Error loading data1...</p>;
+  if (!categories) return <p>Loading1...</p>;
   console.log(categories);
 
   function handleChange(event) {

@@ -59,7 +59,7 @@ const DropdownLink = styled(Link)`
 `;
 
 const DropdownButton = styled.button`
- 
+ text-decoration: none;
     background: none;
     border: none;
     padding: 10px;

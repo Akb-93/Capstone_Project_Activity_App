@@ -3,6 +3,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const Header = styled.header`
+    position: sticky;
+    top: 0;
+    z-index: 1000;
      background-color: #ccc;
      padding-left: 2rem;
      padding-right: 2rem;

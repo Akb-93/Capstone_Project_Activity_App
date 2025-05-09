@@ -19,8 +19,7 @@ export default function App({ Component, pageProps }) {
       <SWRConfig value={{ fetcher }}>
         <Component {...pageProps} />
       </SWRConfig>
-      <Component {...pageProps} />
-      </Layout>
+       </Layout>
     </>
   );
 }

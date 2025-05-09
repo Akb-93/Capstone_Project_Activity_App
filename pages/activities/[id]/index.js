@@ -2,8 +2,13 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
+import { StyledButton } from "@/components/Style";
+import ConfirmModal from "@/components/ConfirmationModal";
+import { useState } from "react";
 
 export default function ActivityDetailPage() {
+  const [showModal, setShowModal] = useState(false); // for the modal
+
   const router = useRouter();
   const { id } = router.query; // to access [id] from the route
 
@@ -60,6 +65,17 @@ export default function ActivityDetailPage() {
         <p>Area: {activity.area || "N/A"}</p>
         <p>Country: {activity.country || "N/A"}</p>
       </LocationInfo>
+      <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
+        Delete
+      </StyledButton>
+      {showModal && (
+        <ConfirmModal
+          title="Confirm Delete"
+          message="Do you want to delete the activity?"
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </main>
   );
 }

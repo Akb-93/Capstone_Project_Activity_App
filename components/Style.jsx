@@ -108,14 +108,20 @@ export const StyledLinkButton = styled(Link)`
 export const Dialog = styled.dialog`
   position: fixed;
   inset: 0;
-  margin: auto;
-  padding: 0;
-  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
   border: none;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
 `;
 
 export const Section = styled.section`

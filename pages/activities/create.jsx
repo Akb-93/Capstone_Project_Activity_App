@@ -16,6 +16,7 @@ export default function CreateActivity() {
   if (!activities) return <p>Loading2...</p>;
 
   async function addActivity(activityData) {
+    console.log("Datos que se están enviando al backend:", activityData);
     const response = await fetch("/api/activities", {
       method: "POST",
       headers: {

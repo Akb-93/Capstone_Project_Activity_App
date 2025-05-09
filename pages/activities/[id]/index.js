@@ -18,6 +18,21 @@ export default function ActivityDetailPage() {
   if (isLoading) return <p>Loading...</p>;
   if (!activity) return <p>No activity found.</p>;
 
+  async function handleDelete() {
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      console.log(response.status);
+      return;
+    }
+
+    await response.json();
+    setShowModal(false);
+    router.push("/");
+  }
+
   return (
     <main>
       <Header>

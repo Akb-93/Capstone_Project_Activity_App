@@ -1,10 +1,14 @@
+import Link from "next/link";
+
 import styled from "styled-components";
 
 export default function ActivityCard({ activity }) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
       <CardContent>
-        <Title>{activity.title}</Title>
+        <Link href={`/activities/${activity._id}`}>
+          <Title>{activity.title}</Title>
+        </Link>
         <Country>{activity.country}</Country>
         <TagList>
           {activity.categories.map((category) => (

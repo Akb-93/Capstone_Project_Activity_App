@@ -28,11 +28,9 @@ export default function ActivitiesPage() {
 }
 
 const StyledActivityGrid = styled.main`
-  padding: 2rem;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  overflow-x: auto;
 
   @media (max-width: 375px) {
     grid-template-columns: 1fr;

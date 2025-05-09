@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
+import Image from "next/image";
 
 export default function ActivityDetailPage() {
   const router = useRouter();
@@ -23,12 +24,14 @@ export default function ActivityDetailPage() {
         <BackButton onClick={() => router.back()}>←</BackButton>
         <Title>{activity.title}</Title>
       </Header>
+
       <ImageWrapper>
-        <img
+        <imgage
           src={activity.imageUrl || "/placeholder.jpg"}
           alt={activity.title}
         />
       </ImageWrapper>
+
       <Description>{activity.description}</Description>
       <Categories>
         <strong>Categories:</strong>
@@ -67,16 +70,20 @@ const Title = styled.h1`
   font-weight: 600;
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.figure`
   margin-bottom: 2rem;
-`;
 
+  img {
+    width: 100%;
+    border-radius: 8px;
+  }
+`;
 const Description = styled.p`
   font-size: 1.2rem;
   margin-bottom: 1rem;
 `;
 
-const Categories = styled.div`
+const Categories = styled.section`
   font-size: 1rem;
   margin-bottom: 1rem;
 `;
@@ -89,7 +96,7 @@ const CategoryTag = styled.span`
   margin-right: 0.5rem;
 `;
 
-const LocationInfo = styled.div`
+const LocationInfo = styled.section`
   font-size: 1rem;
   margin-top: 1rem;
 `;

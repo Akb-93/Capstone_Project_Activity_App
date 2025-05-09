@@ -4,22 +4,24 @@
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
-export default async function handler(req, res) {
-  if (req.method !== "GET") {
-    res.setHeader("Allow", ["GET"]);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+export default async function handler(request, response) {
   try {
-    //connect mongoDB
     await dbConnect();
+    const { id } = request.query;
+    if (request.method === "GET") {
+      const activity = await Activity.findById(id).populate("categories");
+      if (!activity) {
+        response.status(404).json({ status: "Activity not found" });
+        return;
+      }
+      response.status(200).json(activity);
+      return;
+    }
 
-    //fetch activities(all) with categories
-    const activities = await Activity.find().populate("categories");
-
-    //return activities as JSON
-    res.status(200).json(activities);
+    res.setHeader("Allow", ["GET"]);
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
   } catch (error) {
-    console.error("Error fetching activities:", error);
-    res.status(500).json({ error: "Failed to fetch activities" });
+    console.error(error); // log the error for debugging
+    return res.status(500).json({ error: "Internal server error" });
   }
 }

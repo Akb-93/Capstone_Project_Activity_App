@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const newActivity = await Activity.create(newActivityData);
     return res.status(201).json(newActivity); // Devuelve la nueva actividad creada
   }
-  // alissa's code
+
   if (req.method !== "GET") {
     res.setHeader("Allow", ["GET"]);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   try {
     const activities = await Activity.find()
       .populate("categories")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 }); //por MUTATE
     return res.status(200).json(activities);
   } catch (error) {
     console.error("Error fetching activities:", error);

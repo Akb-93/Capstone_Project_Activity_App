@@ -8,30 +8,23 @@ export default function ActivityForm({ onSubmit, inputData }) {
   //el fetcher esta en otra carpeta
   const router = useRouter();
 
-  // const {
-  // data: categories,
-  //error: categoriesError,
-  //} = useSWR("/api/categories"); // improved SWR, copied Alissa's config from her last PR
-  //const { data: activities, error: activitiesError } =
-  // useSWR("/api/activities");
+  const { data: categories, error: categoriesError } =
+    useSWR("/api/categories");
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
-  const [formData, setFormData] = useState(
-    inputData || {
-      // this to have inputData if there are any
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-    }
-  );
+  const [formData, setFormData] = useState({
+    title: "",
+    categories: [],
+    description: "",
+    area: "",
+    country: "",
+  });
 
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
-  if (categoriesError || activitiesError) return <p>Error loading data...</p>;
-  if (!categories || !activities) return <p>Loading...</p>;
+  if (categoriesError) return <p>Error loading data...</p>;
+  if (!categories) return <p>Loading...</p>;
 
   function handleChange(event) {
     const { name, value, selectedOptions } = event.target;
@@ -64,6 +57,15 @@ export default function ActivityForm({ onSubmit, inputData }) {
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
     //router.back(); <--------- would this be better or would it be better to have more control?
+    setFormData({
+      title: "",
+      categories: [],
+      description: "",
+      area: "",
+      country: "",
+    });
+
+    setErrorMessage("");
 
     if (inputData?._id) {
       router.push(`/activities/${inputData._id}`); // won't work until Alissa cooks the details page
@@ -128,16 +130,12 @@ export default function ActivityForm({ onSubmit, inputData }) {
           Categories*
           <Select
             name="categories"
-            //value={formData.category}
-            //defaultValue={formData.categories.map(cat => cat._id)}
             value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
             onChange={handleChange}
-            multiple //let's allow for multiple entries
+            multiple
             required
           >
             {" "}
-            {/*loop MAP para unir categoria se necesita 1 opcion // actually also more than 1 option since it's an array, we need it for the edit ad well */}
-            {/*<option value="">Select categories</option> <--- commenting out, since it's not a single select anymore*/}
             {categories?.map((cat) => (
               <option
                 key={cat._id}
@@ -165,15 +163,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
         {errorMessage && <p>{errorMessage}</p>}
         <button
           type="submit"
-          disabled={
-            !formData.title || formData.categories.length === 0
-          } /* updating the logic to disable the button here */
+          disabled={!formData.title || formData.categories.length === 0}
         >
-          {
-            inputData
-              ? "Edit Activity"
-              : "Add Activity" /* updating the logic so it change depending whether we have inputData (the data we use in edit page) */
-          }
+          Add activity
         </button>
         <button type="button" onClick={handleCancel}>
           Cancel

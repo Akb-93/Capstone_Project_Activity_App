@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import Activity from "./Activities";
 
 const categorySchema = new Schema({
   _id: { type: Schema.Types.ObjectId }, // Explicitly defining _id type (optional as Mongoose handles it)

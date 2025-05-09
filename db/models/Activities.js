@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import Category from "./Categories";
+import "./Categories";
 
 const activitySchema = new Schema(
   {

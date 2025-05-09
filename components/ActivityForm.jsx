@@ -8,38 +8,25 @@ export default function ActivityForm({ onSubmit, inputData }) {
   //el fetcher esta en otra carpeta
   const router = useRouter();
 
-  // const { data: categories, error: categoriesError } = useSWR(
-  //   "/api/categories",
-  //   fetcher
-  // ); //useswr para cargar datos automáticamente cuando el componente se monta.
-
-  // const { data: activities, error: activitiesError } = useSWR(
-  //   "/api/activities",
-  //   fetcher
-  // ); // Obtener actividades desde GET el backend
-
-  const {
-    data: categories,
-    error: categoriesError,
-  } = useSWR("/api/categories"); // improved SWR, copied Alissa's config from her last PR
-  const { data: activities, error: activitiesError } =
-    useSWR("/api/activities");
-
-  //console.log("form:", inputData);
+  // const {
+  // data: categories,
+  //error: categoriesError,
+  //} = useSWR("/api/categories"); // improved SWR, copied Alissa's config from her last PR
+  //const { data: activities, error: activitiesError } =
+  // useSWR("/api/activities");
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
       // this to have inputData if there are any
       title: "",
-      categories: [], // this one was originally treated as a string, but actually is an array :/
+      categories: [],
       description: "",
       area: "",
       country: "",
     }
   );
 
-  //console.log("formData", formData);
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -52,9 +39,8 @@ export default function ActivityForm({ onSubmit, inputData }) {
     let newValue;
 
     if (name === "categories") {
-      // here we need an array of category objects based on the selected category IDs, so we have to change the logic
       newValue = Array.from(selectedOptions).map((opt) => {
-        return categories.find((cat) => cat._id === opt.value); // and we need need this to return categories objs whose ids matches the ids specifies in the option
+        return categories.find((cat) => cat._id === opt.value);
       });
     } else {
       newValue = value;
@@ -77,18 +63,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
-    // setFormData({ <--------- do I need this here if I need to go back?
-    //   title: "",
-    //   categories: [],
-    //   description: "",
-    //   area: "",
-    //   country: "",
-    // });
-
-    // setErrorMessage("");
-
-    // brainstorming some logic to go back when cancel (for Jessi's ticket too)
-
     //router.back(); <--------- would this be better or would it be better to have more control?
 
     if (inputData?._id) {
@@ -112,11 +86,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
   }
 
   return (
-    <div>
-      {/* <h1> New Activity</h1> <--- commenting this out, we don't need this in the form, we handle the title in the page where we use the form*/}
+    <>
       <FormContainer onSubmit={handleSubmit}>
         {" "}
-        {/* Escucha el envío del formulario. Cuando el usuario hace clic en "Add Activity"*/}
         <Label>
           {" "}
           Title*
@@ -207,6 +179,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           Cancel
         </button>
       </FormContainer>
-    </div>
+    </>
   );
 }

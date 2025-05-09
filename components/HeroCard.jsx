@@ -10,7 +10,6 @@ export default function HeroCard({ title, children }) {
 }
 
 const Wrapper = styled.header`
->>>>>>> origin/main
   background-color: #f5f5dc;
   border: 2px solid rgb(9, 9, 8);
   padding: 2rem;

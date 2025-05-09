@@ -23,7 +23,7 @@ export default function ActivityDetailPage() {
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-      <BackButton onClick={() => router.back()}>←</BackButton>{" "}
+      <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
       <ImageWrapper>
         <imgage
           src={activity.imageUrl || "/placeholder.jpg"}
@@ -52,11 +52,12 @@ export default function ActivityDetailPage() {
 // Styled components
 
 const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center the title */
+  background-color: #f5f5dc;
+  border: 2px solid rgb(9, 9, 8);
+  padding: 2rem;
+  border-radius: 12px;
   margin-bottom: 2rem;
-  position: relative;
+  text-align: center;
 `;
 
 const BackButton = styled.button`
@@ -70,8 +71,9 @@ const BackButton = styled.button`
 const Title = styled.h1`
   font-size: 2rem;
   font-weight: 600;
+  color: #4a3f35;
+  margin: 0;
 `;
-
 const ImageWrapper = styled.figure`
   margin-bottom: 2rem;
 

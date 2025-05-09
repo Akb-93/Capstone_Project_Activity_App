@@ -34,6 +34,8 @@ export default function CreateActivity() {
       false
     );
 
+    console.log(newActivity);
+
     // router.push(""); // COMPLETAR ACA !! CUANDO TENGA EL ACTIVITY LIST
   }
 

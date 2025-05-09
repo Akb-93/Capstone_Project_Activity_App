@@ -24,9 +24,13 @@ export default async function handler(request, response) {
     if (request.method === "PUT") {
       const activityData = request.body;
 
-      const updatedActivity = await Activity.findByIdAndUpdate(id, activityData, {
-        new: true,
-      }).populate("categories");
+      const updatedActivity = await Activity.findByIdAndUpdate(
+        id,
+        activityData,
+        {
+          new: true,
+        }
+      ).populate("categories");
 
       if (!updatedActivity) {
         response.status(404).json({ status: "Activity not found" });
@@ -40,6 +44,8 @@ export default async function handler(request, response) {
     response.status(405).json({ status: "Method not allowed" });
   } catch (error) {
     console.error("Error in /api/activities/[id]:", error);
-    response.status(500).json({ status: "Server error", message: error.message });
+    response
+      .status(500)
+      .json({ status: "Server error", message: error.message });
   }
 }

@@ -3,6 +3,7 @@ import useSWR from "swr";
 import HeroCard from "@/components/HeroCard";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
+import AddButton from "@/components/AddButton";
 
 export default function ActivitiesPage() {
   const { data: activities, error, isLoading } = useSWR("/api/activities");
@@ -23,6 +24,7 @@ export default function ActivitiesPage() {
           <ActivityCard key={activity._id} activity={activity} />
         ))}
       </StyledActivityGrid>
+      <AddButton />
     </>
   );
 }

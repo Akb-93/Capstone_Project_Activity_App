@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-const StyledButton = styled.button`
+// Buttons & links that look like buttons
+
+export const StyledButton = styled.button`
   background-color: black;
   color: white;
   padding: 0.8rem 1.5rem;
@@ -58,7 +60,7 @@ const StyledButton = styled.button`
     `}
 `;
 
-const StyledLinkButton = styled(Link)`
+export const StyledLinkButton = styled(Link)`
   display: inline-block;
   background-color: black;
   color: white;
@@ -99,4 +101,35 @@ const StyledLinkButton = styled(Link)`
         background-color: #e5e7eb;
       }
     `}
+`;
+
+// Dialog
+
+export const Dialog = styled.dialog`
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+export const Section = styled.section`
+  background: white;
+  padding: 2rem;
+  border-radius: 0.6rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
 `;

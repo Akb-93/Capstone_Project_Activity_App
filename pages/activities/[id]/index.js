@@ -21,17 +21,15 @@ export default function ActivityDetailPage() {
   return (
     <main>
       <Header>
-        <BackButton onClick={() => router.back()}>←</BackButton>
-        <Title>{activity.title}</Title>
+        <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-
+      <BackButton onClick={() => router.back()}>←</BackButton>{" "}
       <ImageWrapper>
         <imgage
           src={activity.imageUrl || "/placeholder.jpg"}
           alt={activity.title}
         />
       </ImageWrapper>
-
       <Description>{activity.description}</Description>
       <Categories>
         <strong>Categories:</strong>
@@ -56,13 +54,17 @@ export default function ActivityDetailPage() {
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* center the title */
   margin-bottom: 2rem;
+  position: relative;
 `;
 
 const BackButton = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  margin-bottom: 1rem;
 `;
 
 const Title = styled.h1`

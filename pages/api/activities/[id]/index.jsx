@@ -18,10 +18,20 @@ export default async function handler(request, response) {
       return;
     }
 
-    res.setHeader("Allow", ["GET"]);
-    return res.status(405).json({ error: `Method ${req.method} not allowed` });
+    if (request.method === "DELETE") {
+      const activity = await Activity.findById(id);
+      if (!activity) {
+        return response.status(404).json({ status: "Activity not found" });
+      }
+
+      await Activity.findByIdAndDelete(id);
+      return response.status(200).json({ message: "Activity deleted successfully." });
+    }
+
+    response.setHeader("Allow", ["GET", "DELETE"]);
+    return response.status(405).json({ error: `Method ${request.method} not allowed` });
   } catch (error) {
     console.error(error); // log the error for debugging
-    return res.status(500).json({ error: "Internal server error" });
+    return response.status(500).json({ error: "Internal server error" });
   }
 }

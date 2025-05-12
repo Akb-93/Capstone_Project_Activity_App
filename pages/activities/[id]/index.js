@@ -34,16 +34,21 @@ export default function ActivityDetailPage() {
       <Categories>
         <strong>Categories:</strong>
         {activity.categories?.length ? (
-          activity.categories.map((cat) => (
-            <CategoryTag key={cat._id}>{cat.name}</CategoryTag>
+          <ul> activity.categories.map((cat) => (
+            <CategoryTag as="li" key={cat._id}>
+            {cat.name}
+            </CategoryTag>
           ))
+          </ul>
         ) : (
-          <span>No categories</span>
+          <p>No categories</p>
         )}
       </Categories>
       <LocationInfo>
-        <p>Area: {activity.area || "N/A"}</p>
-        <p>Country: {activity.country || "N/A"}</p>
+        <strong>Area:</strong> 
+        {activity.area || "N/A"}
+        <strong>Country:</strong> 
+        {activity.country || "N/A"}
       </LocationInfo>
     </main>
   );
@@ -84,17 +89,18 @@ const Description = styled.p`
   margin-bottom: 1rem;
 `;
 
-const Categories = styled.section`
+const Categories = styled.ul`
   font-size: 1rem;
   margin-bottom: 1rem;
 `;
 
-const CategoryTag = styled.span`
+const CategoryTag = styled.li`
   background-color: #4a90e2;
   color: white;
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
   margin-right: 0.5rem;
+  list-style:none;
 `;
 
 const LocationInfo = styled.section`

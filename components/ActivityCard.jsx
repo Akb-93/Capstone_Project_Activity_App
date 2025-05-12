@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
-export default function ActivityCard({ activity }) {
+
+export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
-      <FavoriteButtonContainer>
-      <FavoriteButton activityId={activity._id} />
-      </FavoriteButtonContainer>
+      
+        <FavoriteButton 
+          activityId={activity._id} 
+          onToggle={onFavoriteToggle}
+        />
+      
       <CardContent>
         <Title>{activity.title}</Title>
         <Country>{activity.country}</Country>
@@ -19,7 +23,7 @@ export default function ActivityCard({ activity }) {
   );
 }
 
-const FavoriteButtonContainer = styled.div`
+const FavoriteButtonWrapper = styled.div`
 position: absolute;
 top:20px;
 right: 20px;

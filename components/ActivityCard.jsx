@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function ActivityCard({ activity }) {
   return (
-    <Card>
+    <Card bg={activity.imageUrl || "/placeholder.jpg"}>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>

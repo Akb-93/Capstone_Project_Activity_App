@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function ActivityCard({ activity }) {
   return (
-    <Card bg={activity.imageUrl || "/placeholder.jpg"}>
+    <Card>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>
@@ -31,7 +31,6 @@ const Card = styled.article`
   margin-bottom: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-image: ${({ bg }) => `url(${bg})`};
 `;
 
 const CardContent = styled.section`

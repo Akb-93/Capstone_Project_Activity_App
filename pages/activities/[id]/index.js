@@ -24,12 +24,12 @@ export default function ActivityDetailPage() {
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
       <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
-      <ImageWrapper>
-        <imgage
-          src={activity.imageUrl || "/placeholder.jpg"}
-          alt={activity.title}
-        />
-      </ImageWrapper>
+      <ImageWrapper
+        src={activity.imageUrl || `/images/placeholder.jpg`}
+        alt={activity.title}
+        width={500}
+        height={500}
+      />
       <Description>{activity.description}</Description>
       <Categories>
         <strong>Categories:</strong>
@@ -74,13 +74,10 @@ const Title = styled.h1`
   color: #4a3f35;
   margin: 0;
 `;
-const ImageWrapper = styled.figure`
+const ImageWrapper = styled(Image)`
   margin-bottom: 2rem;
-
-  img {
-    width: 100%;
-    border-radius: 8px;
-  }
+  width: 100%;
+  border-radius: 8px;
 `;
 const Description = styled.p`
   font-size: 1.2rem;

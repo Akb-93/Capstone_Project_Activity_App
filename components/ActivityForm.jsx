@@ -9,17 +9,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   const { data: categories, error: categoriesError } =
     useSWR("/api/categories");
-  const { data: categories, error: categoriesError } =
-    useSWR("/api/categories");
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
-  const [formData, setFormData] = useState({
-    title: "",
-    categories: [],
-    description: "",
-    area: "",
-    country: "",
-  });
+
   const [formData, setFormData] = useState({
     title: "",
     categories: [],
@@ -65,10 +57,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
     }
   }
 
-  
   function handleCancel() {
     setErrorMessage("");
-    router.push("/activities"); 
+    router.push("/activities");
     setFormData({
       title: "",
       categories: [],
@@ -100,7 +91,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
   }
 
   return (
-    <>
     <>
       <FormContainer onSubmit={handleSubmit}>
         <Label>
@@ -141,7 +131,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
             value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
             onChange={handleChange}
             multiple
-            multiple
             required
           >
             {categories?.map((cat) => (
@@ -173,15 +162,11 @@ export default function ActivityForm({ onSubmit, inputData }) {
           disabled={!formData.title || formData.categories.length === 0}
         >
           Add activity
-          disabled={!formData.title || formData.categories.length === 0}
-        >
-          Add activity
         </button>
         <button type="button" onClick={handleCancel}>
           Cancel
         </button>
       </FormContainer>
-    </>
     </>
   );
 }

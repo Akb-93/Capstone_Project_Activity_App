@@ -3,8 +3,10 @@ import FavoriteButton from "./FavoriteButton";
 export default function ActivityCard({ activity }) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
+      <FavoriteButtonContainer>
+      <FavoriteButton activityId={activity._id} />
+      </FavoriteButtonContainer>
       <CardContent>
-       <FavoriteButton activityId={activity._id} />
         <Title>{activity.title}</Title>
         <Country>{activity.country}</Country>
         <TagList>
@@ -16,6 +18,12 @@ export default function ActivityCard({ activity }) {
     </Card>
   );
 }
+
+const FavoriteButtonContainer = styled.div`
+position: absolute;
+top:20px;
+right: 20px;
+`;
 
 const Card = styled.article`
   position: relative;

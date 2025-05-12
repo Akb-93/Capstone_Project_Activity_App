@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Button = styled.button`
   background: none;
   border: none;
-  cursor: pointer;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -23,7 +22,7 @@ export default function FavoriteButton({ activityId }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    // Load favorite status from localStorage on component mount
+    // Load favorite status from localStorage
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setIsFavorite(favorites.includes(activityId));
   }, [activityId]);

@@ -34,20 +34,17 @@ export default function ActivityDetailPage() {
       <Categories>
         <strong>Categories:</strong>
         {activity.categories?.length ? (
-          <ul> activity.categories.map((cat) => (
-            <CategoryTag as="li" key={cat._id}>
-            {cat.name}
-            </CategoryTag>
+          activity.categories.map((cat) => (
+            <CategoryTag key={cat._id}>{cat.name}</CategoryTag>
           ))
-          </ul>
         ) : (
           <p>No categories</p>
         )}
       </Categories>
       <LocationInfo>
-        <strong>Area:</strong> 
+        <strong>Area:</strong>
         {activity.area || "N/A"}
-        <strong>Country:</strong> 
+        <strong>Country:</strong>
         {activity.country || "N/A"}
       </LocationInfo>
     </main>
@@ -80,18 +77,22 @@ const Title = styled.h1`
   margin: 0;
 `;
 const ImageWrapper = styled(Image)`
-  margin-bottom: 2rem;
   width: 100%;
+  height: auto;
   border-radius: 8px;
+  margin-bottom: 2rem;
 `;
-const Description = styled.p`
+const Description = styled.article`
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  padding: 0 1rem;
 `;
 
 const Categories = styled.ul`
   font-size: 1rem;
   margin-bottom: 1rem;
+  list-style: none;
+  padding: 0 1rem;
 `;
 
 const CategoryTag = styled.li`
@@ -100,10 +101,16 @@ const CategoryTag = styled.li`
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
   margin-right: 0.5rem;
-  list-style:none;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: auto;
 `;
 
 const LocationInfo = styled.section`
   font-size: 1rem;
   margin-top: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;

@@ -54,10 +54,10 @@ export default function ActivityForm({ onSubmit, inputData }) {
     }
   }
 
-  //LIMPIAR EL FORM LUEGO DE CANCEL
+  
   function handleCancel() {
     setErrorMessage("");
-    router.push("/activities"); // won't work until activities page is operational
+    router.push("/activities"); 
   }
 
   function handleSubmit(event) {

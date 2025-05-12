@@ -1,6 +1,4 @@
-//BACKEND : PUT + DELETE put necesita id igual que delete and get , y se usa para editar
-//create a GET API route that fetches activities from your Activity model and populates the categories field with the actual category names
-
+// this is just a placeholder to make it work, Alissa will implement that
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
@@ -8,6 +6,7 @@ export default async function handler(request, response) {
   try {
     await dbConnect();
     const { id } = request.query;
+
     if (request.method === "GET") {
       const activity = await Activity.findById(id).populate("categories");
       if (!activity) {
@@ -17,11 +16,31 @@ export default async function handler(request, response) {
       response.status(200).json(activity);
       return;
     }
+    if (request.method === "PUT") {
+      const activityData = request.body;
 
-    res.setHeader("Allow", ["GET"]);
-    return res.status(405).json({ error: `Method ${req.method} not allowed` });
+      const updatedActivity = await Activity.findByIdAndUpdate(
+        id,
+        activityData,
+        {
+          new: true,
+        }
+      ).populate("categories");
+
+      if (!updatedActivity) {
+        response.status(404).json({ status: "Activity not found" });
+        return;
+      }
+
+      response.status(200).json(updatedActivity);
+      return;
+    }
+
+    response.status(405).json({ status: "Method not allowed" });
   } catch (error) {
-    console.error(error); // log the error for debugging
-    return res.status(500).json({ error: "Internal server error" });
+    console.error("Error in /api/activities/[id]:", error);
+    response
+      .status(500)
+      .json({ status: "Server error", message: error.message });
   }
 }

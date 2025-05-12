@@ -1,4 +1,5 @@
 //create a GET API route that fetches activities from your Activity model and populates the categories field with the actual category names
+
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 

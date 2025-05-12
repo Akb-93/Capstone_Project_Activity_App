@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function ActivityForm({ onSubmit, inputData }) {
-  //el fetcher esta en otra carpeta
+  
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =
@@ -56,7 +56,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   //LIMPIAR EL FORM LUEGO DE CANCEL
   function handleCancel() {
-    //router.back(); <--------- would this be better or would it be better to have more control?
     setFormData({
       title: "",
       categories: [],
@@ -65,12 +64,13 @@ export default function ActivityForm({ onSubmit, inputData }) {
       country: "",
     });
 
+
     setErrorMessage("");
 
     if (inputData?._id) {
-      router.push(`/activities/${inputData._id}`); // won't work until Alissa cooks the details page
+      router.push(`/activities/${inputData._id}`);
     } else {
-      router.push("/activities"); // won't work until activities page is operational
+      router.push("/activities"); 
     }
   }
 

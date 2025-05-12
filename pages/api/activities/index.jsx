@@ -4,15 +4,20 @@ import Activity from "@/db/models/Activities";
 export default async function handler(req, res) {
   await dbConnect();
   if (req.method === "POST") {
+    try{
     const newActivityData = req.body;
     // Validación simple (puedes expandirla según lo que necesites)
     if (!newActivityData.title || !newActivityData.categories) {
       return res.status(400).json({ status: "Missing required fields" });
     }
     // Crear nueva actividad
-    const newActivity = await Activity.create(newActivityData);
-    return res.status(201).json(newActivity); // Devuelve la nueva actividad creada
+    await Activity.create(newActivityData);
+    return res.status(201).json({ status: "Activity created successfully" });
+  } catch (error) {
+    console.error("Error creating activity:", error);
+    return res.status(500).json({ status: "Failed to create activity" });
   }
+}
 
   if (req.method !== "GET") {
     res.setHeader("Allow", ["GET"]);

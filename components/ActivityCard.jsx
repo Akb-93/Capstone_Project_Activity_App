@@ -4,12 +4,12 @@ import FavoriteButton from "./FavoriteButton";
 export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
-      
+      <FavoriteButtonWrapper>
         <FavoriteButton 
           activityId={activity._id} 
           onToggle={onFavoriteToggle}
         />
-      
+      </FavoriteButtonWrapper> 
       <CardContent>
         <Title>{activity.title}</Title>
         <Country>{activity.country}</Country>

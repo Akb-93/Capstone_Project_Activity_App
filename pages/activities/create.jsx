@@ -34,12 +34,11 @@ export default function CreateActivity() {
       false
     );
 
-    router.push("/activities"); 
+    router.push("/activities");} 
 
   return (
     <>
       <ActivityForm onSubmit={addActivity} />
     </>
   );
-}
 }

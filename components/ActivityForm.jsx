@@ -5,13 +5,21 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function ActivityForm({ onSubmit, inputData }) {
-  //el fetcher esta en otra carpeta
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =
     useSWR("/api/categories");
+  const { data: categories, error: categoriesError } =
+    useSWR("/api/categories");
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
+  const [formData, setFormData] = useState({
+    title: "",
+    categories: [],
+    description: "",
+    area: "",
+    country: "",
+  });
   const [formData, setFormData] = useState({
     title: "",
     categories: [],
@@ -25,6 +33,8 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   if (categoriesError) return <p>Error loading data...</p>;
   if (!categories) return <p>Loading...</p>;
+  if (categoriesError) return <p>Error loading data...</p>;
+  if (!categories) return <p>Loading...</p>;
 
   function handleChange(event) {
     const { name, value, selectedOptions } = event.target;
@@ -33,6 +43,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
     if (name === "categories") {
       newValue = Array.from(selectedOptions).map((opt) => {
+        return categories.find((cat) => cat._id === opt.value);
         return categories.find((cat) => cat._id === opt.value);
       });
     } else {
@@ -58,6 +69,21 @@ export default function ActivityForm({ onSubmit, inputData }) {
   function handleCancel() {
     setErrorMessage("");
     router.push("/activities"); 
+    setFormData({
+      title: "",
+      categories: [],
+      description: "",
+      area: "",
+      country: "",
+    });
+
+    setErrorMessage("");
+
+    if (inputData?._id) {
+      router.push(`/activities/${inputData._id}`);
+    } else {
+      router.push("/activities");
+    }
   }
 
   function handleSubmit(event) {
@@ -75,10 +101,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   return (
     <>
+    <>
       <FormContainer onSubmit={handleSubmit}>
-        {" "}
         <Label>
-          {" "}
           Title*
           <Input
             type="text"
@@ -90,7 +115,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Area
           <Input
             type="text"
@@ -101,7 +125,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Country
           <Input
             type="text"
@@ -112,16 +135,15 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Categories*
           <Select
             name="categories"
             value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
             onChange={handleChange}
             multiple
+            multiple
             required
           >
-            {" "}
             {categories?.map((cat) => (
               <option
                 key={cat._id}
@@ -135,7 +157,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           </Select>
         </Label>
         <Label>
-          {" "}
           Description
           <Textarea
             name="description"
@@ -143,7 +164,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
             placeholder="insert description"
             value={formData.description}
             onChange={handleChange}
-          />{" "}
+          />
         </Label>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
@@ -152,11 +173,15 @@ export default function ActivityForm({ onSubmit, inputData }) {
           disabled={!formData.title || formData.categories.length === 0}
         >
           Add activity
+          disabled={!formData.title || formData.categories.length === 0}
+        >
+          Add activity
         </button>
         <button type="button" onClick={handleCancel}>
           Cancel
         </button>
       </FormContainer>
+    </>
     </>
   );
 }

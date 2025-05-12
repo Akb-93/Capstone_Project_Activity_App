@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function ActivityForm({ onSubmit, inputData }) {
-  
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =
@@ -64,13 +63,12 @@ export default function ActivityForm({ onSubmit, inputData }) {
       country: "",
     });
 
-
     setErrorMessage("");
 
     if (inputData?._id) {
       router.push(`/activities/${inputData._id}`);
     } else {
-      router.push("/activities"); 
+      router.push("/activities");
     }
   }
 
@@ -90,9 +88,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
   return (
     <>
       <FormContainer onSubmit={handleSubmit}>
-        {" "}
         <Label>
-          {" "}
           Title*
           <Input
             type="text"
@@ -104,7 +100,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Area
           <Input
             type="text"
@@ -115,7 +110,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Country
           <Input
             type="text"
@@ -126,7 +120,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           />
         </Label>
         <Label>
-          {" "}
           Categories*
           <Select
             name="categories"
@@ -135,7 +128,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
             multiple
             required
           >
-            {" "}
             {categories?.map((cat) => (
               <option
                 key={cat._id}
@@ -149,7 +141,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
           </Select>
         </Label>
         <Label>
-          {" "}
           Description
           <Textarea
             name="description"
@@ -157,7 +148,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
             placeholder="insert description"
             value={formData.description}
             onChange={handleChange}
-          />{" "}
+          />
         </Label>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}

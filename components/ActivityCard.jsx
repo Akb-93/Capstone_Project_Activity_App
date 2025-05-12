@@ -1,9 +1,10 @@
 import styled from "styled-components";
-
+import FavoriteButton from "./FavoriteButton";
 export default function ActivityCard({ activity }) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
       <CardContent>
+       <FavoriteButton activityId={activity._id} />
         <Title>{activity.title}</Title>
         <Country>{activity.country}</Country>
         <TagList>

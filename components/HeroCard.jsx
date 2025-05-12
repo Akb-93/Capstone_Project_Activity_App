@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export default function HeroCard({ title, children }) {
   return (
     <Wrapper>

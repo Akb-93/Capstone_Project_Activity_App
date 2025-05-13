@@ -11,7 +11,15 @@ export default function ActivitiesPage() {
   if (error) return <p>Failed to load activities.</p>;
   if (isLoading) return <p>Loading activities...</p>;
   if (!activities || activities.length === 0)
-    return <p>No activities available.</p>;
+    return (
+      <>
+        <HeroCard title="Activities List">
+          <p>Choose your fun</p>
+        </HeroCard>
+        <p>No activities available. Click on the "+" button to add one.</p>
+        <AddButton />
+      </>
+    );
 
   return (
     <>

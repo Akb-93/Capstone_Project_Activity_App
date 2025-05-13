@@ -6,6 +6,7 @@ export const FormContainer = styled.form`
   gap: 1rem;
   border: 1px solid #ddd;
   padding: 1rem;
+  padding-bottom: 8rem; // adding this as a temporary fix for the overlapping footer
   border-radius: 8px;
   width: 100%;
   max-width: 500px;

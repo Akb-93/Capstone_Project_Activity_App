@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function ActivityForm({ onSubmit, inputData }) {
+export default function ActivityForm({ onSubmit, onCancel }) {
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =
@@ -25,8 +25,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
   if (categoriesError) return <p>Error loading data...</p>;
   if (!categories) return <p>Loading...</p>;
-  if (categoriesError) return <p>Error loading data...</p>;
-  if (!categories) return <p>Loading...</p>;
 
   function handleChange(event) {
     const { name, value, selectedOptions } = event.target;
@@ -35,7 +33,6 @@ export default function ActivityForm({ onSubmit, inputData }) {
 
     if (name === "categories") {
       newValue = Array.from(selectedOptions).map((opt) => {
-        return categories.find((cat) => cat._id === opt.value);
         return categories.find((cat) => cat._id === opt.value);
       });
     } else {
@@ -57,29 +54,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
     }
   }
 
-  function handleCancel() {
-    setErrorMessage("");
-    router.push("/activities");
-    setFormData({
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-    });
-
-    setErrorMessage("");
-
-    if (inputData?._id) {
-      router.push(`/activities/${inputData._id}`);
-    } else {
-      router.push("/activities");
-    }
-  }
-
   function handleSubmit(event) {
     // función que se ejecuta cuando el usuario envía el formulario.
-    event.preventDefault(); //evitar que se recargue la pagina
+    event.preventDefault();
 
     const dataToSubmit = {
       // also updating here the data we need to submit
@@ -163,7 +140,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
         >
           Add activity
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={onCancel}>
           Cancel
         </button>
       </FormContainer>

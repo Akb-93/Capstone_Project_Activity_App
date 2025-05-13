@@ -57,6 +57,16 @@ export const StyledAddButton = styled.button`
   }
 `;
 
+// Wrapper for buttons (mostly to add some margin so they don't get covered by the footer)
+
+export const StyledButtonGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 8rem;
+`;
+
 // Buttons
 
 export const StyledButton = styled.button`

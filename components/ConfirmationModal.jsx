@@ -1,20 +1,20 @@
-import { Dialog, Section, Footer, StyledButton } from "./Style";
+import { Dialog, DialogSection, DialogFooter, StyledButton } from "./Style";
 
 export default function ConfirmModal({ title, message, onCancel, onConfirm }) {
   return (
     <Dialog open role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <Section>
+      <DialogSection>
         <h2 id="modal-title">{title}</h2>
         <p>{message}</p>
-        <Footer>
+        <DialogFooter>
           <StyledButton type="button" onClick={onCancel} $variant="outlined">
             No, Cancel
           </StyledButton>
           <StyledButton type="button" onClick={onConfirm} $variant="destructive">
             Yes, Delete
           </StyledButton>
-        </Footer>
-      </Section>
+        </DialogFooter>
+      </DialogSection>
     </Dialog>
   );
 }

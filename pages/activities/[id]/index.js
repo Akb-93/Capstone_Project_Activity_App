@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledButton } from "@/components/Style";
+import { StyledButtonGroup, StyledButton } from "@/components/Style";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
 
@@ -35,7 +35,7 @@ export default function ActivityDetailPage() {
 
     await response.json();
     setShowModal(false);
-    router.push("/");
+    router.push("/activities");
   }
 
   return (
@@ -71,6 +71,19 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
+      <StyledButtonGroup>
+        <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
+        Delete
+      </StyledButton>
+      </StyledButtonGroup>
+      {showModal && (
+        <ConfirmModal
+          title="Confirm Delete"
+          message="Do you want to delete the activity?"
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </>
   );
 }
@@ -137,5 +150,4 @@ const LocationInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 100px;
 `;

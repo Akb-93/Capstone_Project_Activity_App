@@ -3,6 +3,7 @@ import useSWR from "swr";
 import HeroCard from "@/components/HeroCard";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
+import AddButton from "@/components/AddButton";
 
 export default function ActivitiesPage() {
   const { data: activities, error, isLoading } = useSWR("/api/activities");
@@ -23,16 +24,15 @@ export default function ActivitiesPage() {
           <ActivityCard key={activity._id} activity={activity} />
         ))}
       </StyledActivityGrid>
+      <AddButton />
     </>
   );
 }
 
 const StyledActivityGrid = styled.main`
-  padding: 2rem;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  overflow-x: auto;
 
   @media (max-width: 375px) {
     grid-template-columns: 1fr;

@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function ActivityForm({ onSubmit, inputData }) {
+export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =
@@ -58,28 +58,9 @@ export default function ActivityForm({ onSubmit, inputData }) {
     }
   }
 
-  //LIMPIAR EL FORM LUEGO DE CANCEL
-  function handleCancel() {
-    setFormData({
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-    });
-
-    setErrorMessage("");
-
-    if (inputData?._id) {
-      router.push(`/activities/${inputData._id}`);
-    } else {
-      router.push("/activities");
-    }
-  }
-
   function handleSubmit(event) {
     // función que se ejecuta cuando el usuario envía el formulario.
-    event.preventDefault(); //evitar que se recargue la pagina
+    event.preventDefault();
 
     const dataToSubmit = {
       // also updating here the data we need to submit
@@ -163,7 +144,7 @@ export default function ActivityForm({ onSubmit, inputData }) {
         >
           {inputData ? "Edit Activity" : "Add Activity"}
         </button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" onClick={onCancel}>
           Cancel
         </button>
       </FormContainer>

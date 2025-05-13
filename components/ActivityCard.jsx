@@ -5,10 +5,7 @@ export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
   return (
     <Card bg={activity.imageUrl || "/placeholder.jpg"}>
       <FavoriteButtonWrapper>
-        <FavoriteButton 
-          activityId={activity._id} 
-          onToggle={onFavoriteToggle}
-        />
+        <FavoriteButton activityId={activity._id} onToggle={onFavoriteToggle}/>
       </FavoriteButtonWrapper> 
       <CardContent>
         <Title>{activity.title}</Title>

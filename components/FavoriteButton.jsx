@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: none;
@@ -18,8 +18,8 @@ const HeartIcon = styled.svg`
 `;
 
 const HeartPath = styled.path`
- fill: ${props => props.isFavorite ? '#ff4d4d' : 'none'};
- stroke: ${props => props.isFavorite ? '#ff4d4d' : '#666'};
+ fill: ${props => props.isFavorite ? "#ff4d4d" : "none"};
+ stroke: ${props => props.isFavorite ? "#ff4d4d" : "#666"};
 `;
 
 export default function FavoriteButton({ activityId, onToggle }) {
@@ -27,12 +27,12 @@ export default function FavoriteButton({ activityId, onToggle }) {
   
     useEffect(() => {
       // Load favorite status from localStorage on component mount
-      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       setIsFavorite(favorites.includes(activityId));
     }, [activityId]);
   
     const toggleFavorite = () => {
-      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       let newFavorites;
   
       if (isFavorite) {
@@ -41,7 +41,7 @@ export default function FavoriteButton({ activityId, onToggle }) {
         newFavorites = [...favorites, activityId];
       }
   
-      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
       setIsFavorite(!isFavorite);
       
      
@@ -51,7 +51,7 @@ export default function FavoriteButton({ activityId, onToggle }) {
     };
 
   return (
-    <Button onClick={toggleFavorite} aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
+    <Button onClick={toggleFavorite} aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}>
      <HeartIcon viewBox="0 0 24 24">
         <HeartPath 
           isFavorite={isFavorite}

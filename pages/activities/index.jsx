@@ -4,7 +4,7 @@ import HeroCard from "@/components/HeroCard";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
 import AddButton from "@/components/AddButton";
-ç
+
 export default function ActivitiesPage() {
   const { data: activities, error, isLoading } = useSWR("/api/activities");
 

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Category from "./models/Categories";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

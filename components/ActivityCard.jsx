@@ -31,7 +31,6 @@ const Card = styled.article`
   margin-bottom: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-image: ${({ bg }) => `url(${bg})`};
 `;
 
 const CardContent = styled.section`

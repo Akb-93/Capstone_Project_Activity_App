@@ -39,17 +39,17 @@ export default function ActivityDetailPage() {
   }
 
   return (
-    <main>
+    <>
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
       <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
-      <ImageWrapper>
-        <imgage
-          src={activity.imageUrl || "/placeholder.jpg"}
-          alt={activity.title}
-        />
-      </ImageWrapper>
+      <ImageWrapper
+        src={activity.imageUrl || `/images/placeholder.jpg`}
+        alt={activity.title}
+        width={500}
+        height={500}
+      />
       <Description>{activity.description}</Description>
       <Categories>
         <strong>Categories:</strong>
@@ -58,25 +58,20 @@ export default function ActivityDetailPage() {
             <CategoryTag key={cat._id}>{cat.name}</CategoryTag>
           ))
         ) : (
-          <span>No categories</span>
+          <p>No categories</p>
         )}
       </Categories>
       <LocationInfo>
-        <p>Area: {activity.area || "N/A"}</p>
-        <p>Country: {activity.country || "N/A"}</p>
+        <p>
+          <strong>Area:</strong>
+          {activity.area || "N/A"}
+        </p>
+        <p>
+          <strong>Country:</strong>
+          {activity.country || "N/A"}
+        </p>
       </LocationInfo>
-      <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
-        Delete
-      </StyledButton>
-      {showModal && (
-        <ConfirmModal
-          title="Confirm Delete"
-          message="Do you want to delete the activity?"
-          onCancel={() => setShowModal(false)}
-          onConfirm={handleDelete}
-        />
-      )}
-    </main>
+    </>
   );
 }
 
@@ -105,33 +100,42 @@ const Title = styled.h1`
   color: #4a3f35;
   margin: 0;
 `;
-const ImageWrapper = styled.figure`
+const ImageWrapper = styled(Image)`
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
   margin-bottom: 2rem;
-
-  img {
-    width: 100%;
-    border-radius: 8px;
-  }
 `;
-const Description = styled.p`
+const Description = styled.article`
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  padding: 0 1rem;
 `;
 
-const Categories = styled.section`
+const Categories = styled.ul`
   font-size: 1rem;
   margin-bottom: 1rem;
+  list-style: none;
+  padding: 0 1rem;
 `;
 
-const CategoryTag = styled.span`
+const CategoryTag = styled.li`
   background-color: #4a90e2;
   color: white;
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
   margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: auto;
 `;
 
 const LocationInfo = styled.section`
   font-size: 1rem;
   margin-top: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 100px;
 `;

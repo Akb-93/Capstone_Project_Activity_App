@@ -24,7 +24,7 @@ export default function ActivityDetailPage() {
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-      <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
+      <BackButton onClick={() => router.push("/activities")}>←Back</BackButton>{" "}
       <ImageWrapper
         src={activity.imageUrl || `/images/placeholder.jpg`}
         alt={activity.title}

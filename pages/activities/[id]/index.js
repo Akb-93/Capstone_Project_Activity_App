@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledButtonGroup, StyledButton } from "@/components/Style";
+import { StyledButton } from "@/components/Style";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
 
@@ -71,11 +71,9 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
-      <StyledButtonGroup>
         <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
         Delete
       </StyledButton>
-      </StyledButtonGroup>
       {showModal && (
         <ConfirmModal
           title="Confirm Delete"

@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function ActivityForm({ onSubmit, onCancel }) {
+export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();
 
   const { data: categories, error: categoriesError } =

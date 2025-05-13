@@ -9,10 +9,8 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
 
   const { data: categories, error: categoriesError } =
     useSWR("/api/categories");
-  const { data: activities, error: activitiesError } = // check if we still need this
-    useSWR("/api/activities");
 
-    console.log("form:", inputData)
+  //console.log("form:", inputData)
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(

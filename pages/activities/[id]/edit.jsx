@@ -34,10 +34,14 @@ export default function EditActivityPage() {
   if (error) return <p>Error loading edit form...</p>; // adding better copy here :D
   if (!activities) return <p>Loading edit form...</p>;
 
+  function handleCancel() {
+    router.push(`/activities/${id}`);
+  }
+
   return (
     <>
       <HeroCard title={"Edit Activity"}/>
-      <ActivityForm onSubmit={editActivity} inputData={activities} />
+      <ActivityForm onCancel={handleCancel} onSubmit={editActivity} inputData={activities} />
     </>
   );
 }

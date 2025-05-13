@@ -28,9 +28,12 @@ export default function CreateActivity() {
     router.push("/activities");
   }
 
+  function handleCancel() {
+    router.push("/activities");
+  }
   return (
     <>
-      <ActivityForm onSubmit={addActivity} />
+      <ActivityForm onCancel={handleCancel} onSubmit={addActivity} />
     </>
   );
 }

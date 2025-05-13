@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
 
@@ -8,7 +10,9 @@ export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
         <FavoriteButton activityId={activity._id} onToggle={onFavoriteToggle}/>
       </FavoriteButtonWrapper> 
       <CardContent>
-        <Title>{activity.title}</Title>
+        <Link href={`/activities/${activity._id}`}>
+          <Title>{activity.title}</Title>
+        </Link>
         <Country>{activity.country}</Country>
         <TagList>
           {activity.categories.map((category) => (
@@ -37,7 +41,6 @@ const Card = styled.article`
   margin-bottom: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-image: ${({ bg }) => `url(${bg})`};
 `;
 
 const CardContent = styled.section`

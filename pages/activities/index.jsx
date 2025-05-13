@@ -4,9 +4,21 @@ import HeroCard from "@/components/HeroCard";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
 import AddButton from "@/components/AddButton";
+import ActivityFilter from "@/components/ActivityFilter";
+import { useState } from "react";
 
 export default function ActivitiesPage() {
-  const { data: activities, error, isLoading } = useSWR("/api/activities");
+  // Added category state
+  const [category, setCategory] = useState("");
+
+  //Updated SWR key to depend on category
+  const {
+    data: activities,
+    error,
+    isLoading,
+  } = useSWR(
+    category ? `/api/activities?category=${category}` : "/api/activities"
+  );
 
   if (error) return <p>Failed to load activities.</p>;
   if (isLoading) return <p>Loading activities...</p>;
@@ -18,7 +30,7 @@ export default function ActivitiesPage() {
       <HeroCard title="Activities List">
         <p>Choose your fun</p>
       </HeroCard>
-
+      <ActivityFilter onChange={setCategory} /> {/* Added filter component */}
       <StyledActivityGrid>
         {activities.map((activity) => (
           <ActivityCard key={activity._id} activity={activity} />

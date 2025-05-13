@@ -2,6 +2,8 @@
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
+import { Types } from "mongoose";
+
 export default async function handler(req, res) {
   await dbConnect();
 
@@ -28,9 +30,18 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const activities = await Activity.find()
+      const { category } = req.query; // Get category query parameter
+
+      let filter = {};
+      if (category) {
+        // If category is provided, convert it to ObjectId
+        const categoryId = Types.ObjectId(category);
+        filter = { categories: categoryId }; // Filter activities by category ID
+      }
+      const activities = await Activity.find(filter)
         .populate("categories")
         .sort({ createdAt: -1 }); //por MUTATE
+      console.log("Activities fetched:", activities);
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

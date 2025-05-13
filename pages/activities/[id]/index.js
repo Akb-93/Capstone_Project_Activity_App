@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledButton } from "@/components/Style";
+import { StyledLinkButton, StyledButton } from "@/components/Style";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
 
@@ -43,7 +43,7 @@ export default function ActivityDetailPage() {
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-      <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
+      <BackButton onClick={() => router.push("/activities")}>←Back</BackButton>{" "}
       <ImageWrapper
         src={activity.imageUrl || `/images/placeholder.jpg`}
         alt={activity.title}
@@ -71,7 +71,10 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
-        <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
+      <StyledLinkButton href={`/activities/${id}/edit`} $variant="outlined">
+        Edit
+      </StyledLinkButton>
+      <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
         Delete
       </StyledButton>
       {showModal && (
@@ -148,4 +151,5 @@ const LocationInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 `;

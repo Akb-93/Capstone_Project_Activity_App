@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledLinkButton, StyledButtonGroup } from "@/components/Style";
+import { StyledLinkButton } from "@/components/Style";
 
 export default function ActivityDetailPage() {
   const router = useRouter();
@@ -52,11 +52,9 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
-      <StyledButtonGroup>
       <StyledLinkButton href={`/activities/${id}/edit`} $variant="outlined">
         Edit
       </StyledLinkButton>
-      </StyledButtonGroup>
     </>
   );
 }
@@ -123,4 +121,5 @@ const LocationInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 `;

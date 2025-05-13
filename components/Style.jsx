@@ -104,12 +104,8 @@ export const StyledLinkButton = styled(Link)`
     `}
 `;
 
-// Wrapper for buttons (mostly to add some margin so they don't get covered by the footer)
+// Main
 
-export const StyledButtonGroup = styled.div`
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 8rem;
-`;
+export const StyledMain = styled.main`
+padding: 1.5rem;
+margin-bottom: 8rem`;

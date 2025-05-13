@@ -10,10 +10,12 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const activity = await Activity.findById(id).populate("categories");
+
       if (!activity) {
         response.status(404).json({ status: "Activity not found" });
         return;
       }
+
       response.status(200).json(activity);
       return;
     }

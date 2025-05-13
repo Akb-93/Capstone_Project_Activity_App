@@ -123,5 +123,4 @@ const LocationInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  // margin-bottom: 100px; <- this is pushing the buttons too low, removing because of the new button group 
 `;

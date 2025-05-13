@@ -28,10 +28,10 @@ export default function EditActivityPage() {
     }
 
     mutate();
-    router.push(`/activities/${id}`) // this won't work until Alissa cooks the details page
+    router.push(`/activities/${id}`)
   }
 
-  if (error) return <p>Error loading edit form...</p>; // adding better copy here :D
+  if (error) return <p>Error loading edit form...</p>;
   if (!activities) return <p>Loading edit form...</p>;
 
   function handleCancel() {

@@ -19,7 +19,7 @@ export default function ActivityDetailPage() {
   if (!activity) return <p>No activity found.</p>;
 
   return (
-    <main>
+    <>
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
@@ -42,12 +42,16 @@ export default function ActivityDetailPage() {
         )}
       </Categories>
       <LocationInfo>
-        <strong>Area:</strong>
-        {activity.area || "N/A"}
-        <strong>Country:</strong>
-        {activity.country || "N/A"}
+        <p>
+          <strong>Area:</strong>
+          {activity.area || "N/A"}
+        </p>
+        <p>
+          <strong>Country:</strong>
+          {activity.country || "N/A"}
+        </p>
       </LocationInfo>
-    </main>
+    </>
   );
 }
 

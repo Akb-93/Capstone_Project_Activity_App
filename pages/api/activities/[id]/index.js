@@ -1,4 +1,5 @@
 // this is just a placeholder to make it work, Alissa will implement that
+
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
@@ -16,6 +17,7 @@ export default async function handler(request, response) {
       response.status(200).json(activity);
       return;
     }
+
     if (request.method === "PUT") {
       const activityData = request.body;
 

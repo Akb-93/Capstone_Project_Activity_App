@@ -1,7 +1,6 @@
 //create a GET API route that fetches activities from your Activity model and populates the categories field with the actual category names
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
-
 import { Types } from "mongoose";
 
 export default async function handler(req, res) {
@@ -30,18 +29,18 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const { category } = req.query; // Get category query parameter
-
-      let filter = {};
-      if (category) {
-        // If category is provided, convert it to ObjectId
-        const categoryId = Types.ObjectId(category);
-        filter = { categories: categoryId }; // Filter activities by category ID
-      }
-      const activities = await Activity.find(filter)
+      const { category } = req.query;
+      console.log("Filtering by category:", category);
+      // Filter by category ID if provided
+      const query = category ? { categories: category } : {};
+      const activities = await Activity.find(query)
         .populate("categories")
-        .sort({ createdAt: -1 }); //por MUTATE
-      console.log("Activities fetched:", activities);
+        .sort({ createdAt: -1 });
+      console.log("Found activities:", activities);
+      console.log(
+        "Categories in activities:",
+        activities.map((activity) => activity.categories)
+      );
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

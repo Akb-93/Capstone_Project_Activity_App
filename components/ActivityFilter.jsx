@@ -5,15 +5,28 @@ export default function ActivityFilter({ onChange }) {
   const [selected, setSelected] = useState("");
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then((res) => res.json())
-      .then(setCategories);
+    async function fetchCategories() {
+      try {
+        const res = await fetch("/api/categories");
+        if (!res.ok) {
+          throw new Error(`Failed to fetch categories: ${res.status}`);
+        }
+        const data = await res.json();
+        setCategories(data);
+        console.log("Fetched categories:", data); // Debugging log to check the fetched categories
+      } catch (error) {
+        console.error("Error loading categories:", error);
+      }
+    }
+
+    fetchCategories();
   }, []);
 
   const handleChange = (e) => {
     const value = e.target.value;
     setSelected(value);
     onChange(value); // pass selected category _id
+    console.log("Selected category:", value);
   };
 
   const handleReset = () => {

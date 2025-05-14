@@ -3,10 +3,10 @@ import "./Categories";
 
 const activitySchema = new Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-      default: () => new mongoose.Types.ObjectId(),
-    },
+    // _id: {
+    //   type: Schema.Types.ObjectId,
+    //   default: () => new mongoose.Types.ObjectId(),
+    // },
     title: { type: String, required: true },
     categories: [
       {

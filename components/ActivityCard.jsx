@@ -15,9 +15,9 @@ export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
       </FavoriteButtonWrapper> 
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
-          <Title>{activity.title || 'Untitled Activity'}</Title>
+          <Title>{activity.title || "Untitled Activity"}</Title>
         </Link>
-        <Country>{activity.country || 'No country specified'}</Country>
+        <Country>{activity.country || "No country specified"}</Country>
         <TagList>
           {activity.categories && activity.categories.length > 0 ? (
             activity.categories.map((category) => (

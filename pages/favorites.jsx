@@ -9,10 +9,10 @@ export default function Favorites() {
 
   const loadFavorites = async () => {
     try {
-      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       
       if (!Array.isArray(favorites)) {
-        setError('Invalid favorites data');
+        setError("Invalid favorites data");
         setLoading(false);
         return;
       }
@@ -42,8 +42,8 @@ export default function Favorites() {
       const validActivities = activities.filter(activity => activity !== null);
       setFavoriteActivities(validActivities);
     } catch (error) {
-      console.error('Error loading favorite activities:', error);
-      setError('Failed to load favorite activities');
+      console.error("Error loading favorite activities:", error);
+      setError("Failed to load favorite activities");
     } finally {
       setLoading(false);
     }

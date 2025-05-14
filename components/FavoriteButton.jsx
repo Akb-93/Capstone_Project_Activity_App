@@ -26,7 +26,7 @@ export default function FavoriteButton({ activityId, onToggle }) {
     const [isFavorite, setIsFavorite] = useState(false);
   
     useEffect(() => {
-      // Load favorite status from localStorage on component mount
+      // Load favorite status from localStorage 
       const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       setIsFavorite(favorites.includes(activityId));
     }, [activityId]);
@@ -34,6 +34,8 @@ export default function FavoriteButton({ activityId, onToggle }) {
     const toggleFavorite = () => {
       const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       let newFavorites;
+
+      console.log("favs", favorites);
   
       if (isFavorite) {
         newFavorites = favorites.filter(id => id !== activityId);
@@ -49,6 +51,7 @@ export default function FavoriteButton({ activityId, onToggle }) {
         onToggle(!isFavorite);
       }
     };
+
 
   return (
     <Button onClick={toggleFavorite} aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}>

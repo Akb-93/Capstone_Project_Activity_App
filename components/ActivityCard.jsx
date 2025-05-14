@@ -5,14 +5,10 @@ import FavoriteButton from "./FavoriteButton";
 
 export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
   return (
-<<<<<<< HEAD
-    <Card bg={activity.imageUrl || "/placeholder.jpg"}>
+    <Card>
       <FavoriteButtonWrapper>
         <FavoriteButton activityId={activity._id} onToggle={onFavoriteToggle}/>
       </FavoriteButtonWrapper> 
-=======
-    <Card>
->>>>>>> main
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>

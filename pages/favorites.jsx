@@ -34,7 +34,6 @@ export default function Favorites() {
 
   const handleFavoriteToggle = (activityId, isNowFavorite) => {
     if (!isNowFavorite) {
-      // If the activity was unfavorited, remove it from the list immediately
       setFavoriteActivities(prevActivities => 
         prevActivities.filter(activity => activity._id !== activityId)
       );
@@ -42,22 +41,22 @@ export default function Favorites() {
   };
 
   if (loading) {
-    return <LoadingMessage>Loading favorites...</LoadingMessage>;
+    return <div>Loading...</div>;
   }
 
   if (favoriteActivities.length === 0) {
     return (
-      <EmptyState>
+      <div>
         <h1>No Favorites Yet</h1>
-        <p>You haven&apos;t bookmarked any activities yet. Start exploring and add some favorites!</p>
-      </EmptyState>
+        <p>You haven't bookmarked any activities yet.</p>
+      </div>
     );
   }
 
   return (
-    <Container>
+    <div>
       <h1>My Favorite Activities</h1>
-      <ActivityGrid>
+      <div>
         {favoriteActivities.map(activity => (
           <ActivityCard 
             key={activity._id} 
@@ -65,46 +64,7 @@ export default function Favorites() {
             onFavoriteToggle={(isFavorite) => handleFavoriteToggle(activity._id, isFavorite)}
           />
         ))}
-      </ActivityGrid>
-    </Container>
+      </div>
+    </div>
   );
-}
-
-const Container = styled.div`
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  h1 {
-    margin-bottom: 2rem;
-    color: #333;
-  }
-`;
-
-const ActivityGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-`;
-
-const EmptyState = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #666;
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1.1rem;
-  }
-`;
-
-const LoadingMessage = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #666;
-  font-size: 1.2rem;
-`; 
+} 

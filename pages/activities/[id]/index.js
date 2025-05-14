@@ -3,6 +3,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
 import { StyledLinkButton } from "@/components/Style";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export default function ActivityDetailPage() {
   const router = useRouter();
@@ -32,6 +33,11 @@ export default function ActivityDetailPage() {
         height={500}
       />
       <Description>{activity.description}</Description>
+
+      <FavoriteButtonWrapper>
+          <FavoriteButton activityId={activity._id} />
+        </FavoriteButtonWrapper>
+
       <Categories>
         <strong>Categories:</strong>
         {activity.categories?.length ? (
@@ -60,6 +66,9 @@ export default function ActivityDetailPage() {
 }
 
 // Styled components
+const FavoriteButtonWrapper = styled.div`
+ background-color: none;
+`;
 
 const Header = styled.header`
   background-color: #f5f5dc;

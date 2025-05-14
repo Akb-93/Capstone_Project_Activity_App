@@ -16,7 +16,7 @@ export default function ActivitiesPage() {
         <HeroCard title="Activities List">
           <p>Choose your fun</p>
         </HeroCard>
-        <p>No activities available. Click on the "+" button to add one.</p>
+        <p>No activities available. Click on the + button to add one.</p>
         <AddButton />
       </>
     );

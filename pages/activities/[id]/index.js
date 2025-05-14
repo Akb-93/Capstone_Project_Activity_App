@@ -2,10 +2,14 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledLinkButton } from "@/components/Style";
+import { StyledLinkButton, StyledButton } from "@/components/Style";
+import ConfirmModal from "@/components/ConfirmationModal";
+import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function ActivityDetailPage() {
+  const [showModal, setShowModal] = useState(false); // for the modal
+
   const router = useRouter();
   const { id } = router.query; // to access [id] from the route
 
@@ -19,6 +23,19 @@ export default function ActivityDetailPage() {
   if (error) return <p>Failed to load activity.</p>;
   if (isLoading) return <p>Loading...</p>;
   if (!activity) return <p>No activity found.</p>;
+
+  async function handleDelete() {
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      console.log(response.status);
+      return;
+    }
+    setShowModal(false);
+    router.push("/activities");
+  }
 
   return (
     <>
@@ -61,6 +78,17 @@ export default function ActivityDetailPage() {
       <StyledLinkButton href={`/activities/${id}/edit`} $variant="outlined">
         Edit
       </StyledLinkButton>
+      <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
+        Delete
+      </StyledButton>
+      {showModal && (
+        <ConfirmModal
+          title="Confirm Delete"
+          message="Do you want to delete the activity?"
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </>
   );
 }

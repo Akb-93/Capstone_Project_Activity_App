@@ -58,6 +58,65 @@ export const StyledAddButton = styled.button`
   }
 `;
 
+// Buttons
+
+export const StyledButton = styled.button`
+  background-color: black;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  ${({ $variant }) =>
+    $variant === "outlined" &&
+    `
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      &:active {
+        background-color: #e5e7eb;
+      }
+    `}
+
+  ${({ $variant }) =>
+    $variant === "destructive" &&
+    `
+      background-color: #dc2626;
+      border: 1px solid #dc2626;
+
+      &:hover {
+        background-color: #ef4444;
+      }
+
+      &:active {
+        background-color: #b91c1c;
+      }
+    `}
+`;
+
 // Links that look like buttons
 
 export const StyledLinkButton = styled(Link)`
@@ -101,6 +160,58 @@ export const StyledLinkButton = styled(Link)`
         background-color: #e5e7eb;
       }
     `}
+
+  ${({ $variant }) =>
+    $variant === "destructive" &&
+    `
+      background-color: #dc2626;
+      border: 1px solid #dc2626;
+
+      &:hover {
+        background-color: #ef4444;
+      }
+
+      &:active {
+        background-color: #b91c1c;
+      }
+    `}
+`;
+
+// Dialog
+
+export const Dialog = styled.dialog`
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
+`;
+
+export const DialogSection = styled.section`
+  background: white;
+  padding: 2rem;
+  border-radius: 0.6rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+`;
+
+export const DialogFooter = styled.footer`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
 `;
 
 // Main

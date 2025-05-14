@@ -2,8 +2,13 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
+import { StyledLinkButton, StyledButton } from "@/components/Style";
+import ConfirmModal from "@/components/ConfirmationModal";
+import { useState } from "react";
 
 export default function ActivityDetailPage() {
+  const [showModal, setShowModal] = useState(false); // for the modal
+
   const router = useRouter();
   const { id } = router.query; // to access [id] from the route
 
@@ -18,12 +23,25 @@ export default function ActivityDetailPage() {
   if (isLoading) return <p>Loading...</p>;
   if (!activity) return <p>No activity found.</p>;
 
+  async function handleDelete() {
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      console.log(response.status);
+      return;
+    }
+    setShowModal(false);
+    router.push("/activities");
+  }
+
   return (
     <>
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-      <BackButton onClick={() => router.back()}>←Back</BackButton>{" "}
+      <BackButton onClick={() => router.push("/activities")}>←Back</BackButton>{" "}
       <ImageWrapper
         src={activity.imageUrl || `/images/placeholder.jpg`}
         alt={activity.title}
@@ -51,6 +69,20 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
+      <StyledLinkButton href={`/activities/${id}/edit`} $variant="outlined">
+        Edit
+      </StyledLinkButton>
+      <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
+        Delete
+      </StyledButton>
+      {showModal && (
+        <ConfirmModal
+          title="Confirm Delete"
+          message="Do you want to delete the activity?"
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </>
   );
 }
@@ -117,5 +149,5 @@ const LocationInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 100px;
+  margin-bottom: 2rem;
 `;

@@ -11,8 +11,8 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     useSWR("/api/categories");
 
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
-
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(
+    inputData || {
     title: "",
     categories: [],
     description: "",
@@ -138,7 +138,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
           type="submit"
           disabled={!formData.title || formData.categories.length === 0}
         >
-          Add activity
+          {inputData ? "Edit Activity" : "Add Activity"}
         </button>
         <button type="button" onClick={onCancel}>
           Cancel

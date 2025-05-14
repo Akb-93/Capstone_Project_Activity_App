@@ -26,6 +26,17 @@ export default function ActivitiesPage() {
   const handleReset = () => setSelectedCategory("");
   if (activitiesError || categoryError) return <p>Failed to load data.</p>;
   if (isLoading) return <p>Loading activities...</p>;
+  if (!activities || activities.length === 0)
+    return (
+      <>
+        <HeroCard title="Activities List">
+          <p>Choose your fun</p>
+        </HeroCard>
+        <p>No activities available. Click on the + button to add one.</p>
+        <AddButton />
+      </>
+    );
+
   return (
     <>
       <HeroCard title="Activities List">

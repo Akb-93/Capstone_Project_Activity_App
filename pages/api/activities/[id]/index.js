@@ -1,5 +1,3 @@
-// this is just a placeholder to make it work, Alissa will implement that
-
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
@@ -39,6 +37,14 @@ export default async function handler(request, response) {
       response.status(200).json(updatedActivity);
       return;
     }
+
+    if (request.method === "DELETE") {
+        const activity = await Activity.findById(id);
+        await Activity.findByIdAndDelete(id);
+
+        response.status(200).json({ message: "Activity deleted successfully." });
+        return;
+      }
 
     response.status(405).json({ status: "Method not allowed" });
   } catch (error) {

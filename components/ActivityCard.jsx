@@ -4,6 +4,10 @@ import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
 
 export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
+  if (!activity) {
+    return null;
+  }
+
   return (
     <Card>
       <FavoriteButtonWrapper>
@@ -11,13 +15,17 @@ export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
       </FavoriteButtonWrapper> 
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
-          <Title>{activity.title}</Title>
+          <Title>{activity.title || 'Untitled Activity'}</Title>
         </Link>
-        <Country>{activity.country}</Country>
+        <Country>{activity.country || 'No country specified'}</Country>
         <TagList>
-          {activity.categories.map((category) => (
-            <Tag key={category._id}>{category.name}</Tag>
-          ))}
+          {activity.categories && activity.categories.length > 0 ? (
+            activity.categories.map((category) => (
+              <Tag key={category._id || category.name}>{category.name}</Tag>
+            ))
+          ) : (
+            <Tag>No categories</Tag>
+          )}
         </TagList>
       </CardContent>
     </Card>
@@ -66,6 +74,8 @@ const Country = styled.p`
 
 const TagList = styled.ul`
   margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
 `;
 
 const Tag = styled.li`

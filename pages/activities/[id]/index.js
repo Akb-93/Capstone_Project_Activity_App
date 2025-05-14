@@ -32,8 +32,6 @@ export default function ActivityDetailPage() {
       console.log(response.status);
       return;
     }
-
-    await response.json();
     setShowModal(false);
     router.push("/activities");
   }

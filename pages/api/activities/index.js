@@ -30,17 +30,15 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const { category } = req.query;
-      console.log("Filtering by category:", category);
       // Filter by category ID if provided
       const query = category ? { categories: category } : {};
       const activities = await Activity.find(query)
         .populate("categories")
         .sort({ createdAt: -1 });
-      console.log("Found activities:", activities);
-      console.log(
-        "Categories in activities:",
-        activities.map((activity) => activity.categories)
-      );
+
+      "Categories in activities:",
+        activities.map((activity) => activity.categories);
+
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

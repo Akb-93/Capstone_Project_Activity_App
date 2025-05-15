@@ -1,67 +1,51 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import useSWR from 'swr';
 import ActivityCard from '../components/ActivityCard';
 
 export default function Favorites() {
-  const [favoriteActivities, setFavoriteActivities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [favoriteIds, setFavoriteIds] = useState([]);
 
-  const loadFavorites = async () => {
-    try {
-      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-      
-      if (!Array.isArray(favorites)) {
-        setError("Invalid favorites data");
-        setLoading(false);
-        return;
-      }
-
-      if (favorites.length === 0) {
-        setLoading(false);
-        setFavoriteActivities([]);
-        return;
-      }
-
-      const activities = await Promise.all(
-        favorites.map(async (id) => {
-          try {
-            const response = await fetch(`/api/activities/${id}`);
-            if (!response.ok) {
-              throw new Error(`Failed to fetch activity ${id}`);
-            }
-            const data = await response.json();
-            return data;
-          } catch (error) {
-            console.error(`Error fetching activity ${id}:`, error);
-            return null;
-          }
-        })
-      );
-
-      const validActivities = activities.filter(activity => activity !== null);
-      setFavoriteActivities(validActivities);
-    } catch (error) {
-      console.error("Error loading favorite activities:", error);
-      setError("Failed to load favorite activities");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Load favorite IDs from localStorage on component mount
   useEffect(() => {
-    loadFavorites();
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    // Filter out any null or invalid IDs
+    const validFavorites = favorites.filter(id => id && typeof id === 'string' && id.length > 0);
+    setFavoriteIds(validFavorites);
   }, []);
+
+  // Fetch all favorite activities using SWR with global fetcher
+  const { data: activities, error, isLoading } = useSWR(
+    favoriteIds.length > 0 ? favoriteIds.map(id => `/api/activities/${id}`) : null,
+    async (urls) => {
+      try {
+        const responses = await Promise.all(
+          urls.map(url => fetch(url))
+        );
+        const data = await Promise.all(
+          responses.map(async (res) => {
+            if (!res.ok) {
+              return null;
+            }
+            return res.json();
+          })
+        );
+        // Filter out any false fetches
+        return data.filter(activity => activity !== null);
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+        return [];
+      }
+    }
+  );
 
   const handleFavoriteToggle = (activityId, isNowFavorite) => {
     if (!isNowFavorite) {
-      setFavoriteActivities(prevActivities => 
-        prevActivities.filter(activity => activity._id !== activityId)
-      );
+      setFavoriteIds(prevIds => prevIds.filter(id => id !== activityId));
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -69,26 +53,33 @@ export default function Favorites() {
     return (
       <div>
         <h2>Error</h2>
-        <p>{error}</p>
-        <button onClick={loadFavorites}>Try Again</button>
+        <p>Failed to load favorite activities</p>
       </div>
     );
   }
 
-  if (favoriteActivities.length === 0) {
+  if (!favoriteIds.length) {
     return (
       <div>
         <h1>No Favorites Yet</h1>
-        <p>You haven&apos;t bookmarked any activities yet.</p>
+        <p>You have not bookmarked any activities yet.</p>
       </div>
     );
+  }
+
+  // If we have no valid activities after filtering
+  if (!activities || activities.length === 0) {
+    return (
+      
+        <h1>None of your favorited activities could be loaded.</h1>
+       );
   }
 
   return (
     <Main>
       <Title>My Favorite Activities</Title>
       <StyledActivityGrid>
-        {favoriteActivities.map(activity => (
+        {activities.map(activity => (
           <ActivityCard 
             key={activity._id} 
             activity={activity}

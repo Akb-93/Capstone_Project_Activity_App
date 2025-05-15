@@ -6,8 +6,6 @@ import styled from "styled-components";
 import AddButton from "@/components/AddButton";
 import ActivityFilter from "@/components/ActivityFilter";
 
-// Generic fetcher for SWR
-const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function ActivitiesPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -18,7 +16,7 @@ export default function ActivitiesPage() {
     data: activities,
     error: activitiesError,
     isLoading,
-  } = useSWR(activitiesUrl, fetcher);
+  } = useSWR(activitiesUrl);
   if (activitiesError) return <p>Failed to load activities.</p>;
   if (isLoading) return <p>Loading activities...</p>;
   if (!activities || activities.length === 0)

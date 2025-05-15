@@ -1,5 +1,12 @@
 //creo el formulario
-import { FormContainer, Input, Textarea, Label, Select } from "./Style";
+import {
+  FormContainer,
+  Input,
+  Textarea,
+  Label,
+  Select,
+  StyledButton,
+} from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -13,12 +20,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
-    title: "",
-    categories: [],
-    description: "",
-    area: "",
-    country: "",
-  });
+      title: "",
+      categories: [],
+      description: "",
+      area: "",
+      country: "",
+    }
+  );
 
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
@@ -134,15 +142,15 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
         </Label>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
-        <button
+        <StyledButton
           type="submit"
           disabled={!formData.title || formData.categories.length === 0}
         >
           {inputData ? "Edit Activity" : "Add Activity"}
-        </button>
-        <button type="button" onClick={onCancel}>
+        </StyledButton>
+        <StyledButton type="button" onClick={onCancel}>
           Cancel
-        </button>
+        </StyledButton>
       </FormContainer>
     </>
   );

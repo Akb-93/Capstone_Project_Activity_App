@@ -1,6 +1,7 @@
 //hhhhh
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 export const FormContainer = styled.form`
   display: grid;
@@ -217,5 +218,80 @@ export const DialogFooter = styled.footer`
 // Main
 
 export const StyledMain = styled.main`
-padding: 1.5rem;
-margin-bottom: 8rem`;
+  padding: 1.5rem;
+  margin-bottom: 8rem;
+`;
+
+//thumbnail:
+export const ImageContainer = styled.div`
+  width: 150px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 8px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+export const ThumbnailImage = styled.image`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem;
+`;
+
+//Carousel:
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100vw; /* ancho completo del viewport */
+  padding: 1rem;
+  box-sizing: border-box; /* para que padding no sume ancho */
+`;
+
+export const CarouselContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  /* ocultar scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+`;
+
+export const CircleButton = styled.button`
+  font-size: 2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  user-select: none;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
+//homepage:
+export const DescriptionText = styled.p`
+  border: 3px dashed #4a90e2; /* borde ondulado simulado con dashed */
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 600px; /* para que no ocupe todo el ancho */
+  background: #f9faff;
+`;

@@ -15,7 +15,6 @@ export default function ActivitiesPage() {
   const {
     data: activities,
     error: activitiesError,
-    isLoading,
   } = useSWR(activitiesUrl);
   if (activitiesError) return <p>Failed to load activities.</p>;
   if (!activities || activities.length === 0)

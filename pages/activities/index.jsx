@@ -17,7 +17,7 @@ export default function ActivitiesPage() {
     error: activitiesError,
   } = useSWR(activitiesUrl);
   if (activitiesError) return <p>Failed to load activities.</p>;
-  if (!activities || activities.length === 0)
+  if (activities.length === 0)
     return (
       <>
         <HeroCard title="Activities List">

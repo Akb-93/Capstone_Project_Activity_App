@@ -35,9 +35,6 @@ export default async function handler(req, res) {
         .populate("categories")
         .sort({ createdAt: -1 });
 
-      "Categories in activities:",
-        activities.map((activity) => activity.categories);
-
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

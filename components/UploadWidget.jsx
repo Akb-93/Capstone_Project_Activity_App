@@ -22,7 +22,7 @@ export default function UploadWidget({ onUpload }) {
   }
 
   return (
-    <StyledButton onClick={openWidget}>
+    <StyledButton $variant="outlined" onClick={openWidget}>
       Upload Image
     </StyledButton>
   );

@@ -1,5 +1,7 @@
 //creo el formulario
-import { FormContainer, Input, Textarea, Label, Select } from "./Style";
+import { FormContainer, Input, Textarea, Label, Select, FieldSet, Legend, ImagePlaceholder, ImagePreviewWrapper } from "./Style";
+import Image from "next/image";
+import UploadWidget from "./UploadWidget";
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -18,6 +20,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     description: "",
     area: "",
     country: "",
+    imageUrl: "",
   });
 
   //PARA MENSAJE DE ERROR
@@ -65,6 +68,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     };
 
     onSubmit(dataToSubmit);
+  }
+
+  function handleImageUpload(url) {
+    setFormData({
+      ...formData,
+      imageURl: url,
+    });
   }
 
   return (
@@ -132,6 +142,23 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
             onChange={handleChange}
           />
         </Label>
+
+        <FieldSet>
+          <Legend>Image</Legend>
+          {formData.imageUrl ? (
+            <Image
+              src={formData.imageUrl}
+              alt="Uploaded Preview"
+              fill
+            />
+          ) : (
+            <ImagePlaceholder>
+              No image uploaded
+            </ImagePlaceholder>
+          )}
+          <UploadWidget onUpload={handleImageUpload} />
+        </FieldSet>
+
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
         <button

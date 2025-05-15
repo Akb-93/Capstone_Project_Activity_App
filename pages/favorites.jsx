@@ -85,9 +85,9 @@ export default function Favorites() {
   }
 
   return (
-    <div>
-      <h1>My Favorite Activities</h1>
-      <div>
+    <Main>
+      <Title>My Favorite Activities</Title>
+      <StyledActivityGrid>
         {favoriteActivities.map(activity => (
           <ActivityCard 
             key={activity._id} 
@@ -95,7 +95,26 @@ export default function Favorites() {
             onFavoriteToggle={(isFavorite) => handleFavoriteToggle(activity._id, isFavorite)}
           />
         ))}
-      </div>
-    </div>
+      </StyledActivityGrid>
+    </Main>
   );
 } 
+
+const StyledActivityGrid = styled.div`
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @media (max-width: 375px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Title = styled.h1`
+font-size: 2rem;
+
+`;
+
+const Main = styled.h1`
+
+`;

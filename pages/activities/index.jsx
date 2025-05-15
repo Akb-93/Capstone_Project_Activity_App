@@ -36,7 +36,10 @@ export default function ActivitiesPage() {
         <p>Choose your fun</p>
       </HeroCard>
       <StyledFilterWrapper>
-        <ActivityFilter onChange={setSelectedCategory} />
+        <ActivityFilter
+          selectedCategory={selectedCategory}
+          onChange={setSelectedCategory}
+        />
       </StyledFilterWrapper>
       {!activities || activities.length === 0 ? (
         <>

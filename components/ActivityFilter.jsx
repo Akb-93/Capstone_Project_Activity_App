@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-export default function ActivityFilter({ onChange }) {
+export default function ActivityFilter({ selectedCategory, onChange }) {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     async function fetchCategories() {
@@ -23,12 +22,10 @@ export default function ActivityFilter({ onChange }) {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setSelectedCategory(value);
     onChange(value); // passing selected category _id back to parent
   };
 
   const handleReset = () => {
-    setSelectedCategory("");
     onChange("");
   };
 

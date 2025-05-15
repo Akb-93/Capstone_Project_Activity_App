@@ -235,19 +235,40 @@ export const ImageContainer = styled.div`
     object-fit: cover;
   }
 `;
-export const ThumbnailImage = styled.image`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+
+export const ThumbnailWrapper = styled.div`
+  width: 150px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+export const ThumbnailImage = styled.img`
+  width: 150px;
+  height: 100px;
+  border-radius: 8px;
   object-fit: cover;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+`;
+
+export const ThumbnailTitle = styled.p`
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
 `;
 
 //Carousel:
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100vw; /* ancho completo del viewport */
+  width: 100%;
   padding: 1rem;
   box-sizing: border-box; /* para que padding no sume ancho */
 `;
@@ -286,6 +307,10 @@ export const CircleButton = styled.button`
 
 //homepage:
 export const DescriptionText = styled.p`
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
   border: 3px dashed #4a90e2; /* borde ondulado simulado con dashed */
   border-radius: 15px;
   padding: 15px 20px;
@@ -294,4 +319,19 @@ export const DescriptionText = styled.p`
   color: #333;
   max-width: 600px; /* para que no ocupe todo el ancho */
   background: #f9faff;
+`;
+
+//line between carousel and descrption :
+export const Divider = styled.hr`
+  margin: 40px auto;
+  width: 80%;
+  border: none;
+  border-top: 2px solid #ccc;
+`;
+
+export const StyledSpan = styled.span`
+  display: block;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 `;

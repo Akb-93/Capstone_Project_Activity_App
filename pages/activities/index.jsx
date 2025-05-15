@@ -4,16 +4,13 @@ import HeroCard from "@/components/HeroCard";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
 import AddButton from "@/components/AddButton";
+import ActivityFilter from "@/components/ActivityFilter";
+
 // Generic fetcher for SWR
 const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function ActivitiesPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
-  // Fetch categories for the dropdown
-  const { data: categories, error: categoryError } = useSWR(
-    "/api/categories",
-    fetcher
-  );
-  // Fetch activities (filtered if category is selected)
+
   const activitiesUrl = selectedCategory
     ? `/api/activities?category=${selectedCategory}`
     : "/api/activities";
@@ -22,9 +19,7 @@ export default function ActivitiesPage() {
     error: activitiesError,
     isLoading,
   } = useSWR(activitiesUrl, fetcher);
-  // Handle filter reset
-  const handleReset = () => setSelectedCategory("");
-  if (activitiesError || categoryError) return <p>Failed to load data.</p>;
+  if (activitiesError) return <p>Failed to load activities.</p>;
   if (isLoading) return <p>Loading activities...</p>;
   if (!activities || activities.length === 0)
     return (
@@ -42,22 +37,9 @@ export default function ActivitiesPage() {
       <HeroCard title="Activities List">
         <p>Choose your fun</p>
       </HeroCard>
-      <FilterBar>
-        <label htmlFor="category-select">Filter by category:</label>
-        <select
-          id="category-select"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          {categories?.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-        <button onClick={handleReset}>Reset</button>
-      </FilterBar>
+      <StyledFilterWrapper>
+        <ActivityFilter onChange={setSelectedCategory} />
+      </StyledFilterWrapper>
       {!activities || activities.length === 0 ? (
         <>
           <p>No activities found for this filter.</p>
@@ -84,10 +66,8 @@ const StyledActivityGrid = styled.main`
     grid-template-columns: 1fr;
   }
 `;
-const FilterBar = styled.section`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+
+const StyledFilterWrapper = styled.section`
   margin: 1.5rem 0 2rem;
   select,
   button {

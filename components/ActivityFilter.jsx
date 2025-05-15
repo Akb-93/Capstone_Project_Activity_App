@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function ActivityFilter({ onChange }) {
   const [categories, setCategories] = useState([]);
-  const [selected, setSelected] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     async function fetchCategories() {
@@ -13,7 +13,6 @@ export default function ActivityFilter({ onChange }) {
         }
         const data = await res.json();
         setCategories(data);
-        console.log("Fetched categories:", data); // Debugging log to check the fetched categories
       } catch (error) {
         console.error("Error loading categories:", error);
       }
@@ -24,22 +23,20 @@ export default function ActivityFilter({ onChange }) {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setSelected(value);
-    onChange(value); // pass selected category _id
-    console.log("Selected category:", value);
+    setSelectedCategory(value);
+    onChange(value); // passing selected category _id back to parent
   };
 
   const handleReset = () => {
-    setSelected("");
-    onChange(""); // reset filter
+    setSelectedCategory("");
+    onChange("");
   };
 
   return (
     <section>
-      <label htmlFor="category-filter">Filter by Category</label>
       <select
         id="category-filter"
-        value={selected}
+        value={selectedCategory}
         onChange={handleChange}
         aria-label="Select category"
       >

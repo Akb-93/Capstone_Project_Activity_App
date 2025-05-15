@@ -34,7 +34,6 @@ export default async function handler(req, res) {
       const activities = await Activity.find(query)
         .populate("categories")
         .sort({ createdAt: -1 });
-
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

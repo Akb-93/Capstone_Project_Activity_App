@@ -58,10 +58,12 @@ export default function ActivitiesPage() {
     </>
   );
 }
+
 const StyledActivityGrid = styled.main`
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
   @media (max-width: 375px) {
     grid-template-columns: 1fr;
   }

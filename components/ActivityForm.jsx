@@ -73,7 +73,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   function handleImageUpload(url) {
     setFormData({
       ...formData,
-      imageURl: url,
+      imageUrl: url,
     });
   }
 
@@ -146,11 +146,15 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
         <FieldSet>
           <Legend>Image</Legend>
           {formData.imageUrl ? (
+            <ImagePreviewWrapper>
             <Image
               src={formData.imageUrl}
               alt="Uploaded Preview"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: "cover" }}
             />
+            </ImagePreviewWrapper>
           ) : (
             <ImagePlaceholder>
               No image uploaded

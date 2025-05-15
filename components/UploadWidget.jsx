@@ -1,29 +1,45 @@
-import React from "react";
 import { StyledButton } from "./Style";
+import { useEffect, useRef, useState } from "react";
 
 export default function UploadWidget({ onUpload }) {
+  const widgetRef = useRef(null);
+  const [isReady, setIsReady] = useState(false);
 
-  function openWidget() {
-    if (!window.cloudinary) return;
+  useEffect(() => {
+    const checkInterval = setInterval(() => {
+      if (window.cloudinary) {
+        clearInterval(checkInterval);
 
-    const widget = window.cloudinary.createUploadWidget(
-      {
-        cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-        uploadPreset: "activity_image_upload",
-      },
-      function (error, result) {
-        if (!error && result && result.event === "success") {
-          onUpload(result.info.secure_url);
-        }
+        widgetRef.current = window.cloudinary.createUploadWidget(
+          {
+            cloudName: "dvy65gcrf",
+            uploadPreset: "activity_image_upload",
+          },
+          function (error, result) {
+            if (!error && result.event === "success") {
+              onUpload(result.info.secure_url);
+            }
+          }
+        );
+
+        setIsReady(true);
       }
-    );
+    }, 500);
 
-    widget.open();
+    return () => clearInterval(checkInterval);
+  }, [onUpload]);
+
+  function handleClick() {
+    if (widgetRef.current) {
+      widgetRef.current.open();
+    } else {
+      console.error("Widget not ready yet.");
+    }
   }
 
   return (
-    <StyledButton $variant="outlined" onClick={openWidget}>
-      Upload Image
+    <StyledButton type="button" onClick={handleClick} disabled={!isReady}>
+      {isReady ? "Upload Image" : "Loading..."}
     </StyledButton>
   );
 }

@@ -65,10 +65,15 @@ export const ImagePlaceholder = styled.div`
 `;
 
 export const ImagePreviewWrapper = styled.div`
-  width: 200px;
+  width: 100%;
   height: 200px;
-  position: relative;
   background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin-bottom: 1em;
+  position: relative;
 `;
 
 // Add button for Activity page

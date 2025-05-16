@@ -5,6 +5,7 @@ import Image from "next/image";
 import { StyledLinkButton, StyledButton } from "@/components/Style";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export default function ActivityDetailPage() {
   const [showModal, setShowModal] = useState(false); // for the modal
@@ -49,6 +50,11 @@ export default function ActivityDetailPage() {
         height={500}
       />
       <Description>{activity.description}</Description>
+
+      <FavoriteButtonWrapper>
+          <FavoriteButton activityId={activity._id} />
+        </FavoriteButtonWrapper>
+
       <Categories>
         <strong>Categories:</strong>
         {activity.categories?.length ? (
@@ -88,6 +94,9 @@ export default function ActivityDetailPage() {
 }
 
 // Styled components
+const FavoriteButtonWrapper = styled.div`
+ background-color: none;
+`;
 
 const Header = styled.header`
   background-color: #f5f5dc;

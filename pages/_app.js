@@ -10,16 +10,15 @@ const fetcher = async (...args) => {
   return await response.json();
 };
 
-
 export default function App({ Component, pageProps }) {
   return (
     <>
       <Layout>
-      <GlobalStyle />
-      <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} />
-      </SWRConfig>
-       </Layout>
+        <GlobalStyle />
+        <SWRConfig value={{ fetcher }}>
+          <Component {...pageProps} />
+        </SWRConfig>
+      </Layout>
     </>
   );
 }

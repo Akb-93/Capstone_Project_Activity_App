@@ -1,4 +1,5 @@
 import { StyledButton } from "./StyledComponents";
+import styled from "styled-components";
 
 export default function ConfirmModal({ title, message, onCancel, onConfirm }) {
   return (

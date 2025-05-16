@@ -1,5 +1,6 @@
 import NavbarComponent from "@/components/Navbar";
 import FooterComponent from "./Footer";
+import styled from "styled-components";
 
 export default function Layout({ children }) {
   return (

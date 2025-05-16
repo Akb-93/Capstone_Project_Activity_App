@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { StyledButton } from "./StyledComponents";
+import styled from "styled-components";
 
 export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();

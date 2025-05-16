@@ -218,6 +218,7 @@ export const DialogFooter = styled.footer`
 // Main
 
 export const StyledMain = styled.main`
+
   padding: 1.5rem;
   margin-bottom: 8rem;
 `;
@@ -356,3 +357,32 @@ export const StyledSpan = styled.span`
   font-size: 1.3rem;
   margin-bottom: 10px;
 `;
+
+
+
+// Footer
+
+
+export const FooterWrapper = styled.footer`
+    background-color: #ccc;
+    width: 100%;
+    padding:50px;
+`;
+
+export const FooterList = styled.ul`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:auto;
+`;
+
+export const FooterItem = styled.li`
+ list-style-type: none;
+`;
+
+export const FooterLink = styled(Link)`
+  
+  text-decoration: none;
+ 
+`;
+

@@ -1,6 +1,4 @@
-import React from "react";
-import Link from "next/link";
-import styled from "styled-components";
+
 
 const FooterWrapper = styled.footer`
   position: fixed;
@@ -22,6 +20,12 @@ const FooterItem = styled.li`
 const FooterLink = styled(Link)`
   text-decoration: none;
 `;
+
+import React from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+import { FooterWrapper, FooterList, FooterItem, FooterLink } from "./Style";
+
 
 const FooterComponent = () => {
   return (

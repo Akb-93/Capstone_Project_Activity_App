@@ -276,7 +276,7 @@ export const Wrapper = styled.div`
 export const CarouselContainer = styled.div`
   display: flex;
   gap: 1rem;
-  width: 100%;
+  width: 50%;
   overflow-x: auto;
   scroll-behavior: smooth;
 

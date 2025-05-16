@@ -357,32 +357,23 @@ export const StyledSpan = styled.span`
   font-size: 1.3rem;
   margin-bottom: 10px;
 `;
+//logo
+export const LogoContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-
-
-// Footer
-
-
-export const FooterWrapper = styled.footer`
-    background-color: #ccc;
+  img {
     width: 100%;
-    padding:50px;
-`;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 
-export const FooterList = styled.ul`
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin:auto;
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
 `;
-
-export const FooterItem = styled.li`
- list-style-type: none;
-`;
-
-export const FooterLink = styled(Link)`
-  
-  text-decoration: none;
- 
-`;
-

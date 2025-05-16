@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import Image from "next/image";
+import { LogoContainer } from "./Style";
 
 const Header = styled.header`
   position: sticky;
@@ -13,10 +15,6 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   height: 5rem;
-`;
-
-const LogoContainer = styled.div`
-  background: none;
 `;
 
 const Nav = styled.nav`
@@ -97,7 +95,12 @@ const NavbarComponent = () => {
   };
   return (
     <Header>
-      <LogoContainer>Logo</LogoContainer>
+      <LogoContainer>
+        <Link href="/">
+          <img src="/img/logo5.png" alt="Logo" />
+        </Link>
+      </LogoContainer>
+
       <Nav ref={menuRef}>
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (

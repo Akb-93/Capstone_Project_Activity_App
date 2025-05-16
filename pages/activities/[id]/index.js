@@ -2,11 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import {
-  StyledLinkButton,
-  StyledButton,
-  StyledLink,
-} from "@/components/StyledComponents";
+import { StyledButton, StyledLink } from "@/components/StyledComponents";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
 

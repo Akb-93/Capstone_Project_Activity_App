@@ -1,6 +1,9 @@
 //hhhhh
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
+
+// Form
 
 export const FormContainer = styled.form`
   display: grid;
@@ -38,6 +41,43 @@ export const Select = styled.select`
   border: 1px solid black;
   border-radius: 0.5rem;
 `;
+
+export const FieldSet = styled.fieldset`
+  padding: 1rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+export const Legend = styled.legend`
+  font-weight: bold;
+`;
+
+export const ImagePlaceholder = styled.div`
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin-bottom: 1em;
+`;
+
+export const ImagePreviewWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin-bottom: 1em;
+  position: relative;
+`;
+
+// Add button for Activity page
+
 export const StyledAddButton = styled.button`
   position: fixed;
   bottom: 20px;

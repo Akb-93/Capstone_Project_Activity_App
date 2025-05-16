@@ -62,7 +62,7 @@ export const StyledButton = styled.button`
 // Links that look like buttons
 //Will be reused in Home Page moving forward
 
-export const StyledLinkButton = styled(Link)`
+export const StyledLink = styled(Link)`
   display: inline-block;
   background-color: black;
   color: white;

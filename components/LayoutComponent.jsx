@@ -1,14 +1,19 @@
-
-import NavbarComponent from"@/components/Navbar";
+import NavbarComponent from "@/components/Navbar";
 import FooterComponent from "./Footer";
-import { StyledMain } from "./Style";
+import styled from "styled-components";
 
-export default function Layout ({ children }) {
+export default function Layout({ children }) {
   return (
     <>
-      <NavbarComponent/>
+      <NavbarComponent />
       <StyledMain>{children}</StyledMain>
-      <FooterComponent/>
+      <FooterComponent />
     </>
   );
 }
+
+//Styled Components
+const StyledMain = styled.main`
+  padding: 1.5rem;
+  margin-bottom: 4rem;
+`;

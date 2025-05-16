@@ -20,6 +20,7 @@ export default function ActivityCard({ activity }) {
   );
 }
 
+//Styled Components
 const Card = styled.article`
   position: relative;
   background-size: cover;

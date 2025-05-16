@@ -218,7 +218,6 @@ export const DialogFooter = styled.footer`
 // Main
 
 export const StyledMain = styled.main`
-
   padding: 1.5rem;
   margin-bottom: 8rem;
 `;
@@ -376,4 +375,24 @@ export const LogoContainer = styled.div`
       transform: scale(1.5);
     }
   }
+`;
+export const FooterWrapper = styled.footer`
+  position: fixed;
+  bottom: 0;
+  background-color: #ccc;
+  width: 100%;
+`;
+
+export const FooterList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const FooterItem = styled.li`
+  list-style-type: none;
+`;
+
+export const FooterLink = styled(Link)`
+  text-decoration: none;
 `;

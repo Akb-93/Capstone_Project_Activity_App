@@ -247,6 +247,9 @@ export const ThumbnailWrapper = styled.div`
   &:hover {
     transform: scale(1.1);
   }
+  @media (max-width: 768px) {
+    width: 110px;
+  }
 `;
 export const ThumbnailImage = styled.img`
   width: 150px;
@@ -255,6 +258,11 @@ export const ThumbnailImage = styled.img`
   object-fit: cover;
   margin-bottom: 0.5rem;
   transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    width: 110px;
+    height: 80px;
+  }
 `;
 
 export const ThumbnailTitle = styled.p`
@@ -270,7 +278,8 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   padding: 1rem;
-  box-sizing: border-box; /* para que padding no sume ancho */
+  box-sizing: border-box;
+  justify-content: center;
 `;
 
 export const CarouselContainer = styled.div`
@@ -279,13 +288,25 @@ export const CarouselContainer = styled.div`
   width: 50%;
   overflow-x: auto;
   scroll-behavior: smooth;
+  justify-content: flex-start;
 
   /* ocultar scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* cada thumbnail se ajustará con snap */
+  & > * {
+    scroll-snap-align: center;
   }
 `;
 

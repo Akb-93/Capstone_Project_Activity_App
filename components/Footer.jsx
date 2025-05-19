@@ -1,6 +1,5 @@
 import React from "react";
-import Link from "next/link";
-import styled from "styled-components";
+
 import { FooterWrapper, FooterList, FooterItem, FooterLink } from "./Style";
 
 const FooterComponent = () => {

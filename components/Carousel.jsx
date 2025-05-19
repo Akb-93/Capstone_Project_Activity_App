@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import Thumbnail from "./Thumbnail";
-import { CircleButton, Wrapper, CarouselContainer } from "./Style";
+import styled from "styled-components";
 
 export default function Carousel({ activities }) {
   const [scrollX, setScrollX] = useState(0); //esto  cuenta el desplazamiento horizontal actual (en pixeles).
@@ -44,3 +44,57 @@ export default function Carousel({ activities }) {
     </Wrapper>
   );
 }
+
+//Carousel:
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  justify-content: center;
+`;
+
+const CarouselContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 50%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  justify-content: flex-start;
+
+  /* ocultar scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* cada thumbnail se ajustará con snap */
+  & > * {
+    scroll-snap-align: center;
+  }
+`;
+
+const CircleButton = styled.button`
+  font-size: 2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  user-select: none;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;

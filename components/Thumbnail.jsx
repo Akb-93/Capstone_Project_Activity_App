@@ -1,26 +1,36 @@
 import { StyledLinkButton } from "./Style";
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Thumbnail({ activity }) {
   return (
-    <StyledLinkButton href={`/activities/${activity._id}`}>
-      <ThumbnailWrapper>
-        <ThumbnailImage
-          src={activity.imageUrl || "/images/placeholder.jpg"}
-          alt={activity.title}
-          width={150}
-          height={100}
-        />
+    <ThumbnailWrapper href={`/activities/${activity._id}`}>
+      <ThumbnailImage
+        src={activity.imageUrl || "/images/placeholder.jpg"}
+        alt={activity.title}
+        width={150}
+        height={100}
+      />
 
-        <ThumbnailTitle>{activity.title}</ThumbnailTitle>
-      </ThumbnailWrapper>
-    </StyledLinkButton>
+      <ThumbnailTitle>{activity.title}</ThumbnailTitle>
+    </ThumbnailWrapper>
   );
 }
 
 //thumbnail:
+const ThumbnailWrapper = styled(Link)`
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease;
 
-const ThumbnailWrapper = styled.div`
   width: 150px;
   cursor: pointer;
   display: flex;

@@ -222,31 +222,7 @@ export const StyledMain = styled.main`
   margin-bottom: 8rem;
 `;
 
-
-
-
-
-
-//logo
-export const LogoContainer = styled.div`
-  width: 150px;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.5);
-    }
-  }
-`;
+//footer
 export const FooterWrapper = styled.footer`
   position: fixed;
   bottom: 0;

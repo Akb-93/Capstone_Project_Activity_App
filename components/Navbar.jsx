@@ -29,11 +29,19 @@ const NavbarComponent = () => {
     console.log("Navigating to Favorites");
   };
 
+  const handleHomepageClick = () => {
+    setIsMenuOpen(false);
+    console.log("Navigating to Homepage");
+  };
+
   return (
     <Header>
-      <LogoContainer>
-        <img src="/img/logo5.png" alt="Logo" />
-      </LogoContainer>
+      <Link href="/">
+        <LogoContainer>
+          <img src="/img/logo5.png" alt="Logo" />
+        </LogoContainer>
+      </Link>
+      npm run dev
       <Nav ref={menuRef}>
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (
@@ -55,6 +63,13 @@ const NavbarComponent = () => {
               <Link href="/favorites">
                 <DropdownButton onClick={handleFavoritesClick}>
                   Favorites
+                </DropdownButton>
+              </Link>
+            </DropdownListItem>
+            <DropdownListItem>
+              <Link href="/">
+                <DropdownButton onClick={handleHomepageClick}>
+                  Homepage
                 </DropdownButton>
               </Link>
             </DropdownListItem>

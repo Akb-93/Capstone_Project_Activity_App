@@ -85,13 +85,18 @@ const CarouselContainer = styled.div`
 
 const CircleButton = styled.button`
   font-size: 2rem;
-  padding: 0.2rem 0.6rem;
+  width: 40px;
+  height: 40px;
+  padding: 0; /* quita el padding para que el ancho y alto sean iguales */
   cursor: pointer;
   background-color: #4a90e2;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%; /* para que sea redondo */
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled {
     background-color: #ccc;

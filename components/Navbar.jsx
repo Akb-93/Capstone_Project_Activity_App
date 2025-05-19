@@ -31,7 +31,9 @@ const NavbarComponent = () => {
 
   return (
     <Header>
-      <LogoContainer>Logo</LogoContainer>
+      <LogoContainer>
+        <img src="/img/logo5.png" alt="Logo" />
+      </LogoContainer>
       <Nav ref={menuRef}>
         <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (
@@ -122,8 +124,8 @@ const DropdownButton = styled.button`
 `;
 //logo
 const LogoContainer = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 90px;
+  height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;

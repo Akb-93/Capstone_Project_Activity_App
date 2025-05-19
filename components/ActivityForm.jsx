@@ -21,13 +21,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
       country: "",
     }
   );
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-    }
-  );
 
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");

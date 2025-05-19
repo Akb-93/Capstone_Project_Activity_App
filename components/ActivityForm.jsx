@@ -1,15 +1,9 @@
 //creo el formulario
-import {
-  FormContainer,
-  Input,
-  Textarea,
-  Label,
-  Select,
-  StyledButton,
-} from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { StyledButton } from "./StyledComponents";
+import styled from "styled-components";
 
 export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();
@@ -20,6 +14,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
+      title: "",
+      categories: [],
+      description: "",
+      area: "",
+      country: "",
+    }
+  );
       title: "",
       categories: [],
       description: "",
@@ -155,3 +156,41 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     </>
   );
 }
+
+//Styled Components
+const FormContainer = styled.form`
+  display: grid;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const Textarea = styled.textarea`
+  font-family: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+`;
+
+const Select = styled.select`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;

@@ -29,6 +29,7 @@ export default function ActivitiesPage() {
   );
 }
 
+//Styled Components
 const StyledActivityGrid = styled.main`
   padding: 2rem;
   display: grid;

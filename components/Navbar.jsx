@@ -79,10 +79,6 @@ const Header = styled.header`
   height: 5rem;
 `;
 
-const LogoContainer = styled.div`
-  background: none;
-`;
-
 const Nav = styled.nav`
   background: none;
 `;
@@ -123,4 +119,24 @@ const DropdownButton = styled.button`
   display: block;
   width: 100%;
   text-align: left;
+`;
+//logo
+const LogoContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
 `;

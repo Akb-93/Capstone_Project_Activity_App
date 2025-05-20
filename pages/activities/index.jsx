@@ -67,11 +67,14 @@ const StyledActivityGrid = styled.main`
 `;
 
 const StyledFilterWrapper = styled.section`
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
-  @media (max-width: 375px) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  justify-content: center;
+  margin-block: 1.5rem;
+  padding: 1.5rem 2rem;
+  background-color: var(--c-neutral-050);
+  border-radius: var(--radius-lg);
+  width: fit-content;
+  margin-inline: auto;
+  flex-wrap: wrap;
+  gap: 1rem;
 `;

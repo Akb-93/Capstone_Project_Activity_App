@@ -15,7 +15,7 @@ export default function Favorites() {
   // filter out any null or invalid ids
   const validIds = favoriteIds.filter(id => id && typeof id === "string");
 
-  // Fetch the favorite activities
+  // fetch the favorite activities
   const { data: activities, error, isLoading, mutate } = useSWR(
     // valid ids?
     validIds.length > 0 ? validIds.map(id => `/api/activities/${id}`) : null,
@@ -47,13 +47,11 @@ export default function Favorites() {
   if (favoriteIds.length === 0) {
     return (
       <Main>
-        <Section>
           <Title>No Favorites Yet</Title>
           <StatusMessage role="status">
             <p>You haven&apos;t added any activities to your favorites yet.</p>
           </StatusMessage>
-        </Section>
-      </Main>
+        </Main>
     );
   }
 

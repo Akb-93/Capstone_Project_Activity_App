@@ -46,53 +46,53 @@ export default function Favorites() {
   // check for favorites
   if (favoriteIds.length === 0) {
     return (
-      <Main>
+      <Messege>
           <Title>No Favorites Yet</Title>
           <StatusMessage role="status">
             <p>You haven&apos;t added any activities to your favorites yet.</p>
           </StatusMessage>
-        </Main>
+        </Messege>
     );
   }
 
   // loading state
   if (isLoading) {
     return (
-      <Main>
+      <Messege>
           <StatusMessage role="status" aria-live="polite">
             Loading your favorite activities...
           </StatusMessage>
-      </Main>
+      </Messege>
     );
   }
 
   // show error state
   if (error) {
     return (
-      <Main>
+      <Messege>
           <Title>Oops! Something went wrong</Title>
           <StatusMessage role="alert">
             <p>We couldn&apos;t load your favorite activities. Please try again later.</p>
           </StatusMessage>
-      </Main>
+      </Messege>
     );
   }
 
   // no activities were found
   if (!activities || activities.length === 0) {
     return (
-      <Main>
+      <Messege>
           <Title>No Activities Found</Title>
           <StatusMessage role="status">
             <p>We couldn&apos;t find any of your favorited activities.</p>
           </StatusMessage>
-      </Main>
+      </Messege>
     );
   }
 
   //activities
   return (
-    <Main>
+    <Messege>
       <Title>My Favorite Activities</Title>
       <Section role="list" aria-label="Favorite activities">
         {activities.map(activity => (
@@ -102,7 +102,7 @@ export default function Favorites() {
           />
         ))}
       </Section>
-    </Main>
+    </Messege>
   );
 } 
 
@@ -111,7 +111,7 @@ const Title = styled.h1`
   margin-bottom: 1rem;
 `;
 
-const Main = styled.main`
+const Messege = styled.main`
   padding: 1rem;
 `;
 

@@ -10,15 +10,13 @@ export default function ActivityCard({ activity}) {
 
   return (
     <Card>
+      <StyledFavoriteButton activityId={activity._id}/>
       <ImageWrapper
         src={activity.imageUrl || `/images/placeholder.jpg`}
         alt={activity.title}
         width={500}
         height={500}
       />
-      <FavoriteButtonWrapper>
-       <FavoriteButton activityId={activity._id}/>
-       </FavoriteButtonWrapper>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title || "Untitled Activity"}</Title>
@@ -43,7 +41,7 @@ export default function ActivityCard({ activity}) {
 
 //Styled Components
 
-const FavoriteButtonWrapper = styled.section`
+const StyledFavoriteButton = styled(FavoriteButton)`
 position: absolute;
 top:20px;
 right: 20px;

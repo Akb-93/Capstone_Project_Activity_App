@@ -16,11 +16,9 @@ export default function FavoriteButton({ activityId }) {
   const toggleFavorite = () => {
     if (isFavorite) {
       setFavorites(favorites.filter(id => id !== activityId));
-      // Revalidate the favorites page data
       mutate(key => typeof key === 'string' && key.startsWith('/api/activities/'));
     } else {
       setFavorites([...favorites, activityId]);
-      // Revalidate the favorites page data
       mutate(key => typeof key === 'string' && key.startsWith('/api/activities/'));
     }
   };

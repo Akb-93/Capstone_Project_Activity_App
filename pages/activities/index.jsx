@@ -12,11 +12,9 @@ export default function ActivitiesPage() {
   const activitiesUrl = selectedCategory
     ? `/api/activities?category=${selectedCategory}`
     : "/api/activities";
-  const {
-    data: activities,
-    error: activitiesError,
-  } = useSWR(activitiesUrl);
+  const { data: activities, error: activitiesError } = useSWR(activitiesUrl);
   if (activitiesError) return <p>Failed to load activities.</p>;
+  if (!activities) return <p>Loading activities...</p>;
   if (activities.length === 0)
     return (
       <>
@@ -69,10 +67,11 @@ const StyledActivityGrid = styled.main`
 `;
 
 const StyledFilterWrapper = styled.section`
-  margin: 1.5rem 0 2rem;
-  select,
-  button {
-    padding: 0.5rem;
-    font-size: 1rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @media (max-width: 375px) {
+    grid-template-columns: 1fr;
   }
 `;

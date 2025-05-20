@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
 
-export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
+export default function ActivityCard({ activity}) {
   if (!activity) {
     return null;
   }
@@ -11,7 +11,7 @@ export default function ActivityCard({ activity, onFavoriteToggle = () => {}}) {
   return (
     <Card>
       <FavoriteButtonWrapper>
-        <FavoriteButton activityId={activity._id} onToggle={onFavoriteToggle}/>
+        <FavoriteButton activityId={activity._id}/>
       </FavoriteButtonWrapper> 
       <CardContent>
         <Link href={`/activities/${activity._id}`}>

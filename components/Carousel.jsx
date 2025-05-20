@@ -11,10 +11,12 @@ export default function Carousel({ activities }) {
   //click a la izquierda
   const handleLeftClick = () => {
     if (!containerRef.current) return;
-    const newScrollX = Math.max(scrollX - scrollAmount, 0);
-    setScrollX(newScrollX);
+
+    const currentScroll = containerRef.current.scrollLeft;
+    const newScroll = Math.max(currentScroll - scrollAmount, 0);
+
     containerRef.current.scrollTo({
-      left: newScrollX,
+      left: newScroll,
       behavior: "smooth",
     });
   };
@@ -22,16 +24,17 @@ export default function Carousel({ activities }) {
   //click a la derecha
   const handleRightClick = () => {
     if (!containerRef.current) return;
+
+    const currentScroll = containerRef.current.scrollLeft;
     const maxScroll =
       containerRef.current.scrollWidth - containerRef.current.clientWidth;
-    const newScrollX = Math.min(scrollX + scrollAmount, maxScroll);
-    setScrollX(newScrollX);
+    const newScroll = Math.min(currentScroll + scrollAmount, maxScroll);
+
     containerRef.current.scrollTo({
-      left: newScrollX,
+      left: newScroll,
       behavior: "smooth",
     });
   };
-
   return (
     <Wrapper>
       <CircleButton onClick={handleLeftClick}>{"<"}</CircleButton>
@@ -46,7 +49,7 @@ export default function Carousel({ activities }) {
 }
 
 //Carousel:
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
   align-items: center;
   width: 100%;
@@ -58,10 +61,12 @@ const Wrapper = styled.div`
 const CarouselContainer = styled.div`
   display: flex;
   gap: 1rem;
-  width: 50%;
+  width: 100%;
   overflow-x: auto;
   scroll-behavior: smooth;
   justify-content: flex-start;
+  padding-left: 0.5rem;
+  scroll-padding-left: 1rem;
 
   /* ocultar scrollbar */
   scrollbar-width: none;
@@ -77,10 +82,9 @@ const CarouselContainer = styled.div`
     scroll-snap-type: x mandatory;
   }
 
-  /* cada thumbnail se ajustará con snap */
-  & > * {
-    scroll-snap-align: center;
-  }
+
+    &:first-child {
+    margin-left: 1rem;
 `;
 
 const CircleButton = styled.button`

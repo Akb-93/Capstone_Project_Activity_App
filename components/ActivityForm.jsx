@@ -19,6 +19,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
       description: "",
       area: "",
       country: "",
+      imageURL: "",
     }
   );
 

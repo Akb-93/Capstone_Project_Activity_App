@@ -215,3 +215,33 @@ const Select = styled.select`
   border: 1px solid black;
   border-radius: 0.5rem;
 `;
+
+const FieldSet = styled.fieldset`
+  padding: 1rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const Legend = styled.legend`
+  font-weight: bold;
+`;
+
+const ImagePlaceholder = styled.figure`
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin-bottom: 1em;
+`;
+
+const ImagePreviewWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  position: relative;
+  color: #999;
+  margin-bottom: 1em;
+`;

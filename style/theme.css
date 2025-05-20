@@ -1,0 +1,52 @@
+:root {
+  /* Colors */
+  --c-dark-700: #2d332b;
+  --c-dark-600: #262626;
+  --c-neutral-000: #ffffff;
+  --c-neutral-050: #fff6f8;
+  --c-neutral-200: #e5e5e5;
+  --c-neutral-500: #565656;
+  --c-warm-500: #ffc9a0;
+  --c-warm-400: linear-gradient(
+    180deg,
+    #ffc9a0 0%,
+    rgba(255, 201, 160, 0) 100%
+  );
+  --c-red-700: #990909;
+  --c-red-400: #ff7070;
+  --overlay-dark: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  /* Typography */
+  --text-32: 32px;
+  --text-24: 24px;
+  --text-20: 20px;
+  --text-16: 16px;
+  --text-14: 14px;
+
+  --line-height-32: 40px;
+  --line-height-24: 32px;
+  --line-height-20: 28px;
+  --line-height-16: 24px;
+  --line-height-14: 20px;
+
+  --text-regular: 400;
+  --text-bold: 700;
+
+  --font-family: "Cabin", sans-serif;
+
+  /* Spacing */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+}

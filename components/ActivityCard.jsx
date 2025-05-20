@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function ActivityCard({ activity }) {
+export default function ActivityCard({ activity, from = null }) {
   return (
     <Card>
       <ImageWrapper
@@ -12,7 +12,7 @@ export default function ActivityCard({ activity }) {
         height={500}
       />
       <CardContent>
-        <Link href={`/activities/${activity._id}`}>
+        <Link href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
           <Title>{activity.title}</Title>
         </Link>
         <Country>{activity.country}</Country>

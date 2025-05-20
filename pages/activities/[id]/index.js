@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Image from "next/image";
-import { StyledLinkButton, StyledButton } from "@/components/Style";
+import { StyledButton, StyledLink } from "@/components/StyledComponents";
 import ConfirmModal from "@/components/ConfirmationModal";
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -75,9 +75,9 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
-      <StyledLinkButton href={`/activities/${id}/edit`} $variant="outlined">
+      <StyledLink href={`/activities/${id}/edit`} $variant="outlined">
         Edit
-      </StyledLinkButton>
+      </StyledLink>
       <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>
         Delete
       </StyledButton>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import styled from "styled-components";
 import FavoriteButton from "./FavoriteButton";
 
@@ -10,6 +10,12 @@ export default function ActivityCard({ activity}) {
 
   return (
     <Card>
+      <ImageWrapper
+        src={activity.imageUrl || `/images/placeholder.jpg`}
+        alt={activity.title}
+        width={500}
+        height={500}
+      />
       <FavoriteButtonWrapper>
         <FavoriteButton activityId={activity._id}/>
       </FavoriteButtonWrapper> 
@@ -38,6 +44,8 @@ top:20px;
 right: 20px;
 `;
 
+
+//Styled Components
 const Card = styled.article`
   position: relative;
   background-size: cover;
@@ -86,4 +94,11 @@ const Tag = styled.li`
   border-radius: 5px;
   margin-right: 0.5rem;
   font-size: 0.875rem;
+`;
+
+const ImageWrapper = styled(Image)`
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 `;

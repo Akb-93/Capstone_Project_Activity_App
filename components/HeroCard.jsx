@@ -9,6 +9,7 @@ export default function HeroCard({ title, children }) {
   );
 }
 
+//Styled Components
 const Wrapper = styled.header`
   background-color: #f5f5dc;
   border: 2px solid rgb(9, 9, 8);

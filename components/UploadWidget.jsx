@@ -1,4 +1,4 @@
-import { StyledButton } from "./Style";
+import { StyledButton } from "./StyledComponents";
 import { useEffect, useRef, useState } from "react";
 
 export default function UploadWidget({ onUpload }) {

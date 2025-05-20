@@ -1,25 +1,36 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
+import { useSWRConfig } from "swr";
+
 
 
 export default function FavoriteButton({ activityId }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: []
   });
+  const { mutate } = useSWRConfig();
 
   const isFavorite = favorites.includes(activityId);
 
   const toggleFavorite = () => {
     if (isFavorite) {
       setFavorites(favorites.filter(id => id !== activityId));
+      // Revalidate the favorites page data
+      mutate(key => typeof key === 'string' && key.startsWith('/api/activities/'));
     } else {
       setFavorites([...favorites, activityId]);
+      // Revalidate the favorites page data
+      mutate(key => typeof key === 'string' && key.startsWith('/api/activities/'));
     }
   };
 
   return (
-    <Button onClick={toggleFavorite} aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}>
+    <Button 
+      onClick={toggleFavorite} 
+      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+      aria-pressed={isFavorite}
+    >
       <HeartIcon viewBox="0 0 24 24">
         <HeartPath 
           $isFavorite={isFavorite}
@@ -29,7 +40,6 @@ export default function FavoriteButton({ activityId }) {
     </Button>
   );
 } 
-
 
 const Button = styled.button`
   background: none;

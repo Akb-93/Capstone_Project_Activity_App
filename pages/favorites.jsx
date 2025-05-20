@@ -5,27 +5,28 @@ import styled from "styled-components";
 
 
 
+
 export default function Favorites() {
-  // list of favorite ids from local storage
+  // favorite ids from local storage
   const [favoriteIds] = useLocalStorageState("favorites", {
     defaultValue: []
   });
 
-  // filter out any null or invalid id
+  // filter out any null or invalid ids
   const validIds = favoriteIds.filter(id => id && typeof id === "string");
 
-  // fetch the favorite activities
-  const { data: activities, error, isLoading } = useSWR(
-    // only fetch if valid IDs
+  // Fetch the favorite activities
+  const { data: activities, error, isLoading, mutate } = useSWR(
+    // valid ids?
     validIds.length > 0 ? validIds.map(id => `/api/activities/${id}`) : null,
     async (urls) => {
       try {
-        // all activities
+        // fetch all activities 
         const responses = await Promise.all(
           urls.map(url => fetch(url))
         );
 
-        // convert to json and filter out failed
+        // convert responses to json and filter out 
         const activities = await Promise.all(
           responses.map(async (res) => {
             if (!res.ok) return null;
@@ -42,58 +43,70 @@ export default function Favorites() {
     }
   );
 
-  // favorites?
+  // check for favorites
   if (favoriteIds.length === 0) {
     return (
       <Main>
-        <Title>No Favorites Yet</Title>
-        <p>You haven&apos;t added any activities to your favorites yet.</p>
+        <Section>
+          <Title>No Favorites Yet</Title>
+          <StatusMessage role="status">
+            <p>You haven&apos;t added any activities to your favorites yet.</p>
+          </StatusMessage>
+        </Section>
       </Main>
     );
   }
 
   // loading state
   if (isLoading) {
-    return <p>Loading your favorite activities...</p>;
+    return (
+      <Main>
+          <StatusMessage role="status" aria-live="polite">
+            Loading your favorite activities...
+          </StatusMessage>
+      </Main>
+    );
   }
 
-  // error state
+  // show error state
   if (error) {
     return (
       <Main>
-        <Title>Oops! Something went wrong</Title>
-        <p>We could not load your favorite activities. Please try again later.</p>
+          <Title>Oops! Something went wrong</Title>
+          <StatusMessage role="alert">
+            <p>We couldn&apos;t load your favorite activities. Please try again later.</p>
+          </StatusMessage>
       </Main>
     );
   }
 
-  // no activities found
+  // no activities were found
   if (!activities || activities.length === 0) {
     return (
       <Main>
-        <Title>No Activities Found</Title>
-        <p>We could not find any of your favorited activities.</p>
+          <Title>No Activities Found</Title>
+          <StatusMessage role="status">
+            <p>We couldn&apos;t find any of your favorited activities.</p>
+          </StatusMessage>
       </Main>
     );
   }
 
-  // activities
+  //activities
   return (
     <Main>
-        <Title>My Favorite Activities</Title>
-        <Section role="list" aria-label="Favorite activities">
-          {activities.map(activity => (
-            <ActivityCard 
-              key={activity._id} 
-              activity={activity}
-            />
-          ))}
-        </Section>
-      </Main>
-    
+      <Title>My Favorite Activities</Title>
+      <Section role="list" aria-label="Favorite activities">
+        {activities.map(activity => (
+          <ActivityCard 
+            key={activity._id} 
+            activity={activity}
+          />
+        ))}
+      </Section>
+    </Main>
   );
 } 
-
 
 const Title = styled.h1`
   font-size: 2rem;
@@ -111,5 +124,13 @@ const Section = styled.section`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
   @media (max-width: 375px) {
-    grid-template-columns: 2fr;}
+    grid-template-columns: 1fr;
+  }
+`;
+
+const StatusMessage = styled.div`
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #f5f5f5;
+  margin: 1rem 0;
 `;

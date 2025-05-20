@@ -146,7 +146,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
         <FieldSet>
           <Legend>Image</Legend>
           {formData.imageUrl ? (
-            <ImagePreviewWrapper>
+            <ImageWrapper>
             <Image
               src={formData.imageUrl}
               alt="Uploaded Preview"
@@ -154,11 +154,11 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: "cover" }}
             />
-            </ImagePreviewWrapper>
+            </ImageWrapper>
           ) : (
-            <ImagePlaceholder>
+            <ImageWrapper>
               No image uploaded
-            </ImagePlaceholder>
+            </ImageWrapper>
           )}
           <UploadWidget onUpload={handleImageUpload} />
         </FieldSet>
@@ -227,21 +227,15 @@ const Legend = styled.legend`
   font-weight: bold;
 `;
 
-const ImagePlaceholder = styled.figure`
+const ImageWrapper = styled.figure`
   width: 100%;
   height: 200px;
   background-color: #eee;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #999;
-  margin-bottom: 1em;
-`;
-
-const ImagePreviewWrapper = styled.div`
-  width: 100%;
-  height: 200px;
-  position: relative;
-  color: #999;
+  margin: 0;
   margin-bottom: 1em;
 `;

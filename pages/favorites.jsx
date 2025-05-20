@@ -1,111 +1,109 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import useSWR from 'swr';
-import ActivityCard from '../components/ActivityCard';
+import useSWR from "swr";
+import useLocalStorageState from "use-local-storage-state";
+import ActivityCard from "../components/ActivityCard";
+import styled from "styled-components";
+
+
 
 export default function Favorites() {
-  const [favoriteIds, setFavoriteIds] = useState([]);
+  // list of favorite ids from local storage
+  const [favoriteIds] = useLocalStorageState("favorites", {
+    defaultValue: []
+  });
 
-  // Load favorite IDs from localStorage on component mount
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    // Filter out any null or invalid IDs
-    const validFavorites = favorites.filter(id => id && typeof id === 'string' && id.length > 0);
-    setFavoriteIds(validFavorites);
-  }, []);
+  // filter out any null or invalid id
+  const validIds = favoriteIds.filter(id => id && typeof id === "string");
 
-  // Fetch all favorite activities using SWR with global fetcher
+  // fetch the favorite activities
   const { data: activities, error, isLoading } = useSWR(
-    favoriteIds.length > 0 ? favoriteIds.map(id => `/api/activities/${id}`) : null,
+    // only fetch if valid IDs
+    validIds.length > 0 ? validIds.map(id => `/api/activities/${id}`) : null,
     async (urls) => {
       try {
+        // all activities
         const responses = await Promise.all(
           urls.map(url => fetch(url))
         );
-        const data = await Promise.all(
+
+        // convert to json and filter out failed
+        const activities = await Promise.all(
           responses.map(async (res) => {
-            if (!res.ok) {
-              return null;
-            }
+            if (!res.ok) return null;
             return res.json();
           })
         );
-        // Filter out any false fetches
-        return data.filter(activity => activity !== null);
+
+        // remove null values
+        return activities.filter(activity => activity !== null);
       } catch (error) {
-        console.error('Error fetching activities:', error);
+        console.error("Error fetching activities:", error);
         return [];
       }
     }
   );
 
-  const handleFavoriteToggle = (activityId, isNowFavorite) => {
-    if (!isNowFavorite) {
-      setFavoriteIds(prevIds => prevIds.filter(id => id !== activityId));
-    }
-  };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
+  // favorites?
+  if (favoriteIds.length === 0) {
+    return (
+      <Main>
+        <Title>No Favorites Yet</Title>
+        <p>You haven&apos;t added any activities to your favorites yet.</p>
+      </Main>
+    );
   }
 
+  // loading state
+  if (isLoading) {
+    return <p>Loading your favorite activities...</p>;
+  }
+
+  // error state
   if (error) {
     return (
-      <div>
-        <h2>Error</h2>
-        <p>Failed to load favorite activities</p>
-      </div>
+      <Main>
+        <Title>Oops! Something went wrong</Title>
+        <p>We could not load your favorite activities. Please try again later.</p>
+      </Main>
     );
   }
 
-  if (!favoriteIds.length) {
-    return (
-      <div>
-        <h1>No Favorites Yet</h1>
-        <p>You have not bookmarked any activities yet.</p>
-      </div>
-    );
-  }
-
-  // If we have no valid activities after filtering
+  // no activities found
   if (!activities || activities.length === 0) {
     return (
-      
-        <h1>None of your favorited activities could be loaded.</h1>
-       );
+      <Main>
+        <Title>No Activities Found</Title>
+        <p>We could not find any of your favorited activities.</p>
+      </Main>
+    );
   }
 
+  // activities
   return (
     <Main>
-      <Title>My Favorite Activities</Title>
-      <StyledActivityGrid>
-        {activities.map(activity => (
-          <ActivityCard 
-            key={activity._id} 
-            activity={activity}
-            onFavoriteToggle={(isFavorite) => handleFavoriteToggle(activity._id, isFavorite)}
-          />
-        ))}
-      </StyledActivityGrid>
-    </Main>
+        <Title>My Favorite Activities</Title>
+        <Section role="list" aria-label="Favorite activities">
+          {activities.map(activity => (
+            <ActivityCard 
+              key={activity._id} 
+              activity={activity}
+            />
+          ))}
+        </Section>
+      </Main>
+    
   );
 } 
 
-const StyledActivityGrid = styled.div`
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
-  @media (max-width: 375px) {
-    grid-template-columns: 1fr;
-  }
-`;
 
 const Title = styled.h1`
-font-size: 2rem;
-
+  font-size: 2rem;
+  margin-bottom: 1rem;
 `;
 
-const Main = styled.h1`
+const Main = styled.main`
+  padding: 1rem;
+`;
 
+const Section = styled.section`
+  margin-bottom: 2rem;
 `;

@@ -32,7 +32,7 @@ export default function ActivityCard({ activity}) {
   );
 }
 
-const FavoriteButtonWrapper = styled.div`
+const FavoriteButtonWrapper = styled.section`
 position: absolute;
 top:20px;
 right: 20px;

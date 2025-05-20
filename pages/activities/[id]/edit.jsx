@@ -5,13 +5,14 @@ import useSWR from "swr";
 
 export default function EditActivityPage() {
   const router = useRouter();
-  const { id } = router.query;
-  const { data: activities, error, mutate } = useSWR(
-    id ? `/api/activities/${id}` : null
-  );
+  const { id, from } = router.query;
+  const {
+    data: activities,
+    error,
+    mutate,
+  } = useSWR(id ? `/api/activities/${id}` : null);
 
   async function editActivity(activityData) {
-
     console.log("PUT:", activityData);
 
     const response = await fetch(`/api/activities/${id}`, {
@@ -28,21 +29,28 @@ export default function EditActivityPage() {
     }
 
     mutate();
-    router.push(`/activities/${id}`)
+    router.push(`/activities/${id}`);
   }
 
   if (error) return <p>Error loading edit form...</p>;
   if (!activities) return <p>Loading edit form...</p>;
 
   function handleCancel() {
-    router.push(`/activities/${id}`);
+    if (from) {
+      router.push(`/activities/${id}?from=${from}`);
+    } else {
+      router.push(`/activities/${id}`);
+    }
   }
 
   return (
     <>
-      <HeroCard title={"Edit Activity"}/>
-      <ActivityForm onCancel={handleCancel} onSubmit={editActivity} inputData={activities} />
+      <HeroCard title={"Edit Activity"} />
+      <ActivityForm
+        onCancel={handleCancel}
+        onSubmit={editActivity}
+        inputData={activities}
+      />
     </>
   );
 }
-

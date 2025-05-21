@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
+import Image from "next/image";
 
 export default function ActivityCard({ activity }) {
   return (
@@ -9,11 +9,11 @@ export default function ActivityCard({ activity }) {
         <Image
           src={activity.imageUrl || `/images/placeholder.jpg`}
           alt={activity.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          style={{ objectFit: "cover" }}
+          width={500}
+          height={500}
         />
       </ImageWrapper>
+
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>
@@ -49,12 +49,12 @@ const CardContent = styled.section`
   left: 0;
   padding: 1rem;
   color: white;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);
   width: 100%;
 `;
 
 const Title = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0;
   font-weight: 600;
 `;
@@ -70,7 +70,7 @@ const TagList = styled.ul`
 
 const Tag = styled.li`
   display: inline-block;
-  background-color: #4a90e2;
+  background-color: rgb(174, 208, 248, 0.8);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;

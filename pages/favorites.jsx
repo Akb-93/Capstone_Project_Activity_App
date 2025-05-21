@@ -43,8 +43,6 @@ export default function Favorites() {
     return <Title>Error</Title>;
   }
 
-  console.log(activities);
-
   return (
     <StyledFavoritesWrapper>
       {favoriteIds.length === 0 ? (

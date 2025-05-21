@@ -13,7 +13,6 @@ export default function ActivityCard({ activity }) {
           height={500}
         />
       </ImageWrapper>
-
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>

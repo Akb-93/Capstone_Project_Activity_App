@@ -1,8 +1,11 @@
 //creo el formulario
-import { FormContainer, Input, Textarea, Label, Select } from "./Style";
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { StyledButton } from "./StyledComponents";
+import styled from "styled-components";
+import Image from "next/image";
+import UploadWidget from "./UploadWidget";
 
 export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();
@@ -18,6 +21,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     description: "",
     area: "",
     country: "",
+    imageUrl: "",
   });
 
   //PARA MENSAJE DE ERROR
@@ -65,6 +69,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     };
 
     onSubmit(dataToSubmit);
+  }
+
+  function handleImageUpload(url) {
+    setFormData({
+      ...formData,
+      imageUrl: url,
+    });
   }
 
   return (
@@ -132,18 +143,99 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
             onChange={handleChange}
           />
         </Label>
+        <FieldSet>
+          <Legend>Image</Legend>
+          {formData.imageUrl ? (
+            <ImageWrapper>
+            <Image
+              src={formData.imageUrl}
+              alt="Uploaded Preview"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: "cover" }}
+            />
+            </ImageWrapper>
+          ) : (
+            <ImageWrapper>
+              No image uploaded
+            </ImageWrapper>
+          )}
+          <UploadWidget onUpload={handleImageUpload} />
+        </FieldSet>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
-        <button
+        <StyledButton
           type="submit"
           disabled={!formData.title || formData.categories.length === 0}
         >
           {inputData ? "Edit Activity" : "Add Activity"}
-        </button>
-        <button type="button" onClick={onCancel}>
+        </StyledButton>
+        <StyledButton type="button" onClick={onCancel}>
           Cancel
-        </button>
+        </StyledButton>
       </FormContainer>
     </>
   );
 }
+
+//Styled Components
+const FormContainer = styled.form`
+  display: grid;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const Textarea = styled.textarea`
+  font-family: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+`;
+
+const Select = styled.select`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const FieldSet = styled.fieldset`
+  padding: 1rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const Legend = styled.legend`
+  font-weight: bold;
+`;
+
+const ImageWrapper = styled.figure`
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin: 0;
+  margin-bottom: 1em;
+`;

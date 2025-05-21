@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { StyledButton } from "./StyledComponents";
 import styled from "styled-components";
+import Image from "next/image";
+import UploadWidget from "./UploadWidget";
 
 export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const router = useRouter();
@@ -14,14 +16,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
-      title: "",
-      categories: [],
-      description: "",
-      area: "",
-      country: "",
-      imageURL: "",
-    }
-  );
+    title: "",
+    categories: [],
+    description: "",
+    area: "",
+    country: "",
+    imageUrl: "",
+  });
 
   //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
@@ -68,6 +69,13 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     };
 
     onSubmit(dataToSubmit);
+  }
+
+  function handleImageUpload(url) {
+    setFormData({
+      ...formData,
+      imageUrl: url,
+    });
   }
 
   return (
@@ -135,6 +143,25 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
             onChange={handleChange}
           />
         </Label>
+        <FieldSet>
+          <Legend>Image</Legend>
+          {formData.imageUrl ? (
+            <ImageWrapper>
+            <Image
+              src={formData.imageUrl}
+              alt="Uploaded Preview"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: "cover" }}
+            />
+            </ImageWrapper>
+          ) : (
+            <ImageWrapper>
+              No image uploaded
+            </ImageWrapper>
+          )}
+          <UploadWidget onUpload={handleImageUpload} />
+        </FieldSet>
         <p>*required fields</p>
         {errorMessage && <p>{errorMessage}</p>}
         <StyledButton
@@ -187,4 +214,28 @@ const Select = styled.select`
   font-size: inherit;
   border: 1px solid black;
   border-radius: 0.5rem;
+`;
+
+const FieldSet = styled.fieldset`
+  padding: 1rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+`;
+
+const Legend = styled.legend`
+  font-weight: bold;
+`;
+
+const ImageWrapper = styled.figure`
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin: 0;
+  margin-bottom: 1em;
 `;

@@ -5,12 +5,15 @@ import styled from "styled-components";
 export default function ActivityCard({ activity }) {
   return (
     <Card>
-      <ImageWrapper
-        src={activity.imageUrl || `/images/placeholder.jpg`}
-        alt={activity.title}
-        width={500}
-        height={500}
-      />
+      <ImageWrapper>
+        <Image
+          src={activity.imageUrl || `/images/placeholder.jpg`}
+          alt={activity.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+        />
+      </ImageWrapper>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>
@@ -75,9 +78,15 @@ const Tag = styled.li`
   font-size: 0.875rem;
 `;
 
-const ImageWrapper = styled(Image)`
+const ImageWrapper = styled.figure`
   width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 2rem;
+  height: 200px;
+  background-color: #eee;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin: 0;
+  margin-bottom: 1em;
 `;

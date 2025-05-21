@@ -21,6 +21,10 @@ export default function ActivitiesPage() {
         <HeroCard title="Activities List">
           <p>Choose your fun</p>
         </HeroCard>
+        <ActivityFilter
+          selectedCategory={selectedCategory}
+          onChange={setSelectedCategory}
+        />
         <p>No activities available. Click on the + button to add one.</p>
         <AddButton />
       </>
@@ -58,11 +62,9 @@ export default function ActivitiesPage() {
 
 //Styled Components
 const StyledActivityGrid = styled.main`
-
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  
 
   @media (max-width: 375px) {
     grid-template-columns: 1fr;

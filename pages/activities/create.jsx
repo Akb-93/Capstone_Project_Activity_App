@@ -1,7 +1,6 @@
 //FRONTEND aca se crea la nueva actividad
 import ActivityForm from "@/components/ActivityForm";
 import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
 
 export default function CreateActivity() {
   const router = useRouter();

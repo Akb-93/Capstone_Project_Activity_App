@@ -12,7 +12,6 @@ export default async function handler(request, response) {
 
     const { ids } = request.body;
 
-    // Validate array of IDs
     if (!Array.isArray(ids)) {
       return response.status(400).json({ 
         status: "Bad Request", 
@@ -20,7 +19,6 @@ export default async function handler(request, response) {
       });
     }
 
-    // Filter out null 
     const validIds = ids.filter(id => id !== null);
 
     if (validIds.length === 0) {

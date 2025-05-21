@@ -1,6 +1,36 @@
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 
+export default function FavoriteButton({ activityId }) {
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
+    defaultValue: [],
+  });
+
+  const isFavorite = favorites.includes(activityId);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      setFavorites(favorites.filter((id) => id !== activityId));
+    } else {
+      setFavorites([...favorites, activityId]);
+    }
+  };
+
+  return (
+    <Button
+      onClick={toggleFavorite}
+      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+    >
+      <HeartIcon viewBox="0 0 24 24">
+        <HeartPath
+          $isFavorite={isFavorite}
+          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+        />
+      </HeartIcon>
+    </Button>
+  );
+}
+
 const Button = styled.button`
   background: none;
   border: none;
@@ -23,44 +53,7 @@ const HeartIcon = styled.svg`
 `;
 
 const HeartPath = styled.path`
-  fill: ${props => props.$isFavorite ? "#ff4d4d" : "none"};
-  stroke: ${props => props.$isFavorite ? "#ff4d4d" : "#666"};
+  fill: ${(props) => (props.$isFavorite ? "#ff4d4d" : "none")};
+  stroke: ${(props) => (props.$isFavorite ? "#ff4d4d" : "#666")};
   transition: fill 0.2s, stroke 0.2s;
 `;
-
-export default function FavoriteButton({ activityId }) {
-  // Get the list of favorites from local storage
-  const [favorites, setFavorites] = useLocalStorageState("favorites", {
-    defaultValue: []
-  });
-
-  // Check if this activity is in the favorites list
-  const isFavorite = favorites.includes(activityId);
-
-  // Toggle favorite status
-  const toggleFavorite = () => {
-    if (isFavorite) {
-      // Remove from favorites
-      setFavorites(favorites.filter(id => id !== activityId));
-    } else {
-      // Add to favorites
-      setFavorites([...favorites, activityId]);
-    }
-  };
-
-  return (
-    <Button 
-      onClick={toggleFavorite} 
-      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-    >
-      <HeartIcon viewBox="0 0 24 24">
-        <HeartPath 
-          $isFavorite={isFavorite}
-          d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-        />
-      </HeartIcon>
-    </Button>
-  );
-} 
-
-

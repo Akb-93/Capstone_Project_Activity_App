@@ -5,12 +5,14 @@ import Image from "next/image";
 export default function ActivityCard({ activity }) {
   return (
     <Card>
-      <CardImage
-        src={activity.imageUrl || `/images/placeholder.jpg`}
-        alt={activity.title}
-        width={500}
-        height={500}
-      />
+      <ImageWrapper>
+        <Image
+          src={activity.imageUrl || `/images/placeholder.jpg`}
+          alt={activity.title}
+          width={500}
+          height={500}
+        />
+      </ImageWrapper>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
           <Title>{activity.title}</Title>
@@ -75,11 +77,16 @@ const Tag = styled.li`
   font-size: 0.875rem;
 `;
 
-const CardImage = styled(Image)`
+const ImageWrapper = styled.figure`
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
-  display: block;
-  border-bottom: 1px solid #ccc;
-`;
+  height: 200px;
+  background-color: #eee;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin: 0;
+  margin-bottom: 1em;
+
+

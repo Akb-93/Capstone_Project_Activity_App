@@ -5,6 +5,9 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
+    domains: ["res.cloudinary.com"],
+  },
+  images: {
     domains:  ["res.cloudinary.com"],},
 
   webpack(config) {config.module.rules.push({

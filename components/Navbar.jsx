@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import Image from "next/image";
 
 const NavbarComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const NavbarComponent = () => {
     <Header>
       <Link href="/">
         <LogoContainer>
-          <img src="/img/logo5.png" alt="Logo" />
+          <Logo src="/img/logo5.png" alt="Logo" fill />
         </LogoContainer>
       </Link>
 
@@ -141,19 +142,22 @@ const DropdownButton = styled.button`
 const LogoContainer = styled.div`
   width: 90px;
   height: 90px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  img {
-    width: 100%;
+  
+  }
+`;
+
+const Logo = styled(Image)`
+width: 100%;
     height: 100%;
+    
     object-fit: cover;
     border-radius: 50%;
     transition: transform 0.3s ease;
 
     &:hover {
-      transform: scale(1.5);
-    }
-  }
-`;
+      transform: scale(1.5);`;

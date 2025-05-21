@@ -19,8 +19,9 @@ export default function Thumbnail({ activity }) {
 //thumbnail:
 const ThumbnailWrapper = styled(Link)`
   display: flex;
-  width: 70%;
-  max-width: 130px;
+  width: 100px;
+  height: 100px;
+
   flex-direction: column;
   align-items: center;
   background-color: black;
@@ -35,14 +36,16 @@ const ThumbnailWrapper = styled(Link)`
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 
-  flex: 0 0 auto; /* evita que se encoja o crezca */
+  flex: 0 0 auto; /* evita que se encoja o crezca en modo movil */
 
   &:hover {
     transform: scale(1.1);
   }
 
   @media (min-width: 769px) {
-    width: 9%; /* para desktop, entran aprox 10 thumbnails */
+    width: 120px;
+    max-width: 25%;
+    min-width: 120px;
   }
 `;
 
@@ -55,7 +58,7 @@ const ThumbnailImage = styled.img`
   margin-bottom: 0.5rem;
   transition: transform 0.3s ease-in-out;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     max-height: 80px;
   }
 `;

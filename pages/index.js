@@ -9,11 +9,13 @@ export default function HomePage() {
   const [isMobile, setIsMobile] = useState(false); //un nuevo estado para la cantidad de thumbnails visibles
 
   const limit = isMobile ? 5 : 10;
-  const { data: activities, error } = useSWR(`/api/activities?limit=${limit}`);
+  const { data: activities, error } = useSWR(
+    `/api/activities/carouselLimited?limit=${limit}`
+  );
 
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth < 500);
+      setIsMobile(window.innerWidth < 768);
     }
 
     handleResize(); // lo ejecuta una vez al cargar

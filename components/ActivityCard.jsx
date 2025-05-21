@@ -88,5 +88,4 @@ const ImageWrapper = styled.figure`
   color: #999;
   margin: 0;
   margin-bottom: 1em;
-
-
+`;

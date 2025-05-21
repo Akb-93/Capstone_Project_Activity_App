@@ -67,7 +67,7 @@ const TagList = styled.ul`
 
 const Tag = styled.li`
   display: inline-block;
-  background-color: #4a90e2;
+  background-color: var(--c-red-400);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;

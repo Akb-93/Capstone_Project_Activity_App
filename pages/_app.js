@@ -1,6 +1,7 @@
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import Layout from "@/components/LayoutComponent";
+import "/style/theme.css";
 
 const fetcher = async (...args) => {
   const response = await fetch(...args);

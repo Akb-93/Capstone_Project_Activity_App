@@ -28,10 +28,12 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const activities = await Activity.find()
+      const { category } = req.query;
+      // Filter by category ID if provided
+      const query = category ? { categories: category } : {};
+      const activities = await Activity.find(query)
         .populate("categories")
-        .sort({ createdAt: -1 }); //por MUTATE
-
+        .sort({ createdAt: -1 });
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

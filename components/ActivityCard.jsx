@@ -44,7 +44,7 @@ export default function ActivityCard({ activity}) {
 const StyledFavoriteButton = styled(FavoriteButton)`
 position: absolute;
 top:20px;
-right: 20px;
+left: 20px;
 `;
 const Card = styled.article`
   position: relative;

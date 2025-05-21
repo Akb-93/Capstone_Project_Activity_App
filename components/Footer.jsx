@@ -12,6 +12,9 @@ const FooterComponent = () => {
         <FooterItem>
           <FooterLink href="/favorites">Favorites</FooterLink>
         </FooterItem>
+        <FooterItem>
+          <FooterLink href="/">Homepage</FooterLink>
+        </FooterItem>
       </FooterList>
     </FooterWrapper>
   );

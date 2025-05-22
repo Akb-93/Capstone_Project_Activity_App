@@ -8,11 +8,8 @@ export default function Favorites() {
   const [favoriteIds, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
-const [localActivities, setLocalActivities] = useState([]);
-  const {
-    data: activities,
-    error,
-  } = useSWR(
+  const [localActivities, setLocalActivities] = useState([]);
+  const { data: activities, error } = useSWR(
     favoriteIds.length > 0 ? ["/api/activities/favourites", favoriteIds] : null,
     async ([url, ids]) => {
       const response = await fetch(url, {
@@ -28,11 +25,11 @@ const [localActivities, setLocalActivities] = useState([]);
       return response.json();
     }
   );
-useEffect(() => {
-  if (activities) {
-    setLocalActivities(activities);
-  }
-}, [activities]);
+  useEffect(() => {
+    if (activities) {
+      setLocalActivities(activities);
+    }
+  }, [activities]);
   const handleFavoriteToggle = (activityId) => {
     const newFavorites = favoriteIds.filter((id) => id !== activityId);
     setFavorites(newFavorites);

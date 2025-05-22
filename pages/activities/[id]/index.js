@@ -50,11 +50,7 @@ export default function ActivityDetailPage() {
         height={500}
       />
       <Description>{activity.description}</Description>
-
-      <FavoriteButtonWrapper>
-          <FavoriteButton activityId={activity._id} />
-        </FavoriteButtonWrapper>
-
+      <StyledFavoriteButton activityId={activity._id} />
       <Categories>
         <strong>Categories:</strong>
         {activity.categories?.length ? (
@@ -94,8 +90,12 @@ export default function ActivityDetailPage() {
 }
 
 // Styled components
-const FavoriteButtonWrapper = styled.div`
- background-color: none;
+
+const StyledFavoriteButton = styled(FavoriteButton)`
+  position: absolute;
+  top: 20;
+  right: 20;
+  z-index: 1000;
 `;
 
 const Header = styled.header`

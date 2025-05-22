@@ -12,6 +12,7 @@ export default function ActivityCard({
   if (!activity) {
     return null;
   }
+  
   return (
     <Card>
       <StyledFavoriteButton

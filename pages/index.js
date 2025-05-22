@@ -42,29 +42,41 @@ export default function HomePage() {
           something to do today—disconnect from your routine by connecting to
           our website.
         </DescriptionText>
-        <StyledLink href="/activities">Go to Activity List →</StyledLink>
       </DescriptionSection>
+      <StyledLink href="/activities">Explore activities</StyledLink>
     </>
   );
 }
 
 const DescriptionSection = styled.section`
-  background: #f9faff;
-  padding: 24px 48px;
+  background: var(--c-neutral-050);
+  padding: var(--space-3) var(--space-3);
+
+  border-radius: var(--radius-md);
+  border: 1.5px solid #ffb3b8;
+  box-shadow: 0 2px 6px rgba(255, 179, 184, 0.3);
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto;
 `;
 const StyledH2 = styled.h2`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  padding: 15px 20px;
-  font-size: 2rem;
+  padding: var(--space-3) var(--space-3);
+
+  font-size: var(--text-24);
+  font-weight: var(--text-bold);
   color: #000;
 `;
 const DescriptionText = styled.p`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  padding: 15px 20px;
-  font-size: 1.1rem;
+  padding: var(--space-3) var(--space-3);
+
+  font-size: var(--text-20);
   color: #333;
 `;

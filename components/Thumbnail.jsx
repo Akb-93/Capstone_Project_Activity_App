@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function Thumbnail({ activity }) {
+export default function Thumbnail({ activity, from = null }) {
   return (
-    <ThumbnailWrapper href={`/activities/${activity._id}`}>
+    <ThumbnailWrapper href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
       <ThumbnailImage
         src={activity.imageUrl || "/images/placeholder.jpg"}
         alt={activity.title}

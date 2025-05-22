@@ -8,7 +8,7 @@ export default function Favorites() {
   const [favoriteIds, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
-
+const [localActivities, setLocalActivities] = useState([]);
   const {
     data: activities,
     error,

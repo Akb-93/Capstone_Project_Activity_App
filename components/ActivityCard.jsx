@@ -1,10 +1,25 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
+import FavoriteButton from "./FavoriteButton";
 
-export default function ActivityCard({ activity }) {
+export default function ActivityCard({
+  activity,
+  onFavoriteToggle,
+  isFavorite,
+}) {
+  if (!activity) {
+    return null;
+  }
+
   return (
     <Card>
+      <StyledFavoriteButton
+        activityId={activity._id}
+        isFavorite={isFavorite}
+        onToggle={onFavoriteToggle}
+      />
+
       <ImageWrapper>
         <Image
           src={activity.imageUrl || `/images/placeholder.jpg`}
@@ -15,13 +30,17 @@ export default function ActivityCard({ activity }) {
       </ImageWrapper>
       <CardContent>
         <Link href={`/activities/${activity._id}`}>
-          <Title>{activity.title}</Title>
+          <Title>{activity.title || "Untitled Activity"}</Title>
         </Link>
-        <Country>{activity.country}</Country>
+        <Country>{activity.country || "No country specified"}</Country>
         <TagList>
-          {activity.categories.map((category) => (
-            <Tag key={category._id}>{category.name}</Tag>
-          ))}
+          {activity.categories && activity.categories.length > 0 ? (
+            activity.categories.map((category) => (
+              <Tag key={category._id || category.name}>{category.name}</Tag>
+            ))
+          ) : (
+            <Tag>No categories</Tag>
+          )}
         </TagList>
       </CardContent>
     </Card>
@@ -29,6 +48,13 @@ export default function ActivityCard({ activity }) {
 }
 
 //Styled Components
+
+const StyledFavoriteButton = styled(FavoriteButton)`
+  position: absolute;
+  top: 20;
+  right: 20;
+  z-index: 1000;
+`;
 const Card = styled.article`
   position: relative;
   background-size: cover;
@@ -65,6 +91,8 @@ const Country = styled.p`
 
 const TagList = styled.ul`
   margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
 `;
 
 const Tag = styled.li`
@@ -88,4 +116,5 @@ const ImageWrapper = styled.figure`
   color: #999;
   margin: 0;
   margin-bottom: 1em;
+  z-index: -1;
 `;

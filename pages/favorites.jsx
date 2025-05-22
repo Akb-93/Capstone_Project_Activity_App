@@ -37,9 +37,7 @@ export default function Favorites() {
     activities.filter((activity) => activity._id !== activityId);
   };
 
-  if (isLoading) {
-    return <Title>Loading...</Title>;
-  } else if (error) {
+  if (error) {
     return <Title>Error</Title>;
   }
 

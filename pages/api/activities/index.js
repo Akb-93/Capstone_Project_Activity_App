@@ -1,4 +1,3 @@
-//create a GET API route that fetches activities from your Activity model and populates the categories field with the actual category names
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activities";
 
@@ -17,7 +16,6 @@ export default async function handler(req, res) {
       if (!newActivityData.title || !newActivityData.categories) {
         return res.status(400).json({ status: "Missing required fields" });
       }
-      // Crear nueva actividad
       await Activity.create(newActivityData);
       return res.status(201).json({ status: "Activity created successfully" });
     } catch (error) {
@@ -28,9 +26,11 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const activities = await Activity.find()
+      const { category } = req.query;
+      const query = category ? { categories: category } : {};
+      const activities = await Activity.find(query)
         .populate("categories")
-        .sort({ createdAt: -1 }); //por MUTATE
+        .sort({ createdAt: -1 });
       return res.status(200).json(activities);
     } catch (error) {
       console.error("Error fetching activities:", error);

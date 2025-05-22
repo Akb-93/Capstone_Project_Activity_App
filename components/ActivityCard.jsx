@@ -1,25 +1,47 @@
 import Link from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
+import Image from "next/image";
+import FavoriteButton from "./FavoriteButton";
 
-export default function ActivityCard({ activity, from = null }) {
+export default function ActivityCard({
+  activity,
+  onFavoriteToggle,
+  isFavorite,
+  from = null
+}) {
+  if (!activity) {
+    return null;
+  }
+  
   return (
     <Card>
-      <ImageWrapper
-        src={activity.imageUrl || `/images/placeholder.jpg`}
-        alt={activity.title}
-        width={500}
-        height={500}
+      <StyledFavoriteButton
+        activityId={activity._id}
+        isFavorite={isFavorite}
+        onToggle={onFavoriteToggle}
       />
+
+      <ImageWrapper>
+        <Image
+          src={activity.imageUrl || `/images/placeholder.jpg`}
+          alt={activity.title}
+          width={500}
+          height={500}
+        />
+      </ImageWrapper>
       <CardContent>
         <Link href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
-          <Title>{activity.title}</Title>
+          <Title>{activity.title || "Untitled Activity"}</Title>
         </Link>
-        <Country>{activity.country}</Country>
+        <Country>{activity.country || "No country specified"}</Country>
         <TagList>
-          {activity.categories.map((category) => (
-            <Tag key={category._id}>{category.name}</Tag>
-          ))}
+          {activity.categories && activity.categories.length > 0 ? (
+            activity.categories.map((category) => (
+              <Tag key={category._id || category.name}>{category.name}</Tag>
+            ))
+          ) : (
+            <Tag>No categories</Tag>
+          )}
         </TagList>
       </CardContent>
     </Card>
@@ -27,6 +49,13 @@ export default function ActivityCard({ activity, from = null }) {
 }
 
 //Styled Components
+
+const StyledFavoriteButton = styled(FavoriteButton)`
+  position: absolute;
+  top: 20;
+  right: 20;
+  z-index: 1000;
+`;
 const Card = styled.article`
   position: relative;
   background-size: cover;
@@ -46,12 +75,12 @@ const CardContent = styled.section`
   left: 0;
   padding: 1rem;
   color: white;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);
   width: 100%;
 `;
 
 const Title = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0;
   font-weight: 600;
 `;
@@ -63,11 +92,13 @@ const Country = styled.p`
 
 const TagList = styled.ul`
   margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
 `;
 
 const Tag = styled.li`
   display: inline-block;
-  background-color: #4a90e2;
+  background-color: rgb(174, 208, 248, 0.8);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
@@ -75,9 +106,16 @@ const Tag = styled.li`
   font-size: 0.875rem;
 `;
 
-const ImageWrapper = styled(Image)`
+const ImageWrapper = styled.figure`
   width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 2rem;
+  height: 200px;
+  background-color: #eee;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  margin: 0;
+  margin-bottom: 1em;
+  z-index: -1;
 `;

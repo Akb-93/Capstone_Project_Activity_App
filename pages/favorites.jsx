@@ -38,7 +38,9 @@ useEffect(() => {
     const newFavorites = favoriteIds.filter((id) => id !== activityId);
     setFavorites(newFavorites);
 
-    activities.filter((activity) => activity._id !== activityId);
+    setLocalActivities((prev) =>
+      prev.filter((activity) => activity._id !== activityId)
+    );
   };
 
   if (error) {

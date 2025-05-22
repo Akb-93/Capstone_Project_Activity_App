@@ -55,7 +55,7 @@ useEffect(() => {
         <>
           <Title>My Favorite Activities</Title>
           <StyledFavorites>
-            {activities.map((activity) => (
+            {localActivities.map((activity) => (
               <ActivityCard
                 key={activity._id}
                 activity={activity}

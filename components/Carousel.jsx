@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Thumbnail from "./Thumbnail";
 import styled from "styled-components";
 
-export default function Carousel({ activities, from }) {
+export default function Carousel({ activities }) {
   const containerRef = useRef(null);
   const scrollAmount = 200;
 
@@ -20,7 +20,7 @@ export default function Carousel({ activities, from }) {
       <CircleButton onClick={() => handleScroll("left")}>{"<"}</CircleButton>
       <CarouselContainer ref={containerRef}>
         {activities.map((activity) => (
-          <Thumbnail key={activity._id} activity={activity} from={from} />
+          <Thumbnail key={activity._id} activity={activity} />
         ))}
       </CarouselContainer>
       <CircleButton onClick={() => handleScroll("right")}>{">"}</CircleButton>

@@ -2,17 +2,20 @@ import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
 import FavoriteButton from "./FavoriteButton";
+import { useRouter } from "next/router";
 
 export default function ActivityCard({
   activity,
   onFavoriteToggle,
   isFavorite,
-  from = null
 }) {
+  const router = useRouter();
+  const { pathname: from } = router;
+
   if (!activity) {
     return null;
   }
-  
+
   return (
     <Card>
       <StyledFavoriteButton

@@ -32,7 +32,7 @@ export default function HomePage() {
   return (
     <>
       <HeroCard title="Disconnect by connecting" />
-      <Carousel activities={activities} from="/" />
+      <Carousel activities={activities} />
 
       <DescriptionSection>
         <StyledH2>Discover your next adventure. </StyledH2>

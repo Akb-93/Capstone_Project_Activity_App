@@ -50,7 +50,7 @@ export default function ActivitiesPage() {
         <>
           <StyledActivityGrid>
             {activities.map((activity) => (
-              <ActivityCard key={activity._id} activity={activity} from="/activities"/>
+              <ActivityCard key={activity._id} activity={activity} />
             ))}
           </StyledActivityGrid>
           <AddButton />

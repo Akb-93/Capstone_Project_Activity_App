@@ -43,7 +43,9 @@ export default function HomePage() {
           our website.
         </DescriptionText>
       </DescriptionSection>
-      <StyledLink href="/activities">Explore activities</StyledLink>
+      <CenteredWrapper>
+        <StyledLink href="/activities">Explore activities</StyledLink>
+      </CenteredWrapper>
     </>
   );
 }
@@ -79,4 +81,9 @@ const DescriptionText = styled.p`
 
   font-size: var(--text-20);
   color: #333;
+`;
+const CenteredWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-5);
 `;

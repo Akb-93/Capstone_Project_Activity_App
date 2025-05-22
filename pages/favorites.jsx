@@ -12,7 +12,6 @@ const [localActivities, setLocalActivities] = useState([]);
   const {
     data: activities,
     error,
-    isLoading,
   } = useSWR(
     favoriteIds.length > 0 ? ["/api/activities/favourites", favoriteIds] : null,
     async ([url, ids]) => {

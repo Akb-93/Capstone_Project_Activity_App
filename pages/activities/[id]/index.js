@@ -92,10 +92,7 @@ export default function ActivityDetailPage() {
 // Styled components
 
 const StyledFavoriteButton = styled(FavoriteButton)`
-  position: absolute;
-  top: 20;
-  right: 20;
-  z-index: 1000;
+  margin: 1rem;
 `;
 
 const Header = styled.header`

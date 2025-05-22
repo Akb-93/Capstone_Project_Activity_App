@@ -57,6 +57,7 @@ export default function Favorites() {
                 activity={activity}
                 onFavoriteToggle={() => handleFavoriteToggle(activity._id)}
                 isFavorite={true}
+                from="/favorites"
               />
             ))}
           </StyledFavorites>

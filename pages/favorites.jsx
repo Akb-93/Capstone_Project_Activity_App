@@ -29,7 +29,11 @@ const [localActivities, setLocalActivities] = useState([]);
       return response.json();
     }
   );
-
+useEffect(() => {
+  if (activities) {
+    setLocalActivities(activities);
+  }
+}, [activities]);
   const handleFavoriteToggle = (activityId) => {
     const newFavorites = favoriteIds.filter((id) => id !== activityId);
     setFavorites(newFavorites);

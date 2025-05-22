@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function ActivityCard({
   activity,
   onFavoriteToggle,
-  isFavorite,
+  isFavorite
 }) {
   const router = useRouter();
   const { pathname: from } = router;

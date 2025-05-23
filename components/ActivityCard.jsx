@@ -2,12 +2,16 @@ import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
 import FavoriteButton from "./FavoriteButton";
+import { useRouter } from "next/router";
 
 export default function ActivityCard({
   activity,
   onFavoriteToggle,
-  isFavorite,
+  isFavorite
 }) {
+  const router = useRouter();
+  const { pathname: from } = router;
+
   if (!activity) {
     return null;
   }
@@ -30,7 +34,7 @@ export default function ActivityCard({
         />
       </ImageWrapper>
       <CardContent>
-        <StyledTitleLink href={`/activities/${activity._id}`}>
+            <StyledTitleLink href={`/activities/${activity._id}`}>
           {activity.title || "Untitled Activity"}
         </StyledTitleLink>
         <Country>{activity.country || "No country specified"}</Country>

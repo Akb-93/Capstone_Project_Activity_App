@@ -15,4 +15,6 @@ export default function Layout({ children }) {
 //Styled Components
 const StyledMain = styled.main`
   margin-bottom: 4rem;
+  max-width: 100%;
+  overflow-x: hidden;
 `;

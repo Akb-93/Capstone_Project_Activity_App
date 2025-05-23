@@ -24,22 +24,33 @@ export default FooterComponent;
 
 //Styled Components
 const FooterWrapper = styled.footer`
-  background-color: #ccc;
+  background-color: var(--c-dark-700);
   width: 100%;
-  padding: 50px;
+  padding: var(--space-5) var(--space-3);
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  overflow-x: hidden;
 `;
 
 const FooterList = styled.ul`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 1200px;
 `;
 
 const FooterItem = styled.li`
   list-style-type: none;
+  margin: 0 var(--space-3);
 `;
 
 const FooterLink = styled(Link)`
-  text-decoration: none;
+  text-decoration: underline;
+  color: var(--c-neutral-000);
+  font-size: var(--text-14);
 `;

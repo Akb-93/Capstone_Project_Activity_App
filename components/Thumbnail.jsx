@@ -1,33 +1,34 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Thumbnail({ activity }) {
+  const router = useRouter();
+  const { pathname: from } = router;
+
   return (
-    <ThumbnailWrapper href={`/activities/${activity._id}`}>
+    <ThumbnailWrapper href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
       <ThumbnailImage
         src={activity.imageUrl || "/images/placeholder.jpg"}
         alt={activity.title}
         width={150}
         height={100}
       />
-
       <ThumbnailTitle>{activity.title}</ThumbnailTitle>
     </ThumbnailWrapper>
   );
 }
 
-//thumbnail:
 const ThumbnailWrapper = styled(Link)`
   display: flex;
-  width: 100px;
-  height: 100px;
-
+  width: 120px;
+  height: 140px;
   flex-direction: column;
   align-items: center;
   background-color: black;
   color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-radius: 16px; /* borde redondeado 16px */
   border: 1px solid black;
   text-decoration: none;
   font-size: 1rem;
@@ -35,31 +36,28 @@ const ThumbnailWrapper = styled(Link)`
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
-
-  flex: 0 0 auto; /* evita que se encoja o crezca en modo movil */
+  flex: 0 0 auto;
 
   &:hover {
     transform: scale(1.1);
   }
 
   @media (min-width: 769px) {
-    width: 120px;
-    max-width: 25%;
-    min-width: 120px;
+    width: 140px;
+    min-width: 140px;
   }
 `;
 
 const ThumbnailImage = styled.img`
-  width: 80%;
-  height: 60px;
-  max-height: 100px;
-  border-radius: 8px;
+  width: 100%;
+  height: 90px;
+  border-radius: 16px; /* borde redondeado 16px */
   object-fit: cover;
   margin-bottom: 0.5rem;
   transition: transform 0.3s ease-in-out;
 
   @media (max-width: 769px) {
-    max-height: 80px;
+    height: 80px;
   }
 `;
 

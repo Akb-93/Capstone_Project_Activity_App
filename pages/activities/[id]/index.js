@@ -11,7 +11,7 @@ export default function ActivityDetailPage() {
   const [showModal, setShowModal] = useState(false); // for the modal
 
   const router = useRouter();
-  const { id } = router.query; // to access [id] from the route
+  const { id, from } = router.query; // to access [id] from the route
 
   // SWR fetch activity data from API route
   const {
@@ -37,12 +37,20 @@ export default function ActivityDetailPage() {
     router.push("/activities");
   }
 
+  function handleBack() {
+    if (from) {
+      router.push(from);
+    } else {
+      router.push("/activities"); // this as a safe fallback just in case
+    }
+  }
+
   return (
     <>
       <Header>
         <Title>{activity.title}</Title> {/* Centered */}
       </Header>
-      <BackButton onClick={() => router.push("/activities")}>←Back</BackButton>{" "}
+      <BackButton onClick={handleBack}>←Back</BackButton>{" "}
       <ImageWrapper
         src={activity.imageUrl || `/images/placeholder.jpg`}
         alt={activity.title}
@@ -71,7 +79,13 @@ export default function ActivityDetailPage() {
           {activity.country || "N/A"}
         </p>
       </LocationInfo>
-      <StyledLink href={`/activities/${id}/edit`} $variant="outlined">
+      <StyledLink
+        href={{
+          pathname: `/activities/${id}/edit`,
+          query: from ? { from } : {},
+        }}
+        $variant="outlined"
+      >
         Edit
       </StyledLink>
       <StyledButton $variant="destructive" onClick={() => setShowModal(true)}>

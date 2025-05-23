@@ -31,7 +31,13 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroCard title="Disconnect by connecting" />
+      <HeroCard
+        title="Disconnect by connecting"
+        backgroundImageUrl="/img/cappadocia-ballooning.jpg"
+      >
+        Pick an interest, grab your crew, and let us handle the details — all in
+        one place
+      </HeroCard>
       <Carousel activities={activities} />
 
       <DescriptionSection>

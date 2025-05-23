@@ -3,15 +3,15 @@ import Link from "next/link";
 
 // Buttons
 export const StyledButton = styled.button`
-  background-color: black;
-  color: white;
-  padding: var(--space-5) var(--space-3);
-
-  border-radius: 0.6rem;
-  border: 1px solid black;
+  background-color: var(--c-dark-600);
+  color: var(--c-neutral-000);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--c-dark-600);
   text-decoration: none;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: var(--text-20);
+  font-weight: var(--text-bold);
+  font-family: var(--font-family);
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -31,31 +31,31 @@ export const StyledButton = styled.button`
   ${({ $variant }) =>
     $variant === "outlined" &&
     `
-      background-color: white;
-      color: black;
-      border: 1px solid black;
+      background-color: var(--c-neutral-000);
+      color: var(--c-dark-600);
+      border: 1px solid var(--c-dark-600);
 
       &:hover {
-        background-color: #f3f4f6;
+        background-color: var(--c-neutral-050);
       }
 
       &:active {
-        background-color: #e5e7eb;
+        background-color: var(--c-neutral-050);
       }
     `}
 
   ${({ $variant }) =>
     $variant === "destructive" &&
     `
-      background-color: #dc2626;
-      border: 1px solid #dc2626;
+      background-color: var(--c-red-700);
+      border: 1px solid var(--c-red-700);
 
       &:hover {
-        background-color: #ef4444;
+        background-color: var(--c-red-400);
       }
 
       &:active {
-        background-color: #b91c1c;
+        background-color: var(--c-red-400);
       }
     `}
 `;

@@ -1,17 +1,11 @@
 import styled from "styled-components";
-import heroImage from "public/images/placeholder.jpg";
 import Image from "next/image";
+export default function HeroCard({ title, subtitle, bgImage }) {
 
-export default function HeroCard({
-  title = "Default title",
-  subtitle,
-  backgroundImageUrl = "/images/placeholder.jpg",
-  children,
-}) {
   return (
     <Wrapper>
       <StyledImage
-        src={backgroundImageUrl}
+        src={bgImage}
         alt="Hero background"
         layout="fill"
         objectFit="cover"
@@ -19,11 +13,10 @@ export default function HeroCard({
         quality={80}
       />
       <Title>{title}</Title>
-      <Subtitle>{children}</Subtitle>
+      <Subtitle>{subtitle}</Subtitle>
     </Wrapper>
   );
 }
-
 //Styled Components
 const Wrapper = styled.header`
   position: relative;
@@ -36,7 +29,6 @@ const Wrapper = styled.header`
   justify-content: flex-end; /* Push content to bottom */
   align-items: flex-start; /* Align content to left */
   padding: var(--space-2); /* Padding around content */
-
   &::before {
     content: "";
     position: absolute;
@@ -49,7 +41,6 @@ const Wrapper = styled.header`
     pointer-events: none;
   }
 `;
-
 const StyledImage = styled(Image)`
   position: absolute !important;
   top: 0;
@@ -59,7 +50,6 @@ const StyledImage = styled(Image)`
   object-fit: cover;
   z-index: 0;
 `;
-
 const Title = styled.h1`
   font-size: var(--text-32);
   font-weight: var(--text-bold);
@@ -67,7 +57,6 @@ const Title = styled.h1`
   position: relative;
   z-index: 2;
 `;
-
 const Subtitle = styled.p`
   font-size: var(--text-20);
   margin: 0;

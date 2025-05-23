@@ -33,22 +33,23 @@ const Wrapper = styled.header`
   position: relative;
   background-image: url(${(props) => props.backgroundImageUrl});
   width: 100%; /* Full viewport width */
-  height: 200px; /* Fixed height */
+  height: 280px; /* Fixed height */
   overflow: hidden;
   color: var(--c-neutral-000);
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: var(--space-2);
   &::before {
     content: "";
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 100%; /* or try 60% to limit the overlay height */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    height: 100%;
+
     z-index: 1;
     pointer-events: none;
   }
@@ -71,24 +72,25 @@ const Overlay = styled.div`
 `;
 
 const Content = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
   z-index: 2;
-  text-align: center;
-  padding: var(--space-5) var(--space-3);
+  text-align: left;
 `;
 
 const Title = styled.h1`
   font-size: var(--text-32);
-  font-weight: var(--text-bold);
-  margin: 0 0 var(--space-2) 0;
-  font-family: var(--font-family);
+  font-weight: 700;
+  font-family: "Cabin", sans-serif;
+  margin: 0 0 var(--space-1) 0;
+  position: relative;
   z-index: 2;
 `;
-
-const Subtitle = styled.h2`
+const Subtitle = styled.p`
   font-size: var(--text-20);
-  font-weight: var(--text-regular);
   margin: 0;
-  font-family: var(--font-family);
+  position: relative;
   z-index: 2;
+  font-family: "Cabin", sans-serif;
 `;

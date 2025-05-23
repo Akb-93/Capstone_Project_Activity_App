@@ -9,6 +9,7 @@ export default function Favorites() {
   const [favoriteIds, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
+
   const [localActivities, setLocalActivities] = useState([]);
   const { data: activities, error } = useSWR(
     favoriteIds.length > 0 ? ["/api/activities/favourites", favoriteIds] : null,
@@ -47,7 +48,10 @@ export default function Favorites() {
   return (
     <StyledFavoritesWrapper>
       {favoriteIds.length === 0 ? (
-        <Title>No Favorites Yet</Title>
+        <>
+          <Title>No Favorites Yet</Title>
+          <EmptyStateText>Please add activities.</EmptyStateText>
+        </>
       ) : (
         <>
           <HeroCard title="Your favorites" subtitle="Revisit the hikes you loved, the cafes you raved about, and all
@@ -70,21 +74,24 @@ export default function Favorites() {
 }
 
 const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-top: var(--space-4);
+  font-size: var(--text-16);
+  text-align: center;
 `;
 
-const StyledFavoritesWrapper = styled.section`
-  padding: 1rem;
-`;
+const StyledFavoritesWrapper = styled.section``;
 
 const StyledFavorites = styled.article`
   padding: 1rem;
   display: grid;
-  gap: var(--space-5) var(--space-3);
+  gap: var(--space-3);
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
   @media (max-width: 375px) {
     grid-template-columns: 1fr;
   }
+`;
+const EmptyStateText = styled.p`
+  font-size: var(--text-14);
+  text-align: center;
 `;

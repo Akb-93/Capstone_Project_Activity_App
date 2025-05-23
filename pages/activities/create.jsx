@@ -7,7 +7,6 @@ import { mutate } from "swr";
 
 export default function CreateActivity() {
   const router = useRouter();
-
   async function addActivity(activityData) {
     console.log("Datos que se están enviando al backend:", activityData);
     const response = await fetch("/api/activities", {
@@ -35,7 +34,11 @@ export default function CreateActivity() {
   }
   return (
     <>
-      <HeroCard title="Add a New Activity" subtitle="Got a spark? Turn it into an experience." bgImage={HeroImage} />
+      <HeroCard
+        title="Add a New Activity"
+        subtitle="Got a spark? Turn it into an experience."
+        bgImage={HeroImage}
+      />
       <ActivityForm onCancel={handleCancel} onSubmit={addActivity} />
     </>
   );

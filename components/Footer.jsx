@@ -16,6 +16,7 @@ const FooterComponent = () => {
           <FooterLink href="/">Homepage</FooterLink>
         </FooterItem>
       </FooterList>
+      <FooterText>Made with ❤️ and 😣 and 😭 by the AAAJ collective</FooterText>
     </FooterWrapper>
   );
 };
@@ -28,9 +29,17 @@ const FooterWrapper = styled.footer`
   width: 100%;
   padding: var(--space-5) var(--space-3);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   max-width: 100%;
   overflow-x: hidden;
+`;
+
+const FooterText = styled.p`
+  font-size: var(--text-14);
+  color: var(--c-neutral-000);
+  text-align: center;
+  margin: var(--space-3) var(--space-5);
 `;
 
 const FooterList = styled.ul`

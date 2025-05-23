@@ -47,11 +47,9 @@ const FooterList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   margin: 0;
   padding: 0;
   width: 100%;
-  max-width: 1200px;
 `;
 
 const FooterItem = styled.li`

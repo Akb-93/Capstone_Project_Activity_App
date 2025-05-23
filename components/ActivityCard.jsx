@@ -100,7 +100,7 @@ const CardContent = styled.section`
   bottom: 0;
   left: 0;
   padding-left: var(--space-2);
-  padding-top: var(--space-2);
+  padding-top: var(--space-1);
   color: var(--c-neutral-000);
   background: var(--c-dark-600);
   width: 100%;

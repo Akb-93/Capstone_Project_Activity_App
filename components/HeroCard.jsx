@@ -22,15 +22,15 @@ export default function HeroCard({ title, children }) {
 //Styled Components
 const Wrapper = styled.header`
   position: relative;
-  width: 100%; /* Full viewport width */
-  height: 200px; /* Fixed height */
+  width: 100%;
+  height: 280px; /* Increased height */
   overflow: hidden;
   color: var(--c-neutral-000);
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end; /* Push content to bottom */
+  align-items: flex-start; /* Align content to left */
+  padding: var(--space-2); /* Padding around content */
 
   &::before {
     content: "";
@@ -38,7 +38,7 @@ const Wrapper = styled.header`
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 100%; /* or try 60% to limit the overlay height */
+    height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
     z-index: 1;
     pointer-events: none;
@@ -57,8 +57,8 @@ const StyledImage = styled(Image)`
 
 const Title = styled.h1`
   font-size: var(--text-32);
-  font-weight: var(--text-bold);
-  margin: 0 0 var(--space-1) 0;
+  font-weight: ;
+  margin: 0 0 var(--space-1) 0; /* margin bottom for spacing */
   position: relative;
   z-index: 2;
 `;

@@ -57,7 +57,7 @@ const StyledImage = styled(Image)`
 
 const Title = styled.h1`
   font-size: var(--text-32);
-  font-weight: ;
+  font-weight: var(--text-bold);
   margin: 0 0 var(--space-1) 0; /* margin bottom for spacing */
   position: relative;
   z-index: 2;

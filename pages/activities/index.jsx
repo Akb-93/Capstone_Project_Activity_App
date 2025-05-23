@@ -13,8 +13,10 @@ export default function ActivitiesPage() {
     ? `/api/activities?category=${selectedCategory}`
     : "/api/activities";
   const { data: activities, error: activitiesError } = useSWR(activitiesUrl);
-  if (activitiesError) return <p>Failed to load activities.</p>;
-  if (!activities) return <p>Loading activities...</p>;
+  if (activitiesError)
+    return <StyledEmptyState>Failed to load activities.</StyledEmptyState>;
+  if (!activities)
+    return <StyledEmptyState>Loading activities...</StyledEmptyState>;
   if (activities.length === 0)
     return (
       <>
@@ -25,7 +27,9 @@ export default function ActivitiesPage() {
           selectedCategory={selectedCategory}
           onChange={setSelectedCategory}
         />
-        <p>No activities available. Click on the + button to add one.</p>
+        <StyledEmptyState>
+          No activities available. Click on the + button to add one.
+        </StyledEmptyState>
         <AddButton />
       </>
     );
@@ -43,7 +47,9 @@ export default function ActivitiesPage() {
       </StyledFilterWrapper>
       {!activities || activities.length === 0 ? (
         <>
-          <p>No activities found for this filter.</p>
+          <StyledEmptyState>
+            No activities found for this filter.
+          </StyledEmptyState>
           <AddButton />
         </>
       ) : (
@@ -63,23 +69,36 @@ export default function ActivitiesPage() {
 //Styled Components
 const StyledActivityGrid = styled.main`
   display: grid;
-  gap: 1.5rem;
+  gap: var(--space-2);
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
+  margin-left: var(--space-3);
+  margin-right: var(--space-3);
   @media (max-width: 375px) {
     grid-template-columns: 1fr;
   }
 `;
 
+const StyledEmptyState = styled.p`
+  text-align: center;
+  margin-top: var(--space-4);
+  font-size: var(--text-16);
+`;
+
 const StyledFilterWrapper = styled.section`
   display: flex;
-  justify-content: center;
-  margin-block: 1.5rem;
-  padding: 1.5rem 2rem;
-  background-color: var(--c-neutral-050);
-  border-radius: var(--radius-lg);
-  width: fit-content;
-  margin-inline: auto;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-3);
+  margin-top: 1rem;
+  margin-bottom: var(--space-2);
+  @media (max-width: 600px) {
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  @media (max-width: 400px) {
+    padding: var(--space-2);
+  }
 `;

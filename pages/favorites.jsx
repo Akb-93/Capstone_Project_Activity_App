@@ -54,13 +54,8 @@ export default function Favorites() {
         </>
       ) : (
         <>
-          <HeroCard title="Favorites List">
-            <p>
-              Revisit the hikes you loved, the cafes you raved about, and all
-              your favorite adventures.
-            </p>
-          </HeroCard>
-
+          <HeroCard title="Your favorites" subtitle="Revisit the hikes you loved, the cafes you raved about, and all
+              your favorite adventures." bgImage="/images/fiji-sailing.jpg"/>
           <StyledFavorites>
             {localActivities.map((activity) => (
               <ActivityCard
@@ -68,6 +63,7 @@ export default function Favorites() {
                 activity={activity}
                 onFavoriteToggle={() => handleFavoriteToggle(activity._id)}
                 isFavorite={true}
+                from="/favorites"
               />
             ))}
           </StyledFavorites>

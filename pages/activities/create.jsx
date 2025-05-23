@@ -34,7 +34,7 @@ export default function CreateActivity() {
   }
   return (
     <>
-      <HeroCard title="Add a New Activity" children="Got a spark? Turn it into an experience." bgImage={HeroImage}/>
+      <HeroCard title="Add a New Activity" bgImage={HeroImage}><p>Got a spark? Turn it into an experience.</p></HeroCard>
       <ActivityForm onCancel={handleCancel} onSubmit={addActivity} />
     </>
   );

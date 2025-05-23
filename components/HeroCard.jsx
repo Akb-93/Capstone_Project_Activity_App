@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 export default function HeroCard({ title, children, bgImage }) {
-  console.log("bgImage",bgImage)
+
   return (
     <Wrapper>
       <StyledImage

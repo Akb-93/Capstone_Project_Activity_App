@@ -33,9 +33,17 @@ export default function HomePage() {
     <>
       <HeroCard
         title="Disconnect by connecting"
+<<<<<<< Updated upstream
         subtitle="Pick an interest, grab your crew, and let us handle the details — all in one place"
         backgroundImageUrl="/img/cappadocia-ballooning.jpg"
       />
+=======
+        backgroundImageUrl="/img/cappadocia-ballooning.jpg"
+      >
+        Pick an interest, grab your crew, and let us handle the details — all in
+        one place
+      </HeroCard>
+>>>>>>> Stashed changes
       <Carousel activities={activities} />
 
       <DescriptionSection>

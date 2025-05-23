@@ -73,14 +73,17 @@ const NavbarComponent = () => {
   );
 };
 export default NavbarComponent;
+
 //Styled Components
 const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #ccc;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  background-color: var(--c-neutral-050);
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -97,30 +100,34 @@ const MenuButton = styled.button`
 const MenuIconImg = styled.img`
   width: 24px;
   height: 24px;
+  fill: var(--c-dark-600);
+  stroke: var(--c-dark-600);
 `;
 const DropdownList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: var(--space-3);
   margin: 0;
   position: fixed;
   right: 0;
   top: 5rem;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--c-neutral-050);
+  border: 1px solid var(--c-neutral-050);
+  box-shadow: 0 2px 5px var(--c-dark-600);
   z-index: 1000;
 `;
 const DropdownListItem = styled.li`
-  font-size: 2rem;
+  font-size: var(--text-16);
+  background-color: var(--c-neutral-050);
 `;
 const DropdownButton = styled.button`
-  text-decoration: none;
+  text-decoration: underline;
   background: none;
   border: none;
   padding: 10px;
   display: block;
   width: 100%;
   text-align: left;
+  color: var(--c-dark-600);
 `;
 //logo
 const LogoContainer = styled.div`

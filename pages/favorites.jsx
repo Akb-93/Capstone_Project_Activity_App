@@ -3,6 +3,7 @@ import ActivityCard from "../components/ActivityCard";
 import styled from "styled-components";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
+import HeroCard from "@/components/HeroCard";
 
 export default function Favorites() {
   const [favoriteIds, setFavorites] = useLocalStorageState("favorites", {
@@ -49,7 +50,13 @@ export default function Favorites() {
         <Title>No Favorites Yet</Title>
       ) : (
         <>
-          <Title>My Favorite Activities</Title>
+          <HeroCard title="Favorites List">
+            <p>
+              Revisit the hikes you loved, the cafes you raved about, and all
+              your favorite adventures.
+            </p>
+          </HeroCard>
+
           <StyledFavorites>
             {localActivities.map((activity) => (
               <ActivityCard
@@ -77,4 +84,11 @@ const StyledFavoritesWrapper = styled.section`
 
 const StyledFavorites = styled.article`
   padding: 1rem;
+  display: grid;
+  gap: var(--space-5) var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @media (max-width: 375px) {
+    grid-template-columns: 1fr;
+  }
 `;

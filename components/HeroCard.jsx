@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
-export default function HeroCard({ title, children, bgImage }) {
+export default function HeroCard({ title, subtitle, bgImage }) {
 
   return (
     <Wrapper>
@@ -13,7 +13,7 @@ export default function HeroCard({ title, children, bgImage }) {
         quality={80}
       />
       <Title>{title}</Title>
-      <Subtitle>{children}</Subtitle>
+      <Subtitle>{subtitle}</Subtitle>
     </Wrapper>
   );
 }

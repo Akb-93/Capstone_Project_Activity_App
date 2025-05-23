@@ -1,6 +1,7 @@
 //FRONTEND aca se crea la nueva actividad
 import ActivityForm from "@/components/ActivityForm";
 import HeroCard from "@/components/HeroCard";
+import HeroImage from "@/public/images/zermatt-skiing.jpg";
 import { useRouter } from "next/router";
 
 export default function CreateActivity() {
@@ -33,7 +34,7 @@ export default function CreateActivity() {
   }
   return (
     <>
-      <HeroCard title={"Add Activity"} />
+      <HeroCard title={"Add Activity"} bgImage={HeroImage}/>
       <ActivityForm onCancel={handleCancel} onSubmit={addActivity} />
     </>
   );

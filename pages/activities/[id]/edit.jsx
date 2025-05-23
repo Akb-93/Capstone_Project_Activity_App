@@ -44,7 +44,7 @@ export default function EditActivityPage() {
 
   return (
     <>
-      <HeroCard title={"Edit Activity"} />
+      <HeroCard title={"Edit Activity"} bgImage={activities.imageUrl}/>
       <ActivityForm onCancel={handleCancel} onSubmit={editActivity} inputData={activities} />
     </>
   );

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import heroImage from "public/images/placeholder.jpg";
 import Image from "next/image";
-export default function HeroCard({ title, children }) {
+export default function HeroCard({ title, children, bgImage }) {
+  console.log("bgImage",bgImage)
   return (
     <Wrapper>
       <StyledImage
-        src={heroImage}
+        src={bgImage}
         alt="Hero background"
         layout="fill"
         objectFit="cover"

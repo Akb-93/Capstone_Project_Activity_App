@@ -64,10 +64,12 @@ export const StyledButton = styled.button`
 //Will be reused in Home Page moving forward
 
 export const StyledLink = styled(Link)`
-  display: inline-block;
+  margin: var(--space-5) auto 0;
+  text-align: center;
+  display: block;
+  width: fit-content;
   text-decoration: none;
   cursor: pointer;
-  text-align: center;
   transition: all 0.2s ease;
   font-weight: var(--text-bold);
   font-size: var(--text-20);

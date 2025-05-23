@@ -6,7 +6,7 @@ import { StyledLink } from "@/components/StyledComponents";
 import styled from "styled-components";
 
 export default function HomePage() {
-  const [isMobile, setIsMobile] = useState(false); //un nuevo estado para la cantidad de thumbnails visibles
+  const [isMobile, setIsMobile] = useState(false);
 
   const limit = isMobile ? 5 : 10;
   const { data: activities, error } = useSWR(
@@ -18,7 +18,7 @@ export default function HomePage() {
       setIsMobile(window.innerWidth < 768);
     }
 
-    handleResize(); // lo ejecuta una vez al cargar
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -26,8 +26,8 @@ export default function HomePage() {
     };
   }, []);
 
-  if (error) return <div>Error al cargar actividades.</div>;
-  if (!activities) return <div>Cargando...</div>;
+  if (error) return <div> Error loading activities.</div>;
+  if (!activities) return <div>Loading...</div>;
 
   return (
     <>
@@ -43,9 +43,8 @@ export default function HomePage() {
           our website.
         </DescriptionText>
       </DescriptionSection>
-      <CenteredWrapper>
-        <StyledLink href="/activities">Explore activities</StyledLink>
-      </CenteredWrapper>
+
+      <StyledLink href="/activities">Explore activities</StyledLink>
     </>
   );
 }
@@ -81,9 +80,4 @@ const DescriptionText = styled.p`
 
   font-size: var(--text-20);
   color: #333;
-`;
-const CenteredWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-5);
 `;

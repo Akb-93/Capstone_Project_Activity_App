@@ -12,7 +12,6 @@ export default function HeroCard({ title, subtitle, backgroundImageUrl }) {
   );
 }
 
-// Valores por defecto si no pasas props
 HeroCard.defaultProps = {
   title: "Disconnect by connecting",
   subtitle:

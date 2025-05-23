@@ -76,7 +76,8 @@ const CardContent = styled.section`
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 1rem;
+  padding: var(--space-5) var(--space-3);
+
   color: white;
   background: rgba(0, 0, 0, 0.75);
   width: 100%;

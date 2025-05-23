@@ -14,20 +14,18 @@ export default function AddButton() {
 //Styled components
 const StyledAddButton = styled.button`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: blue;
-  color: white;
+  bottom: var(--space-4);
+  right: var(--space-3);
+  background-color: var(--c-warm-500);
+  color: var(--c-neutral-500);
   border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
+  border-radius: var(--radius-pill);
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-
-  &:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

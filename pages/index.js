@@ -37,7 +37,7 @@ export default function HomePage() {
         subtitle="Pick an interest, grab your crew, and let us handle the details — all in
         one place."
       />
-      <Carousel activities={activities} />
+      <Carousel activities={activities} from="/"/>
 
       <DescriptionSection>
         <StyledH2>Discover your next adventure. </StyledH2>

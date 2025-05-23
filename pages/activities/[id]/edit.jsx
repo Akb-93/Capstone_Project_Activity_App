@@ -28,7 +28,7 @@ export default function EditActivityPage() {
     }
 
     mutate();
-    router.push(from);
+    router.push(from || `/activities/${id}`);
   }
 
   if (error) return <p>Error loading edit form...</p>;

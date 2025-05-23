@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useSWR from "swr";
 import HeroCard from "@/components/HeroCard";
-import HeroImage from "@/public/images/interlaken-paragliding.jpg";
 import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
 import AddButton from "@/components/AddButton";
@@ -55,7 +54,7 @@ export default function ActivitiesPage() {
         <>
           <StyledActivityGrid>
             {activities.map((activity) => (
-              <ActivityCard key={activity._id} activity={activity} />
+              <ActivityCard key={activity._id} activity={activity} from="activities"/>
             ))}
           </StyledActivityGrid>
           <AddButton />

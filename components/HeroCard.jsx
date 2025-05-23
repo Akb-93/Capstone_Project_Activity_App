@@ -2,11 +2,16 @@ import styled from "styled-components";
 import heroImage from "public/images/placeholder.jpg";
 import Image from "next/image";
 
-export default function HeroCard({ title, children }) {
+export default function HeroCard({
+  title = "Default title",
+  subtitle,
+  backgroundImageUrl = "/images/placeholder.jpg",
+  children,
+}) {
   return (
     <Wrapper>
       <StyledImage
-        src={heroImage}
+        src={backgroundImageUrl}
         alt="Hero background"
         layout="fill"
         objectFit="cover"
@@ -14,7 +19,11 @@ export default function HeroCard({ title, children }) {
         quality={80}
       />
       <Title>{title}</Title>
-      <Subtitle>{children}</Subtitle>
+      {subtitle ? (
+        <Subtitle>{subtitle}</Subtitle>
+      ) : (
+        children && <Subtitle>{children}</Subtitle>
+      )}
     </Wrapper>
   );
 }

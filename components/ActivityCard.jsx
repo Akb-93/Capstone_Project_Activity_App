@@ -108,7 +108,7 @@ const CardContent = styled.section`
 
 const StyledTitleLink = styled(Link)`
   display: block;
-  font-size: var(--text-14);
+  font-size: var(--text-20);
   font-weight: 500;
   color: var(--c-neutral-000);
   text-decoration: none;
@@ -120,7 +120,7 @@ const StyledTitleLink = styled(Link)`
 `;
 
 const Country = styled.p`
-  font-size: 10px;
+  font-size: var(--text-14);
   margin: 0 0 4px 0;
   font-weight: 300;
   padding-top: 4px;

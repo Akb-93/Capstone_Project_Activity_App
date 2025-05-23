@@ -142,6 +142,7 @@ const Description = styled.article`
   font-size: 1.2rem;
   margin-bottom: 1rem;
   padding: 0 1rem;
+  max-width: 90%;
 `;
 
 const Categories = styled.ul`
@@ -171,3 +172,16 @@ const LocationInfo = styled.section`
   gap: 0.5rem;
   margin-bottom: 2rem;
 `;
+
+const divLogo = `
+divdivdivdiv         divdiv        divdiv     divdiv
+divdiv   divdiv      divdiv        divdiv     divdiv
+divdiv    divdiv     divdiv        divdiv     divdiv
+divdiv    divdiv     divdiv        divdiv     divdiv
+divdiv    divdiv     divdiv        divdiv     divdiv
+divdiv    divdiv     divdiv        divdiv     divdiv
+divdiv   divdiv      divdiv          div      div
+divdivdivdiv         divdiv             vdivdiv
+`;
+
+console.log(divLogo);

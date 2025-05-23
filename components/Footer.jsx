@@ -38,6 +38,7 @@ const FooterWrapper = styled.footer`
 const FooterText = styled.p`
   font-size: var(--text-14);
   color: var(--c-neutral-000);
+  justify-content: center;
   text-align: center;
   margin: var(--space-3) var(--space-5);
 `;

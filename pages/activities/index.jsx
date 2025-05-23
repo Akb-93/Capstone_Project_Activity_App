@@ -20,8 +20,7 @@ export default function ActivitiesPage() {
   if (activities.length === 0)
     return (
       <>
-        <HeroCard title="Activities List">
-          <p>Choose your fun</p>
+        <HeroCard title="Ready to unplug?" subtitle="Get started now and turn free time into lifetime stories." bgImage="/images/interlaken-paragliding.jpg">
         </HeroCard>
         <ActivityFilter
           selectedCategory={selectedCategory}
@@ -36,8 +35,7 @@ export default function ActivitiesPage() {
 
   return (
     <>
-      <HeroCard title="Activities List">
-        <p>Choose your fun</p>
+      <HeroCard title="Ready to unplug?" subtitle="Get started now and turn free time into lifetime stories." bgImage="/images/interlaken-paragliding.jpg">
       </HeroCard>
       <StyledFilterWrapper>
         <ActivityFilter
@@ -56,7 +54,7 @@ export default function ActivitiesPage() {
         <>
           <StyledActivityGrid>
             {activities.map((activity) => (
-              <ActivityCard key={activity._id} activity={activity} />
+              <ActivityCard key={activity._id} activity={activity} from="activities"/>
             ))}
           </StyledActivityGrid>
           <AddButton />

@@ -28,7 +28,7 @@ export default function EditActivityPage() {
     }
 
     mutate();
-    router.push(from);
+    router.push(from || `/activities/${id}`);
   }
 
   if (error) return <p>Error loading edit form...</p>;
@@ -44,7 +44,7 @@ export default function EditActivityPage() {
 
   return (
     <>
-      <HeroCard title={"Edit Activity"} />
+      <HeroCard title={"Edit Activity"} subtitle="Change of plans? We have got you covered." bgImage={activities.imageUrl} />
       <ActivityForm onCancel={handleCancel} onSubmit={editActivity} inputData={activities} />
     </>
   );

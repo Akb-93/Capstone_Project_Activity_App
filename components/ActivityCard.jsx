@@ -34,7 +34,7 @@ export default function ActivityCard({
         />
       </ImageWrapper>
       <CardContent>
-            <StyledTitleLink href={`/activities/${activity._id}`}>
+            <StyledTitleLink href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
           {activity.title || "Untitled Activity"}
         </StyledTitleLink>
         <Country>{activity.country || "No country specified"}</Country>

@@ -172,16 +172,3 @@ const LocationInfo = styled.section`
   gap: 0.5rem;
   margin-bottom: 2rem;
 `;
-
-const divLogo = `
-divdivdivdiv         divdiv        divdiv     divdiv
-divdiv   divdiv      divdiv        divdiv     divdiv
-divdiv    divdiv     divdiv        divdiv     divdiv
-divdiv    divdiv     divdiv        divdiv     divdiv
-divdiv    divdiv     divdiv        divdiv     divdiv
-divdiv    divdiv     divdiv        divdiv     divdiv
-divdiv   divdiv      divdiv          div      div
-divdivdivdiv         divdiv             vdivdiv
-`;
-
-console.log(divLogo);

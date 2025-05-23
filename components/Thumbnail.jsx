@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Thumbnail({ activity }) {
+  const router = useRouter();
+  const { pathname: from } = router;
+
   return (
-    <ThumbnailWrapper href={`/activities/${activity._id}`}>
+    <ThumbnailWrapper href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
       <ThumbnailImage
         src={activity.imageUrl || "/images/placeholder.jpg"}
         alt={activity.title}

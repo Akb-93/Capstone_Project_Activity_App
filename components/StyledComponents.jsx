@@ -11,6 +11,7 @@ export const StyledButton = styled.button`
   text-decoration: none;
   font-size: var(--text-20);
   font-weight: var(--text-bold);
+  font-family: var(--font-family);
   cursor: pointer;
   transition: all 0.2s ease;
 

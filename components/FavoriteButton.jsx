@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
-
 export default function FavoriteButton({ activityId }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],

@@ -78,9 +78,7 @@ const Title = styled.h1`
   margin-bottom: 1rem;
 `;
 
-const StyledFavoritesWrapper = styled.section`
-  padding: 1rem;
-`;
+const StyledFavoritesWrapper = styled.section``;
 
 const StyledFavorites = styled.article`
   padding: 1rem;

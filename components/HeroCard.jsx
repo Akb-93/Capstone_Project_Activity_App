@@ -19,11 +19,7 @@ export default function HeroCard({
         quality={80}
       />
       <Title>{title}</Title>
-      {subtitle ? (
-        <Subtitle>{subtitle}</Subtitle>
-      ) : (
-        children && <Subtitle>{children}</Subtitle>
-      )}
+      <Subtitle>{children}</Subtitle>
     </Wrapper>
   );
 }

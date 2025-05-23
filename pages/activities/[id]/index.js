@@ -195,6 +195,7 @@ const StyledDescription = styled.article`
   color: var(--c-dark-600);
   margin-bottom: 1rem;
   padding: 0 1rem;
+  max-width: 100%;
 `;
 
 const CategoriesRow = styled.div`

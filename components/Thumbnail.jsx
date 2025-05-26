@@ -28,7 +28,7 @@ const ThumbnailWrapper = styled(Link)`
   background-color: black;
   color: white;
   padding: 0.8rem 1rem;
-  border-radius: 16px; /* borde redondeado 16px */
+  border-radius: 16px;
   border: 1px solid black;
   text-decoration: none;
   font-size: 1rem;
@@ -51,7 +51,7 @@ const ThumbnailWrapper = styled(Link)`
 const ThumbnailImage = styled.img`
   width: 100%;
   height: 90px;
-  border-radius: 16px; /* borde redondeado 16px */
+  border-radius: 16px;
   object-fit: cover;
   margin-bottom: 0.5rem;
   transition: transform 0.3s ease-in-out;

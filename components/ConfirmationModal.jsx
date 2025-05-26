@@ -5,8 +5,8 @@ export default function ConfirmModal({ title, message, onCancel, onConfirm }) {
   return (
     <Dialog open role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <DialogSection>
-        <DialogTitle id="modal-title">{title}</DialogTitle> {/* <-- CHANGED */}
-        <DialogMessage>{message}</DialogMessage> {/* <-- CHANGED */}
+        <DialogTitle id="modal-title">{title}</DialogTitle>
+        <DialogMessage>{message}</DialogMessage>
         <DialogFooter>
           <StyledButton type="button" onClick={onCancel} $variant="outlined">
             No, Cancel
@@ -32,7 +32,7 @@ const Dialog = styled.dialog`
   width: 100vw;
   height: 100vh;
   border: none;
-  background: rgba(0, 0, 0, 0.4); /* overlay background */
+  background: rgba(0, 0, 0, 0.4);
   padding: 0;
   margin: 0;
   display: flex;
@@ -46,7 +46,7 @@ const Dialog = styled.dialog`
 `;
 
 const DialogSection = styled.section`
-  background: var(--c-neutral-000); /* <-- CHANGED: content bg */
+  background: var(--c-neutral-000);
   padding: 2rem;
   border-radius: 0.6rem;
   max-width: 400px;
@@ -56,14 +56,12 @@ const DialogSection = styled.section`
 `;
 
 const DialogTitle = styled.h2`
-  /* <-- CHANGED: new styled title */
   font-size: var(--text-20);
   color: var(--c-dark-700);
   margin: 0 0 1rem 0;
 `;
 
 const DialogMessage = styled.p`
-  /* <-- CHANGED: new styled message */
   font-size: var(--text-16);
   color: var(--c-dark-600);
   margin: 0;
@@ -72,6 +70,6 @@ const DialogMessage = styled.p`
 const DialogFooter = styled.footer`
   display: flex;
   justify-content: space-around;
-  gap: 1rem; /* <-- CHANGED: spacing between buttons */
+  gap: 1rem;
   margin-top: 1.5rem;
 `;

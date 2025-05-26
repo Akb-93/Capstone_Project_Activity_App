@@ -12,7 +12,6 @@ export default function EditActivityPage() {
 
   async function editActivity(activityData) {
 
-    console.log("PUT:", activityData);
 
     const response = await fetch(`/api/activities/${id}`, {
       method: "PUT",

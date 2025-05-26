@@ -29,7 +29,6 @@ export default function ActivityDetailPage() {
     });
 
     if (!response.ok) {
-      console.log(response.status);
       return;
     }
     setShowModal(false);
@@ -48,7 +47,7 @@ export default function ActivityDetailPage() {
     <>
       <Wrapper>
         <StyledImage
-          src={activityImage}
+          src={activity.imageUrl ? activity.imageUrl : activityImage}
           alt="Activity background"
           fill
           style={{ objectFit: "cover" }}
@@ -100,7 +99,6 @@ export default function ActivityDetailPage() {
         </InfoItem>
       </LocationInfo>
 
-      {/* Buttons wrapped in flex container */}
       <ButtonsRow>
         <EditLinkButton
           href={{
@@ -196,7 +194,6 @@ const StyledDescription = styled.article`
   margin-bottom: 1rem;
   padding: 0 1rem;
   max-width: 100%;
->>>>>>> refs/remotes/origin/main
 `;
 
 const CategoriesRow = styled.div`
@@ -247,7 +244,6 @@ const InfoItem = styled.div`
   padding: var(--space-1);
 `;
 
-// New flex wrapper for buttons
 const ButtonsRow = styled.div`
   display: flex;
   gap: 1rem;
@@ -258,8 +254,6 @@ const ButtonsRow = styled.div`
     margin: 0;
   }
 `;
-
-// Add this styled wrapper for the Edit button inside your ActivityDetailPage file:
 
 const EditLinkButton = styled(StyledLink)`
   background-color: var(--c-neutral-000);

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-// Buttons
+
 export const StyledButton = styled.button`
   background-color: var(--c-dark-600);
   color: var(--c-neutral-000);
@@ -49,8 +49,7 @@ export const StyledButton = styled.button`
       }
     `}
 `;
-// Links that look like buttons
-//Will be reused in Home Page moving forward
+
 export const StyledLink = styled(Link)`
   margin: var(--space-5) auto 0;
   text-align: center;

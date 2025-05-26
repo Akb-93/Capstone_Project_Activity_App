@@ -48,7 +48,7 @@ export default function ActivityDetailPage() {
     <>
       <Wrapper>
         <StyledImage
-          src={activityImage}
+          src={activity.imageUrl ? activity.imageUrl : activityImage}
           alt="Activity background"
           fill
           style={{ objectFit: "cover" }}
@@ -196,7 +196,6 @@ const StyledDescription = styled.article`
   margin-bottom: 1rem;
   padding: 0 1rem;
   max-width: 100%;
->>>>>>> refs/remotes/origin/main
 `;
 
 const CategoriesRow = styled.div`

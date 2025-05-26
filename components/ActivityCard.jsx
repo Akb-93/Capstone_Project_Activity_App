@@ -26,19 +26,16 @@ export default function ActivityCard({
         />
       </ButtonContainer>
       <ImageWrapper>
-        <Image
+        <StyledImage
           src={activity.imageUrl || `/images/placeholder.jpg`}
           alt={activity.title}
-          width={500}
-          height={500}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </ImageWrapper>
       <CardContent>
         <StyledTitleLink
-          href={{
-            pathname: `/activities/${activity._id}`,
-            query: { from: from },
-          }}
+          href={{ pathname: `/activities/${activity._id}`, query: { from } }}
         >
           {activity.title || "Untitled Activity"}
         </StyledTitleLink>
@@ -57,51 +54,33 @@ export default function ActivityCard({
   );
 }
 
-//Styled Components
+// Styled Components
+
+const Card = styled.article`
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border: 2px solid var(--c-neutral-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+`;
 
 const ButtonContainer = styled.aside`
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 140;
-`;
-
-const Card = styled.article`
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 250px;
-  border: 2px solid var(--c-neutral-200);
-  border-radius: var(--radius-lg);
-  margin-bottom: var(--space-2);
-  overflow: hidden;
+  z-index: 3;
 `;
 
 const ImageWrapper = styled.figure`
-  width: 100%;
-  height: 200px;
-  background-color: var(--c-neutral-200);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--c-neutral-500);
+  position: absolute;
+  inset: 0;
   margin: 0;
-  margin-bottom: 1em;
-  z-index: -1;
+  z-index: 0;
+`;
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%; /* or try 60% to limit the overlay height */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
+const StyledImage = styled(Image)`
+  object-fit: cover;
 `;
 
 const CardContent = styled.section`
@@ -113,6 +92,8 @@ const CardContent = styled.section`
   color: var(--c-neutral-000);
   background: var(--c-dark-600);
   width: 100%;
+  height: 40%;
+  z-index: 2;
 `;
 
 const StyledTitleLink = styled(Link)`
@@ -146,8 +127,8 @@ const TagList = styled.ul`
 `;
 
 const Tag = styled.li`
-  background-color: var(--c-neutral-050); /* light gray background */
-  color: var(--c-dark-600); /* dark text color */
+  background-color: var(--c-neutral-050);
+  color: var(--c-dark-600);
   padding: 2px 6px;
   border-radius: var(--radius-md);
   font-size: 10px;

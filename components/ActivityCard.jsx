@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function ActivityCard({
   activity,
   onFavoriteToggle,
-  isFavorite
+  isFavorite,
 }) {
   const router = useRouter();
   const { pathname: from } = router;
@@ -34,7 +34,12 @@ export default function ActivityCard({
         />
       </ImageWrapper>
       <CardContent>
-            <StyledTitleLink href={{pathname: `/activities/${activity._id}`, query: {from: from}}}>
+        <StyledTitleLink
+          href={{
+            pathname: `/activities/${activity._id}`,
+            query: { from: from },
+          }}
+        >
           {activity.title || "Untitled Activity"}
         </StyledTitleLink>
         <Country>{activity.country || "No country specified"}</Country>

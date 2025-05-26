@@ -1,4 +1,3 @@
-//creo el formulario
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -13,7 +12,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const { data: categories, error: categoriesError } =
     useSWR("/api/categories");
 
-  //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
     title: "",
@@ -24,7 +22,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     imageUrl: "",
   });
 
-  //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
   if (categoriesError) return <p>Error loading data...</p>;
@@ -50,7 +47,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
 
     setFormData(updatedFormData);
 
-    // this is updated too so it takes the whole array
     if (!updatedFormData.title || updatedFormData.categories.length === 0) {
       setErrorMessage("Please fill in all required fields.");
     } else {
@@ -59,11 +55,10 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   }
 
   function handleSubmit(event) {
-    // función que se ejecuta cuando el usuario envía el formulario.
+  
     event.preventDefault();
 
     const dataToSubmit = {
-      // also updating here the data we need to submit
       ...formData,
       categories: formData.categories.map((cat) => cat._id),
     };
@@ -116,7 +111,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
           Categories*
           <Select
             name="categories"
-            value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
+            value={formData.categories.map((cat) => cat._id)}
             onChange={handleChange}
             multiple
             required
@@ -126,7 +121,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
                 key={cat._id}
                 value={
                   cat._id
-                } /* also updating here so it sends the id and not the name */
+                }
               >
                 {cat.name}
               </option>

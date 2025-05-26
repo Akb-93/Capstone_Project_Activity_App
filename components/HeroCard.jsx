@@ -21,14 +21,14 @@ export default function HeroCard({ title, subtitle, bgImage }) {
 const Wrapper = styled.header`
   position: relative;
   width: 100%;
-  height: 280px; /* Increased height */
+  height: 280px;
   overflow: hidden;
   color: var(--c-neutral-000);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Push content to bottom */
-  align-items: flex-start; /* Align content to left */
-  padding: var(--space-2); /* Padding around content */
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: var(--space-2);
   &::before {
     content: "";
     position: absolute;
@@ -53,7 +53,7 @@ const StyledImage = styled(Image)`
 const Title = styled.h1`
   font-size: var(--text-32);
   font-weight: var(--text-bold);
-  margin: 0 0 var(--space-1) 0; /* margin bottom for spacing */
+  margin: 0 0 var(--space-1) 0;
   position: relative;
   z-index: 2;
 `;

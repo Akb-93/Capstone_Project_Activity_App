@@ -28,7 +28,8 @@ export default function Carousel({ activities }) {
   );
 }
 
-// Carousel styles
+// Styled components
+
 const Wrapper = styled.section`
   display: flex;
   align-items: center;
@@ -52,8 +53,6 @@ const CarouselContainer = styled.div`
   justify-content: flex-start;
 
   scroll-padding-left: var(--space-3);
-
-  /* ocultar scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {

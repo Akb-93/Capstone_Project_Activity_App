@@ -129,7 +129,6 @@ const DropdownButton = styled.button`
   text-align: left;
   color: var(--c-dark-600);
 `;
-//logo
 const LogoContainer = styled.div`
   width: 90px;
   height: 90px;

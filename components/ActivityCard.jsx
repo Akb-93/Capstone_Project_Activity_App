@@ -92,7 +92,7 @@ const ImageWrapper = styled.figure`
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 100%; /* or try 60% to limit the overlay height */
+    height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
     z-index: 1;
     pointer-events: none;
@@ -141,8 +141,8 @@ const TagList = styled.ul`
 `;
 
 const Tag = styled.li`
-  background-color: var(--c-neutral-050); /* light gray background */
-  color: var(--c-dark-600); /* dark text color */
+  background-color: var(--c-neutral-050);
+  color: var(--c-dark-600);
   padding: 2px 6px;
   border-radius: var(--radius-md);
   font-size: 10px;

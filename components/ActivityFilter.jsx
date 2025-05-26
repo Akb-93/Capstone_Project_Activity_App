@@ -22,11 +22,11 @@ export default function ActivityFilter({ selectedCategory, onChange }) {
   }, []);
 
   const handleChange = (e) => {
-    onChange(e.target.value); // passing selected category _id back to parent
+    onChange(e.target.value);
   };
 
   const handleReset = () => {
-    onChange(""); // reset selected category
+    onChange("");
   };
 
   return (
@@ -97,6 +97,6 @@ const FilterWrapper = styled.section`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2); /* Space between select and reset */
+  gap: var(--space-2);
   width: 100%;
 `;

@@ -1,92 +1,138 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Image from "next/image";
+import FavoriteButton from "./FavoriteButton";
+import { useRouter } from "next/router";
 
-export default function ActivityCard({ activity }) {
+export default function ActivityCard({
+  activity,
+  onFavoriteToggle,
+  isFavorite,
+}) {
+  const router = useRouter();
+  const { pathname: from } = router;
+
+  if (!activity) {
+    return null;
+  }
+
   return (
     <Card>
+      <ButtonContainer>
+        <FavoriteButton
+          activityId={activity._id}
+          isFavorite={isFavorite}
+          onToggle={onFavoriteToggle}
+        />
+      </ButtonContainer>
       <ImageWrapper>
-        <Image
+        <StyledImage
           src={activity.imageUrl || `/images/placeholder.jpg`}
           alt={activity.title}
-          width={500}
-          height={500}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </ImageWrapper>
-
       <CardContent>
-        <Link href={`/activities/${activity._id}`}>
-          <Title>{activity.title}</Title>
-        </Link>
-        <Country>{activity.country}</Country>
+        <StyledTitleLink
+          href={{ pathname: `/activities/${activity._id}`, query: { from } }}
+        >
+          {activity.title || "Untitled Activity"}
+        </StyledTitleLink>
+        <Country>{activity.country || "No country specified"}</Country>
         <TagList>
-          {activity.categories.map((category) => (
-            <Tag key={category._id}>{category.name}</Tag>
-          ))}
+          {activity.categories && activity.categories.length > 0 ? (
+            activity.categories.map((category) => (
+              <Tag key={category._id || category.name}>{category.name}</Tag>
+            ))
+          ) : (
+            <Tag>No categories</Tag>
+          )}
         </TagList>
       </CardContent>
     </Card>
   );
 }
 
-//Styled Components
+// Styled Components
+
 const Card = styled.article`
   position: relative;
-  background-size: cover;
-  background-position: center;
   width: 100%;
   height: 250px;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--c-neutral-200);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+`;
+
+const ButtonContainer = styled.aside`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+`;
+
+const ImageWrapper = styled.figure`
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  z-index: 0;
+`;
+
+const StyledImage = styled(Image)`
+  object-fit: cover;
 `;
 
 const CardContent = styled.section`
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 1rem;
-  color: white;
-  background: rgba(0, 0, 0, 0.75);
+  padding-left: var(--space-2);
+  padding-top: var(--space-1);
+  color: var(--c-neutral-000);
+  background: var(--c-dark-600);
   width: 100%;
+  height: 40%;
+  z-index: 2;
 `;
 
-const Title = styled.h2`
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 600;
+const StyledTitleLink = styled(Link)`
+  display: block;
+  font-size: var(--text-20);
+  font-weight: 500;
+  color: var(--c-neutral-000);
+  text-decoration: none;
+  margin-bottom: 2px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Country = styled.p`
-  font-size: 1rem;
-  margin: 0.5rem 0;
+  font-size: var(--text-14);
+  margin: 0 0 4px 0;
+  font-weight: 300;
+  padding-top: 4px;
+  padding-bottom: 6px;
 `;
 
 const TagList = styled.ul`
-  margin-top: 0.5rem;
+  margin-top: var(--space-1);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
 `;
 
 const Tag = styled.li`
-  display: inline-block;
-  background-color: rgb(174, 208, 248, 0.8);
-  color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  margin-right: 0.5rem;
-  font-size: 0.875rem;
-`;
-
-const ImageWrapper = styled.figure`
-  width: 100%;
-  height: 200px;
-  background-color: #eee;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #999;
-  margin: 0;
-  margin-bottom: 1em;
+  background-color: var(--c-neutral-050);
+  color: var(--c-dark-600);
+  padding: 2px 6px;
+  border-radius: var(--radius-md);
+  font-size: 10px;
+  line-height: 16px;
+  white-space: nowrap;
+  max-width: max-content;
 `;

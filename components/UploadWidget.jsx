@@ -38,7 +38,7 @@ export default function UploadWidget({ onUpload }) {
   }
 
   return (
-    <StyledButton type="button" onClick={handleClick} disabled={!isReady}>
+    <StyledButton type="button" $variant="outlined" onClick={handleClick} disabled={!isReady}>
       {isReady ? "Upload Image" : "Loading..."}
     </StyledButton>
   );

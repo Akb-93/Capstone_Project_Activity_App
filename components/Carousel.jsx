@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Thumbnail from "./Thumbnail";
 import styled from "styled-components";
 
@@ -28,12 +28,13 @@ export default function Carousel({ activities }) {
   );
 }
 
-//Carousel:
+// Styled components
+
 const Wrapper = styled.section`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 1rem;
+  padding: var(--space-5) var(--space-3);
   box-sizing: border-box;
   justify-content: center;
 
@@ -51,9 +52,7 @@ const CarouselContainer = styled.div`
   scroll-behavior: smooth;
   justify-content: flex-start;
 
-  scroll-padding-left: 1rem;
-
-  /* ocultar scrollbar */
+  scroll-padding-left: var(--space-3);
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -62,22 +61,29 @@ const CarouselContainer = styled.div`
 `;
 
 const CircleButton = styled.button`
-  font-size: 2rem;
-  width: 40px;
-  height: 40px;
-  padding: 0;
+  width: 50px;
+  height: 50px;
+  font-size: var(--text-20);
   cursor: pointer;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
+  background-color: #fff0f2;
+  color: var(--c-dark-600);
   border-radius: 50%;
   user-select: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  border: 1.5px solid #ffb3b8;
+  box-shadow: 0 2px 6px rgba(255, 179, 184, 0.3);
+  margin: 0 4px;
 
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #ffccd1;
+    color: var(--c-dark-600);
   }
 `;

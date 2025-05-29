@@ -5,8 +5,8 @@ export default function ConfirmModal({ title, message, onCancel, onConfirm }) {
   return (
     <Dialog open role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <DialogSection>
-        <h2 id="modal-title">{title}</h2>
-        <p>{message}</p>
+        <DialogTitle id="modal-title">{title}</DialogTitle>
+        <DialogMessage>{message}</DialogMessage>
         <DialogFooter>
           <StyledButton type="button" onClick={onCancel} $variant="outlined">
             No, Cancel
@@ -46,7 +46,7 @@ const Dialog = styled.dialog`
 `;
 
 const DialogSection = styled.section`
-  background: white;
+  background: var(--c-neutral-000);
   padding: 2rem;
   border-radius: 0.6rem;
   max-width: 400px;
@@ -55,8 +55,21 @@ const DialogSection = styled.section`
   text-align: center;
 `;
 
+const DialogTitle = styled.h2`
+  font-size: var(--text-20);
+  color: var(--c-dark-700);
+  margin: 0 0 1rem 0;
+`;
+
+const DialogMessage = styled.p`
+  font-size: var(--text-16);
+  color: var(--c-dark-600);
+  margin: 0;
+`;
+
 const DialogFooter = styled.footer`
   display: flex;
   justify-content: space-around;
+  gap: 1rem;
   margin-top: 1.5rem;
 `;

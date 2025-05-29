@@ -1,4 +1,3 @@
-//creo el formulario
 import useSWR from "swr";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -13,7 +12,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   const { data: categories, error: categoriesError } =
     useSWR("/api/categories");
 
-  //DESHABILITAR BOTON SUBMIT ://CREO ESTADO
   const [formData, setFormData] = useState(
     inputData || {
     title: "",
@@ -24,7 +22,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
     imageUrl: "",
   });
 
-  //PARA MENSAJE DE ERROR
   const [errorMessage, setErrorMessage] = useState("");
 
   if (categoriesError) return <p>Error loading data...</p>;
@@ -50,7 +47,6 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
 
     setFormData(updatedFormData);
 
-    // this is updated too so it takes the whole array
     if (!updatedFormData.title || updatedFormData.categories.length === 0) {
       setErrorMessage("Please fill in all required fields.");
     } else {
@@ -59,11 +55,10 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
   }
 
   function handleSubmit(event) {
-    // función que se ejecuta cuando el usuario envía el formulario.
+  
     event.preventDefault();
 
     const dataToSubmit = {
-      // also updating here the data we need to submit
       ...formData,
       categories: formData.categories.map((cat) => cat._id),
     };
@@ -116,7 +111,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
           Categories*
           <Select
             name="categories"
-            value={formData.categories.map((cat) => cat._id)} // changed here so the value is populated by an array of id strings from the array of objects
+            value={formData.categories.map((cat) => cat._id)}
             onChange={handleChange}
             multiple
             required
@@ -126,7 +121,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
                 key={cat._id}
                 value={
                   cat._id
-                } /* also updating here so it sends the id and not the name */
+                }
               >
                 {cat.name}
               </option>
@@ -157,7 +152,11 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
             </ImageWrapper>
           ) : (
             <ImageWrapper>
-              No image uploaded
+              <Image
+              width={39}
+              height={39}
+              alt="placeholder icon"
+              src="/img/img-placeholder-icon.svg"/>
             </ImageWrapper>
           )}
           <UploadWidget onUpload={handleImageUpload} />
@@ -170,7 +169,7 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
         >
           {inputData ? "Edit Activity" : "Add Activity"}
         </StyledButton>
-        <StyledButton type="button" onClick={onCancel}>
+        <StyledButton type="button" $variant="outlined" onClick={onCancel}>
           Cancel
         </StyledButton>
       </FormContainer>
@@ -181,61 +180,87 @@ export default function ActivityForm({ onSubmit, onCancel, inputData }) {
 //Styled Components
 const FormContainer = styled.form`
   display: grid;
-  gap: 1rem;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-3);
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  background-color: #f9f9f9;
 `;
 
 const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
+  padding: var(--space-2) var(--space-2);
+  width: 100%;
+  min-width: 280px;
+  max-width: 500px;
+  font-size: var(--text-16);
+  font-family: var(--font-family);
+  border: 1px solid var(--c-dark-600);
+  border-radius: var(--radius-md);
 `;
 
 const Textarea = styled.textarea`
-  font-family: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: var(--space-2) var(--space-2);
+  width: 100%;
+  min-width: 280px;
+  max-width: 500px;
+  font-size: var(--text-16);
+  font-family: var(--font-family);
+  border: 1px solid var(--c-dark-600);
+  border-radius: var(--radius-md);
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  display: flex;
+  gap: var(--space-1);
+  flex-direction: column;
+  font-size: var(--text-16);
+  font-family: var(--font-family);
+  font-weight: var(--text-bold);
+  color: var(--c-dark-600);
 `;
 
 const Select = styled.select`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
+  padding: var(--space-2) var(--space-2);
+  width: 100%;
+  min-width: 280px;
+  max-width: 500px;
+  font-size: var(--text-16);
+  font-family: var(--font-family);
+  border: 1px solid var(--c-dark-600);
+  border-radius: var(--radius-md);
 `;
 
 const FieldSet = styled.fieldset`
-  padding: 1rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
+  position: relative;
+  width: 100%;
+  min-width: 280px;
+  max-width: 500px;
+  padding: var(--space-2) var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-16);
+  font-family: var(--font-family);
+  border: 1px solid var(--c-dark-600);
+  border-radius: var(--radius-md);
 `;
 
 const Legend = styled.legend`
-  font-weight: bold;
+  position: absolute;
+  top: -32px;
+  left: -4px;
+  font-weight: var(--text-bold);
 `;
 
 const ImageWrapper = styled.figure`
   width: 100%;
   height: 200px;
-  background-color: #eee;
+  background-color: var(--c-neutral-200);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #999;
+  color: var(--c-neutral-500);
   margin: 0;
-  margin-bottom: 1em;
+  margin-bottom: var(--space-2);
+  border: 1px dashed var(--c-dark-600);
+  border-radius: var(--radius-md);
 `;
